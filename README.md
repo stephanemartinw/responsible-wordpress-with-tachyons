@@ -83,9 +83,14 @@ Create then a child theme and start building your theme by :
 
 ## Shortcodes
 
-To be used in posts, pages and custom templates.
+To be used in posts, pages and custom templates :
 
-Available very soon.
+* [wistiti_jumbotron id="id of the jumbotron" background="relative url of background image"] : displays the jumbotron selected by the id attribute. Use jumbotron's slug as id. 'main' is default one.
+* [wistiti_services] : displays all the services, ordered by thee Order field.
+* [wistiti_team] : displays all the team members, ordered by thee Order field.
+* [wistiti_faq] :display all the FAQS, ordered by thee Order field.
+* [wistiti_contact_form] : displays a simple contact form.
+
 
 
 ## Built With
