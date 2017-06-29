@@ -1,4 +1,4 @@
-<?php
+<?php //Jumbotron
 
   $base_url = get_bloginfo('url');
 
@@ -20,7 +20,7 @@
 
   ?>
 
-  <?php $index=0; if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();
+  <?php $index=0; if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();
 
     if (!wistiti_get_template('/partials/jumbotron-'.$atts['id'].'.php', $atts))
       wistiti_get_template('/partials/jumbotron-main.php', $atts);
@@ -30,3 +30,5 @@
   <p>There are no jumbotron here.</p>
 
   <?php endif; ?>
+
+  <?php wp_reset_query(); ?>

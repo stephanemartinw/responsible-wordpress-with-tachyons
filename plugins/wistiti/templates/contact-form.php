@@ -1,4 +1,4 @@
-<form action="<?php the_permalink(); ?>" method="post">
+<form action="<?php esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">
   <p><?php _e('Your Name', 'wistiti');?><br/>
     <input class="f5 pa1 w-75 w-50-ns" type="text" name="cf-name" pattern="[a-zA-Z0-9 ]+" value="<?php ( isset( $_POST["cf-name"] ) ? esc_attr( $_POST["cf-name"] ) : '' );?>" size="40" />
   </p>

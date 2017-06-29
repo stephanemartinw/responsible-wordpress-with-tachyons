@@ -20,9 +20,9 @@ function wistiti_init() {
  *
  * Locate the called template.
  * Search Order:
- * 1. /themes/theme/wistiti-contact-form/$template_name
+ * 1. /themes/theme/plugins/$template_name
  * 2. /themes/theme/$template_name
- * 3. /plugins/woocommerce-plugin-templates/templates/$template_name.
+ * 3. /plugins/wistiti/templates/$template_name.
  *
  * @since 1.0.0
  *
@@ -33,14 +33,14 @@ function wistiti_init() {
  */
 function wistiti_locate_template( $template_name, $template_path = '', $default_path = '' ) {
 
-	// Set variable to search in contact form template folder of theme.
+	// Set variable to search in plugins template folder of theme.
 	if ( ! $template_path ) :
-		$template_path = 'wistiti-contact-form/';
+		$template_path = 'plugins/wistiti/';
 	endif;
 
 	// Set default plugin templates path.
 	if ( ! $default_path ) :
-		$default_path = plugin_dir_path( __FILE__ ) . 'templates/'; // Path to the template folder
+		$default_path = plugin_dir_path( __FILE__ ) . 'templates/';
 	endif;
 
 	// Search template file in theme folder.

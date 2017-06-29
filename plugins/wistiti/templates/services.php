@@ -1,17 +1,17 @@
 
 <?php //Services
-$args = array(
-    'post_type' => 'service',
-    'orderby'=> 'menu_order',
-    'order' => 'ASC',
-    'post_status' => 'publish'
-  );
+  $args = array(
+      'post_type' => 'service',
+      'orderby'=> 'menu_order',
+      'order' => 'ASC',
+      'post_status' => 'publish'
+    );
 
-  $the_query = new WP_Query( $args );
+    $the_query = new WP_Query( $args );
 
-?>
+  ?>
 
-  <?php $index=0; if ( have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();?>
+  <?php $index=0; if ( $the_query->have_posts() ) : while ( $the_query->have_posts() ) : $the_query->the_post();?>
 
       <div class="cf pv3">
 
@@ -40,3 +40,5 @@ $args = array(
   <p>There are no services here.</p>
 
   <?php endif; ?>
+
+  <?php wp_reset_query(); ?>
