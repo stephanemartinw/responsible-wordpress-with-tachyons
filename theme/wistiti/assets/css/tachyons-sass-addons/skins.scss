@@ -1,0 +1,11 @@
+
+@media #{$breakpoint-large} {
+  
+    .black-l {
+      color: $black!important;
+    }
+
+    .bg-transparent-l {
+      background-color: transparent!important;
+    }
+}

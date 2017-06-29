@@ -1,0 +1,120 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: \n"
+"POT-Creation-Date: 2017-06-28 09:15+0200\n"
+"PO-Revision-Date: 2017-06-28 09:23+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.11\n"
+"X-Poedit-Basepath: ..\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Poedit-KeywordsList: __;_e\n"
+"X-Poedit-SearchPath-0: .\n"
+
+#: templates/contact-form.php:2
+msgid "Your Name"
+msgstr "Votre nom"
+
+#: templates/contact-form.php:5
+msgid "Your Email"
+msgstr "Voter e-mail"
+
+#: templates/contact-form.php:8
+msgid "Subject"
+msgstr "Sujet"
+
+#: templates/contact-form.php:11
+msgid "Your Message"
+msgstr "Votre message"
+
+#: templates/contact-form.php:14
+msgid "Send"
+msgstr "Envoyer"
+
+#: templates/partials/contact-error.php:2
+msgid "An error occured."
+msgstr "Une erreur est survenue."
+
+#: templates/partials/contact-invalid.php:2
+msgid "Some mandatory fields are empty."
+msgstr "Un ou plusieurs champs obligatoires sont vides."
+
+#: templates/partials/contact-success.php:2
+msgid "Thanks for contacting me, expect a response soon."
+msgstr "Merci pour votre message, je vous recontacte rapidement."
+
+#: types/faq.php:46 types/faq.php:47 types/faq.php:53
+msgid "Group"
+msgstr ""
+
+#: types/faq.php:48
+msgid "Add New FAQ Group"
+msgstr ""
+
+#: types/faq.php:63
+msgid "FAQ options"
+msgstr ""
+
+#: types/faq.php:86 types/service.php:86
+msgid "Field1"
+msgstr ""
+
+#: types/faq.php:92 types/service.php:92
+msgid "Field2"
+msgstr ""
+
+#: types/faq.php:97 types/service.php:97
+msgid "Field3"
+msgstr ""
+
+#: types/jumbotron.php:46 types/jumbotron.php:47 types/jumbotron.php:53
+msgid "Type"
+msgstr ""
+
+#: types/jumbotron.php:48
+msgid "Add New Jumbotron Type"
+msgstr ""
+
+#: types/jumbotron.php:63
+msgid "Jumbotron action"
+msgstr ""
+
+#: types/jumbotron.php:81
+msgid "Action label"
+msgstr ""
+
+#: types/jumbotron.php:86
+msgid "Action URL"
+msgstr ""
+
+#: types/service.php:46 types/service.php:47 types/service.php:53
+msgid "Family"
+msgstr ""
+
+#: types/service.php:48
+msgid "Add New Service Family"
+msgstr ""
+
+#: types/service.php:63
+msgid "Service options"
+msgstr ""
+
+#: types/team.php:46 types/team.php:47 types/team.php:53
+msgid "Team"
+msgstr ""
+
+#: types/team.php:48
+msgid "Add New Teammember Team"
+msgstr ""
+
+#: types/team.php:63
+msgid "Teammember options"
+msgstr ""
+
+#: types/team.php:79
+msgid "Function"
+msgstr ""
