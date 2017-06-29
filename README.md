@@ -27,13 +27,17 @@ Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemarti
 This prototype wants to be useful to create simple but very lightweight WP websites.
 For that it proposes :
 
-* A minimal starter theme.
-* A plugin that proposes very simple and fully overridable elements (layout and skin).
+* a minimal starter theme,
+* a plugin that proposes very simple and fully overridable elements (layout and skin),
 
 so that Tachyons atomic classes can be used everywhere.
 
-Moreover, as far as possible, all content should be manageable without the use of the WP Editor.
+Moreover, as far as possible :
+
+* all content should be manageable without the use of the WP Editor.
 It should all be defined and accessible via Custom Post Types interfaces.
+
+* avoid to use other plugins. For many small sites, all necessary features can be managed without them.
 
 
 ## The starter theme
@@ -46,6 +50,7 @@ Some modifications have been done :
 * A fully customizable navigation menu.
 * A three widgets footer.
 * Some options (to be extended) via the theme customizer.
+* The meta Description tag is added automatically to pages via the 'description' custom field.
 
 Note : the theme has still to be modified to support blog websites.
 
@@ -91,6 +96,21 @@ To be used in posts, pages and custom templates :
 * [wistiti_faq] :display all the FAQS, ordered by thee Order field.
 * [wistiti_contact_form] : displays a simple contact form.
 
+
+## In progress
+
+* New elements for the Wistiti plugin.
+* Improve existing elements to be more flexible.
+* More theme options to avoid tedious overrides in theme child.
+* Improve SEO features.
+* Develop and test Wistiti in the real world, using it on new adequate projects.
+
+All suggestions are welcome !
+
+
+## Changelog
+
+1.0 : Initial version
 
 
 ## Built With
