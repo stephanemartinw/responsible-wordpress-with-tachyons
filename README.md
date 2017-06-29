@@ -1,6 +1,6 @@
 # Wistiti
 
-An experiment for very light WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
+An experiment for lightened WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
 
 
 ## Presentation
@@ -15,7 +15,7 @@ It also proposes to regain the pleasure of creating a website by refocusing on t
 * it's so exciting and enriching to fully master the code of the site that is being built.
 * it's also gives the possibility to understand and integrate disliked features like accessibility !
 * time becomes available to work on essentials : content and user experience
-* 'green' websites should become the norm and this approach seems to be a good compromise for building clean websites that consume less energy.
+* green sustainable and responsible websites should become the norm and this approach seems to be a good compromise for building clean websites that consume less energy.
 
 
 I will be very happy to get your opinion and feedback about this experiment.
