@@ -1,89 +1,111 @@
 # Wistiti
 
-Very light WordPress websites with Tachyons.io
+An experiment for very light WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
+
+
+# Warning
+
+This Wistiti project is experimental !
+It wants to explore a way for creating efficient, lightweight and fast websites with WP.
+
+It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
+
+* fighting against enormous and over-sized WP themes is not fun.
+* for many 'small' websites in any case, building and maintaining OOCSS libraries is painful and time-consuming.
+* it's so exciting and enriching to fully master the code of the site that is being built.
+* it's also gives the possibility to understand and integrate disliked features like accessibility !
+* time becomes available to work on essentials : content and user experience
+* 'green' websites should become the norm and this approach seems to be a good compromise for building clean websites that consume less energy.
+
+
+I will be very happy to get your opinion and feedback about this experiment.
+Please, feel free to say hello at contact@stephanemartinw.com or @stephanemartinw on Twitter.
+
+
+## Principles
+
+This prototype wants to be useful to create simple but very lightweight WP websites.
+For that it proposes :
+
+* A minimal starter theme.
+* A plugin that proposes very simple and fully overridable elements (layout and skin).
+
+so that Tachyons atomic classes can be used everywhere.
+
+Moreover, as far as possible, all content should be manageable without the use of the WP Editor.
+It should all be defined and accessible via Custom Post Types interfaces.
+
+
+## The starter theme
+
+The starter theme is based on the base package of [Components](http://components.underscores.me/).
+Some modifications have been done :
+
+* No CSS but Tachyons.
+* No jQuery loaded.
+* A fully customizable navigation menu.
+* A three widgets footer.
+* Some options (to be extended) via the theme customizer.
+
+Note : the theme has still to be modified to support blog websites.
+
+
+## The plugin
+
+The plugin proposes so far following elements :
+
+* Jumbotron (inspired from Bootstrap)
+* Services
+* FAQ
+* Contact Form
+
+These elements use custom post types (so the content management is easy with WP), overridable templates(so that you can customize layout and skin with tachyons).
+They propose each a shortcode to be uses in pages and templates.
+
+New elements are currently developed and will be added soon :
+* Text block
+* Portfolio
+* Testimonials
+
+These elements are by default all inactive but can be separately activated, according to the need of the built website.
 
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
+Install and activate both theme and plugin in your WordPress project. In the Wistiti plugin settings, activate the elements you need.
 
-### Prerequisites
+Create then a child theme and start building your theme by :
 
-What things you need to install the software and how to install them
+* building your custom templates or pages (for that use Wistiti's elements shortcodes and tachyons classes.)
+* overriding Wistiti's elements templates to fit your specific needs.
+* adding content via the generated custom post types interfaces.
 
-```
-Give examples
-```
 
-### Installing
+## Shortcodes
 
-A step by step series of examples that tell you have to get a development env running
+To be used in posts, pages and custom templates.
 
-Say what the step will be
+Available very soon.
 
-```
-Give the example
-```
-
-And repeat
-
-```
-until finished
-```
-
-End with an example of getting some data out of the system or using it for a little demo
-
-## Running the tests
-
-Explain how to run the automated tests for this system
-
-### Break down into end to end tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
-```
-
-## Deployment
-
-Add additional notes about how to deploy this on a live system
 
 ## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [Tachyons](https://github.com/tachyons-css/tachyons/) - Functional css for humans
+* [Components](https://github.com/Automattic/theme-components) - A collection of patterns for creating a custom starter WordPress theme
+
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
 
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Stephane Martin** - *Initial work* - [www.stephanemartinw.com](http://www.stephanemartinw.com) (this site is currently being rewrited with Wistiti!)
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
+
 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone who's code was used
-* Inspiration
-* etc
-
