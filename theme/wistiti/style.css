@@ -7931,7 +7931,7 @@ code, .code {
 .js .dn-js {
   display: none; }
 
-.toggler.toggled ul {
+.toggler.toggled > ul {
   display: block; }
 
 /*# sourceMappingURL=style.css.map */

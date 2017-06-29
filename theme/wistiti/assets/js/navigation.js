@@ -1,8 +1,12 @@
 /**
  * File navigation.js.
  *
+ * Manager click on sub menu parent
+ *
  * Handles toggling the navigation menu for small screens and enables TAB key
  * navigation support for dropdown menus.
+ *
+ %
  */
 ( function() {
 	var container, button, menu, links, subMenus, i, len;
@@ -10,6 +14,22 @@
 	container = document.getElementById( 'site-navigation' );
 	if ( ! container ) {
 		return;
+	}
+
+	//Addon : manage click on submenu parent
+	var parents = document.getElementsByClassName( 'js-menu-has-children' );
+	for ( i = 0, len = parents.length; i < len; i++ ) {
+		var parent = parents[i];
+		parent.onclick = function() {
+
+  		if ( -1 !== this.className.indexOf( 'toggled' ) ) {
+				this.className = this.className.replace( ' toggled', '' );
+				this.setAttribute( 'aria-expanded', 'false' );
+			} else {
+				this.className += ' toggled';
+				this.setAttribute( 'aria-expanded', 'true' );
+			}
+		};
 	}
 
 	button = container.getElementsByTagName( 'button' )[0];

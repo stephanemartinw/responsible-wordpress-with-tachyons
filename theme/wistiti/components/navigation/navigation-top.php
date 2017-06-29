@@ -6,7 +6,7 @@
 					'menu_id' => 'top-menu',
 					'container'=> false,
 					'items_wrap' => '<ul class="absolute z-1 top-100 left-0 w-100 w-auto-l relative-l dn db-l list ma0 pa0 bg-'.get_theme_mod( 'smew_colors_brand', 'blue' ).' bg-transparent-l cmzr-navigation-menu">%3$s</ul>',
-			    'walker'  => new Walker_Quickstart_Menu() //use our custom walker in functions.php
+			    'walker'  => new Walker_Main_Menu() //use our custom walker in functions.php
 			));
 			?>
 </nav>

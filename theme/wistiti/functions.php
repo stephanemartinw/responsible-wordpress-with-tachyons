@@ -242,28 +242,64 @@ add_filter( 'tiny_mce_before_init', 'wistiti_child_mce_before_init_insert_format
 */
 
 /*
-* WP Override menu
+* WP Override navigation menu
+* Let child themes override it again.
 */
-class Walker_Quickstart_Menu extends Walker {
 
-    // Tell Walker where to inherit it's parent and id values
-    var $db_fields = array(
-        'parent' => 'menu_item_parent',
-        'id'     => 'db_id'
-    );
+if (!class_exists('Walker_Main_Menu')) {
+	class Walker_Main_Menu extends Walker  {
 
-    /**
-     * At the start of each element, output a <li> and <a> tag structure.
-     *
-     * Note: Menu objects include url and title properties, so we will use those.
-     */
-    function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-        $output .= sprintf( "\n<li class='relative pa3 db dib-l'><a class='db link black-l white f5-l f4' href='%s'%s>%s</a></li>\n",
-            $item->url,
-            ( $item->object_id === get_the_ID() ) ? ' class="current"' : '',
-            $item->title
-        );
-    }
+		// Tell Walker where to inherit it's parent and id values
+		var $db_fields = array(
+				'parent' => 'menu_item_parent',
+				'id'     => 'db_id'
+		);
+
+		public function start_lvl( &$output, $depth = 0, $args = array() ) {
+
+			if ($depth==0)//level 1
+				$classes_list = 'dn relative absolute-l top-100 left-0 pa0';
+
+			//To do !
+			if ($depth==1)//level 2
+				$classes_list = 'dn relative absolute-l top-0 right-0 dn pa0';
+
+			$output .= "<ul class='".$classes_list."'>";
+		}
+
+		public function end_lvl( &$output, $depth = 0, $args = array() ) {
+			$output .= "</ul>";
+		}
+
+		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
+			//Root items, level 0
+			if ($item->menu_item_parent=='0') {
+				$classes_item = 'relative db dib-l pa3';
+				$classes_link = 'db link black-l white f5-l f4';
+			}
+			//Other levels
+			else {
+				$classes_item = 'db pa3';
+				$classes_link = 'db link black-l white f5-l f4';
+			}
+
+			//Menu has children
+			if ($args->walker->has_children) $classes_item .= " js-menu-has-children toggler";
+
+			if ( $item->current ) $classes_item .= ' current';
+
+			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
+					$item->url,
+					$item->title
+			);
+		}
+
+		public function end_el( &$output, $item, $depth = 0, $args = array() ) {
+			$output .= "</li>";
+		}
+
+	}
 }
 
 /**
