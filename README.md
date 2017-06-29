@@ -3,7 +3,7 @@
 An experiment for very light WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
 
 
-# Warning
+## Presentation
 
 This Wistiti project is experimental !
 It wants to explore a way for creating efficient, lightweight and fast websites with WP.
