@@ -22,6 +22,7 @@ I will be very happy to get your opinion and feedback about this experiment.
 Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemartinw](https://twitter.com/StephaneMartinW).
 
 
+
 ## Principles
 
 This prototype wants to be useful to create simple but very lightweight WP websites.
@@ -38,6 +39,8 @@ Moreover, as far as possible :
 It should all be defined and accessible via Custom Post Types interfaces.
 
 * avoid to use other plugins. For many small sites, all necessary features can be managed without them.
+
+As a demo, my website [www.stephanemartinw.com](http://www.stephanemartinw.com) is built with WordPress and Wistiti.
 
 
 ## The starter theme
@@ -99,13 +102,16 @@ To be used in posts, pages and custom templates :
 
 ## In progress
 
-* New elements for the Wistiti plugin.
-* Improve existing elements to be more flexible.
-* More theme options to avoid tedious overrides in theme child.
-* Improve SEO features.
-* Develop and test Wistiti in the real world, using it on new adequate projects.
+I'm working on :
 
-All suggestions are welcome !
+* Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
+* New elements for the Wistiti plugin.
+* Improving existing elements to be more flexible.
+* More theme options to avoid tedious overrides in theme child.
+* Improving SEO features.
+* Developing and testing Wistiti in the real world, using it on new adequate projects.
+
+Web developers, all suggestions are welcome !
 
 
 ## Changelog
@@ -126,7 +132,7 @@ Please read [CONTRIBUTING.md](https://gist.github.com/stephanemartinw) for detai
 
 ## Authors
 
-* **Stephane Martin** - *Initial work* - [www.stephanemartinw.com](http://www.stephanemartinw.com) (this site is currently being rewrited with Wistiti!)
+* **Stephane Martin** - *Initial work* - [www.stephanemartinw.com](http://www.stephanemartinw.com)
 
 See also the list of [contributors](https://github.com/stephanemartinw/wistiti/contributors) who participated in this project.
 
