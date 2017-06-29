@@ -19,7 +19,7 @@ It also proposes to regain the pleasure of creating a website by refocusing on t
 
 
 I will be very happy to get your opinion and feedback about this experiment.
-Please, feel free to say hello at contact@stephanemartinw.com or @stephanemartinw on Twitter.
+Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemartinw](https://twitter.com/StephaneMartinW).
 
 
 ## Principles
