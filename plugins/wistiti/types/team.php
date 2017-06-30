@@ -112,12 +112,18 @@ add_action( 'save_post_teammember', 'teammember_save_meta_box_data' );
 
 function team_shortcode($atts = [], $content = null, $tag = '') {
 
+		$atts = shortcode_atts(
+		array(
+			'layout' => 'cardsgrid',
+			'col' => 3
+		), $atts);
+
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
 		ob_start();
 
-		wistiti_get_template('teammembers.php');
+		wistiti_get_template('teammembers.php', $atts);
 
 		return ob_get_clean();
 }

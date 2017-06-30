@@ -69,40 +69,28 @@ function service_build_meta_box( $post ){
 	// make sure the form request comes from WordPress
 	wp_nonce_field( basename( __FILE__ ), 'service_meta_box_nonce' );
 
-	// retrieve the _service_field1 current value
-	$current_field1 = get_post_meta( $post->ID, '_service_field1', true );
-
-	// retrieve the _service_field2 current value
-	$current_field2 = get_post_meta( $post->ID, '_service_field2', true );
-
-	$field3 = array( 'Value 1', 'Value 2');
-
-	// stores _service_field3 array
-	$current_field3 = ( get_post_meta( $post->ID, '_service_field3', true ) ) ? get_post_meta( $post->ID, '_service_field3', true ) : array();
+	$current_iconname = get_post_meta( $post->ID, '_service_iconname', true );
+	$current_iconsize = get_post_meta( $post->ID, '_service_iconsize', true );
+	$current_iconcolor = get_post_meta( $post->ID, '_service_iconcolor', true );
 
 	?>
 	<div class='inside'>
 
-		<h3><?php _e( 'Field1', 'wistiti' ); ?></h3>
+		<h3><?php _e( 'Icon name', 'wistiti' ); ?></h3>
 		<p>
-			<input type="radio" name="field1" value="0" <?php checked( $current_field1, '0' ); ?> /> Yes<br />
-			<input type="radio" name="fiel1" value="1" <?php checked( $current_field1, '1' ); ?> /> No
+			<input type="text" name="iconname" value="<?php echo $current_iconname; ?>" />
 		</p>
 
-		<h3><?php _e( 'Field2', 'wistiti' ); ?></h3>
+		<h3><?php _e( 'Icon size', 'wistiti' ); ?></h3>
 		<p>
-			<input type="text" name="field2" value="<?php echo $current_field2; ?>" />
+			<input type="text" name="iconsize" value="<?php echo $current_iconsize; ?>" />
 		</p>
 
-		<h3><?php _e( 'Field3', 'wistiti' ); ?></h3>
+		<h3><?php _e( 'Icon color', 'wistiti' ); ?></h3>
 		<p>
-		<?php
-		foreach ( $field3 as $field3item ) {
-			?>
-			<input type="checkbox" name="field3[]" value="<?php echo $field3item; ?>" <?php checked( ( in_array( $field3item, $current_field3 ) ) ? $field3item : '', $field3item ); ?> /><?php echo $field3item; ?> <br />
-			<?php
-		}
-		?>
+			<input type="text" name="iconcolor" value="<?php echo $current_iconvalue; ?>" />
+		</p>
+
 		</p>
 	</div>
 	<?php
@@ -124,43 +112,35 @@ function service_save_meta_box_data( $post_id ){
 		return;
 	}
 
-	// store custom fields values
-	// field1 string
-	if ( isset( $_REQUEST['field1'] ) ) {
-		update_post_meta( $post_id, '_service_field1', sanitize_text_field( $_POST['field1'] ) );
+	// Store custom fields values
+	if ( isset( $_REQUEST['iconname'] ) ) {
+		update_post_meta( $post_id, '_service_iconname', sanitize_text_field( $_POST['iconname'] ) );
 	}
 
-	// store custom fields values
-	// field2 string
-	if ( isset( $_REQUEST['field2'] ) ) {
-		update_post_meta( $post_id, '_service_field2', sanitize_text_field( $_POST['field2'] ) );
+	if ( isset( $_REQUEST['iconsize'] ) ) {
+		update_post_meta( $post_id, '_service_iconsize', sanitize_text_field( $_POST['iconsize'] ) );
 	}
 
-	// store custom fields values
-	// field3 array
-	if( isset( $_POST['field3'] ) ){
-		$field3 = (array) $_POST['field3'];
-
-		// sinitize array
-		$field3 = array_map( 'sanitize_text_field', $field3 );
-
-		// save data
-		update_post_meta( $post_id, '_service_field3', $field3 );
-	}else{
-		// delete data
-		delete_post_meta( $post_id, '_service_field3' );
+	if ( isset( $_REQUEST['iconcolor'] ) ) {
+		update_post_meta( $post_id, '_service_iconcolor', sanitize_text_field( $_POST['iconcolor'] ) );
 	}
+
 }
 add_action( 'save_post_service', 'service_save_meta_box_data' );
 
 function service_shortcode($atts = [], $content = null, $tag = '') {
+
+		$atts = shortcode_atts(
+		array(
+			'layout' => 'medialist'
+		), $atts);
 
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
 		ob_start();
 
-		wistiti_get_template('services.php');
+		wistiti_get_template('services.php', $atts);
 
 		return ob_get_clean();
 }

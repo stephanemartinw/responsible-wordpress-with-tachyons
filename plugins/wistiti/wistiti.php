@@ -112,7 +112,7 @@ class wistiti_settings
         // This page will be under "Settings"
         add_options_page(
             'Settings Admin',
-            'Custom Post Types Settings',
+            'Wistiti Settings',
             'manage_options',
             'wistiti-setting-admin',
             array( $this, 'create_admin_page' )

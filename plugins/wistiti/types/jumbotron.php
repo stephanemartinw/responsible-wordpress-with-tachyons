@@ -108,13 +108,11 @@ function jumbotron_save_meta_box_data( $post_id ){
 		return;
 	}
 
-	// store custom fields values
 	// Action label string
 	if ( isset( $_REQUEST['action-label'] ) ) {
 		update_post_meta( $post_id, '_jumbotron_action_label', sanitize_text_field( $_POST['action-label'] ) );
 	}
 
-  // store custom fields values
   // Action URL string
   if ( isset( $_REQUEST['action-url'] ) ) {
     update_post_meta( $post_id, '_jumbotron_action_url', sanitize_text_field( $_POST['action-url'] ) );
@@ -125,6 +123,12 @@ function jumbotron_save_meta_box_data( $post_id ){
 add_action( 'save_post_jumbotron', 'jumbotron_save_meta_box_data' );
 
 function jumbotron_shortcode($atts = [], $content = null, $tag = '') {
+
+		$atts = shortcode_atts(
+		array(
+			'id' => 'main',
+			'background' => ''
+		), $atts);
 
 		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);

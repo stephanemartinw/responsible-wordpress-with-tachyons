@@ -2,10 +2,6 @@
 
   $base_url = get_bloginfo('url');
 
-  //Jumbotron id
-  if (isset($atts['id'])) $id = $atts['id'];
-  else $id='main'; //default
-
   //Background image ?
   if (isset($atts['background']))
     $atts['style']="background:url('".$base_url . $atts['background']. "')  no-repeat center ; background-size:cover";
