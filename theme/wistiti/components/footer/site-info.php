@@ -7,17 +7,23 @@
 	if ($wcounter!=0) $wwidth = floor(100 / $wcounter);
 ?>
 
-<div class="cf pv4">
+<div class="cf">
 
 		<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
-		  <div class="fl w-100 w-<?php echo $wwidth; ?>-ns pa2">
+		  <div class="fl w-100 w-<?php echo $wwidth; ?>-ns">
 				<div class="cf">
 
-					  <div class="fl w-100 w-25-ns tc pa2">
-								<img itemprop="logo" class="w-25 w-100-ns h-auto" src="<?php wistiti_theme_the_custom_logo_src(); ?>" alt="<?php bloginfo( 'name' ); ?>"\>
-						</div>
+						<?php
+							$logo_src = wistiti_theme_the_custom_logo_src();
+							$logo_width = 0;
+							if (!empty($logo_src)) : $logo_width=25;?>
+							  <div class="fl w-100 w-25-ns tc pa2">
+										<img itemprop="logo" class="w-25 w-100-ns h-auto" src="<?php echo $logo_src; ?>" alt="<?php bloginfo( 'name' ); ?>"\>
+								</div>
+						<?php endif; ?>
 
-						<div class="fl w-100 w-75-ns pa2">
+						<?php $footer1_width = 100 - $logo_width;?>
+						<div class="fl w-100 w-<?php echo $footer1_width; ?>-ns pa2">
 							<?php dynamic_sidebar( 'footer-1' ); ?>
 						</div>
 				</div>
