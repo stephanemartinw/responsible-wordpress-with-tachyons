@@ -5,8 +5,7 @@ An experiment for lightened WordPress websites with [tachyons.io](https://github
 
 ## Presentation
 
-This Wistiti project is experimental !
-It wants to explore a way for creating efficient, lightweight and fast websites with WP.
+This Wistiti project is experimental. It wants to explore a way for creating efficient, lightweight and fast websites with WP.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
@@ -19,8 +18,8 @@ It also proposes to regain the pleasure of creating a website by refocusing on t
 
 
 I will be very happy to get your opinion and feedback about this experiment.
-Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemartinw](https://twitter.com/StephaneMartinW).
 
+Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemartinw](https://twitter.com/StephaneMartinW).
 
 
 ## Principles
@@ -39,8 +38,6 @@ Moreover, as far as possible :
 It should all be defined and accessible via Custom Post Types interfaces.
 
 * avoid to use other plugins. For many small sites, all necessary features can be managed without them.
-
-As a demo, my website [www.stephanemartinw.com](http://www.stephanemartinw.com) is built with WordPress and Wistiti.
 
 
 ## The starter theme
@@ -101,11 +98,16 @@ To be used in posts, pages and custom templates :
 * [wistiti_contact_form] : displays a simple contact form.
 
 
+## Already existing wistitis on the web
+
+* [www.stephanemartinw.com](http://www.stephanemartinw.com).
+
+Send your wistiti website url and we will add it here.
+
+
 ## In progress
 
-I'm working on :
-
-* Supporting blog and post/page comments.
+* Supporting blogs, post/page comments and associated widgets.
 * New elements for the Wistiti plugin.
 * Improving existing elements to be more flexible.
 * More theme options to avoid tedious overrides in theme child.
@@ -113,7 +115,7 @@ I'm working on :
 * Improving SEO features.
 * Developing and testing Wistiti in the real world, using it on new adequate projects.
 
-Web developers, all suggestions are welcome !
+Web developers, all suggestions are welcome ! Feel free to contribute here to Wistiti !
 
 
 ## Changelog
