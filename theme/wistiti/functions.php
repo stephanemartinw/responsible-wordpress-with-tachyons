@@ -275,7 +275,7 @@ if (!class_exists('Walker_Main_Menu')) {
 
 			//Root items, level 0
 			if ($item->menu_item_parent=='0') {
-				$classes_item = 'relative db dib-l pa3';
+				$classes_item = 'relative db dib-l pa3 ph0-l mh3-l pv1-l';
 				$classes_link = 'db link black-l white f5-l f4';
 			}
 			//Other levels
@@ -287,7 +287,7 @@ if (!class_exists('Walker_Main_Menu')) {
 			//Menu has children
 			if ($args->walker->has_children) $classes_item .= " js-menu-has-children toggler";
 
-			if ( $item->current ) $classes_item .= ' current';
+			if ( $item->current ) $classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
 
 			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
 					$item->url,
