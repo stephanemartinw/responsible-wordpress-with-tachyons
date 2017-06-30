@@ -45,7 +45,7 @@ As a demo, my website [www.stephanemartinw.com](http://www.stephanemartinw.com) 
 
 ## The starter theme
 
-The starter theme is based on the base package of [Components](http://components.underscores.me/).
+The Wistiti starter theme is based on the base package of [Components](http://components.underscores.me/).
 Some modifications have been done :
 
 * No CSS but Tachyons.
@@ -55,7 +55,7 @@ Some modifications have been done :
 * Some options (to be extended) via the theme customizer.
 * The meta Description tag is added automatically to pages via the 'description' custom field.
 
-Note : the theme has still to be modified to support blog websites.
+A child theme model (mywistiti) is available. Start from it to create your own Wistiti.
 
 
 ## The plugin
@@ -82,10 +82,11 @@ These elements are by default all inactive but can be separately activated, acco
 
 Install and activate both theme and plugin in your WordPress project. In the Wistiti plugin settings, activate the elements you need.
 
-Create then a child theme and start building your theme by :
+Start from the Wistiti child theme (mywistiti) and start building your theme by :
 
-* building your custom templates or pages (for that use Wistiti's elements shortcodes and tachyons classes.)
+* building your custom templates or pages. For that, use Wistiti's elements shortcodes and tachyons classes.
 * overriding Wistiti's elements templates to fit your specific needs.
+* extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 * adding content via the generated custom post types interfaces.
 
 
@@ -94,9 +95,9 @@ Create then a child theme and start building your theme by :
 To be used in posts, pages and custom templates :
 
 * [wistiti_jumbotron id="id of the jumbotron" background="relative url of background image"] : displays the jumbotron selected by the id attribute. Use jumbotron's slug as id. 'main' is default one.
-* [wistiti_services] : displays all the services, ordered by thee Order field.
-* [wistiti_team] : displays all the team members, ordered by thee Order field.
-* [wistiti_faq] :display all the FAQS, ordered by thee Order field.
+* [wistiti_services] : displays all the services, ordered by the Order field.
+* [wistiti_team] : displays all the team members, ordered by the Order field.
+* [wistiti_faq] :display all the FAQS, ordered by the Order field.
 * [wistiti_contact_form] : displays a simple contact form.
 
 
@@ -104,10 +105,11 @@ To be used in posts, pages and custom templates :
 
 I'm working on :
 
-* Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
+* Supporting blog and post/page comments.
 * New elements for the Wistiti plugin.
 * Improving existing elements to be more flexible.
 * More theme options to avoid tedious overrides in theme child.
+* Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
 * Developing and testing Wistiti in the real world, using it on new adequate projects.
 

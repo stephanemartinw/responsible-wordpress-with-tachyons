@@ -1,0 +1,55 @@
+<?php
+/**
+ * The template for displaying all pages
+ *
+ * This is the template that displays all pages by default.
+ * Please note that this is the WordPress construct of pages
+ * and that other 'pages' on your WordPress site may use a
+ * different template.
+ *
+ * @link https://codex.wordpress.org/Template_Hierarchy
+ *
+ * @package Wistiti
+ */
+
+get_header(); ?>
+
+	<div id="primary" class="content-area">
+		<main id="main" class="mw8 center" role="main">
+
+			<?php
+			while ( have_posts() ) : the_post();
+
+				switch ($post->post_name) {
+
+					//A specific template for front page (front-page.php) can also be used
+					/*case "home-page" :
+						$content="front";
+						break;*/
+
+					//Extend here to manage your custom pages. For example :
+					/*case "contact" :
+						$content="contact";
+						break;*/
+
+					//Default page template
+					default:
+						$content="page";
+						break;
+				}
+
+				get_template_part( 'components/page/content', $content );
+
+				// If comments are open or we have at least one comment, load up the comment template.
+				if ( comments_open() || get_comments_number() ) :
+					comments_template();
+				endif;
+
+			endwhile; // End of the loop.
+			?>
+
+		</main>
+	</div>
+<?php
+get_sidebar();
+get_footer();

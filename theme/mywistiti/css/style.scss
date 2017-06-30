@@ -1,0 +1,590 @@
+/*
+Theme Name: My wistiti
+Theme URI: http://components.underscores.me/
+Template: wistiti
+Author: Stephane Martin
+Author URI: http://www.stephanemartinw.com
+Description: A Wistiti child theme
+Version: 1.0.0
+License: GNU General Public License v2 or later
+License URI: http://www.gnu.org/licenses/gpl-2.0.html
+Tags:
+
+This theme, like WordPress, is licensed under the GPL.
+Use it to make something cool, have fun, and share what you've learned with others.
+
+Wistiti is created by the theme generator at http://components.underscores.me/, (C) 2015-2016 Automattic, Inc.
+Components is distributed under the terms of the GNU GPL v2 or later.
+
+Normalizing styles have been helped along thanks to the fine work of
+Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
+*/
+
+//Import parent theme sass ?
+@import  "../../wistiti/assets/css/style.scss";
+
+//And child theme custom addons
+@import  "tachyons-sass-addons/tachyons-addons.scss";
+
+//Specific
+.pca-hold {
+  width: 180px;
+}
+.pca-hold .pca-main {
+  display: block;
+  position: relative;
+  background-color: #1e1e1e;
+  height: 108px;
+  border: 6.48px solid #2d2d2d;
+  border-top-left-radius: 4.32px;
+  border-top-right-radius: 4.32px;
+}
+.pca-hold .pca-main:after {
+  content: '';
+  position: absolute;
+  top: -6.14px;
+  left: 50%;
+  -webkit-transform: translate(-50%,0);
+  -ms-transform: translate(-50%,0);
+  -o-transform: translate(-50%,0);
+  transform: translate(-50%,0);
+  width: 3.42px;
+  height: 3.42px;
+  background-color: #959595;
+  border-radius: 100%;
+}
+.pca-hold .pca-main:before {
+  content: '';
+  opacity: 0;
+}
+.pca-hold .pca-inner {
+  display: block;
+}
+.pca-hold .pca-sub {
+  display: block;
+  text-align: center;
+}
+.pca-hold .pca-sub .pca-top {
+  position: relative;
+  display: block;
+  width: 180px;
+  height: 14.4px;
+  background-color: #e8e8e8;
+  border-bottom-left-radius: 4.32px;
+  border-bottom-right-radius: 4.32px;
+  opacity: 1;
+  z-index: 2;
+}
+.pca-hold .pca-sub .pca-top:after {
+  content: '';
+  position: absolute;
+  width: 7.2px;
+  height: 7.2px;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%,-50%);
+  -ms-transform: translate(-50%,-50%);
+  -o-transform: translate(-50%,-50%);
+  transform: translate(-50%,-50%);
+  background-image: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMzAuMyIgaGVpZ2h0PSIxNjAiIHZpZXdCb3g9IjE5IDUgMTMwLjMgMTYwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDE5IDUgMTMwLjMgMTYwIj48dGl0bGU+TGF5ZXIgMTwvdGl0bGU+PHBhdGggZD0iTTEyNy44IDkwYy4yIDI0LjIgMjEuMiAzMi4zIDIxLjUgMzIuNC0uMi42LTMuNCAxMS41LTExLjEgMjIuOC02LjcgOS43LTEzLjYgMTkuNS0yNC41IDE5LjctMTAuNy4yLTE0LjItNi40LTI2LjQtNi40cy0xNi4xIDYuMi0yNi4yIDYuNmMtMTAuNS40LTE4LjUtMTAuNS0yNS4zLTIwLjMtMTMuNy0xOS45LTI0LjItNTYuMS0xMC4xLTgwLjYgNy0xMi4yIDE5LjUtMTkuOSAzMy4xLTIwLjEgMTAuMy0uMiAyMC4xIDcgMjYuNCA3IDYuMyAwIDE4LjItOC42IDMwLjYtNy4zIDUuMi4yIDE5LjkgMi4xIDI5LjMgMTUuOS0uOC4zLTE3LjUgMTAuMS0xNy4zIDMwLjNtLTIwLjEtNTkuNWM1LjYtNi44IDkuMy0xNi4yIDguMy0yNS41LTguMS4zLTE3LjggNS40LTIzLjYgMTIuMS01LjIgNi05LjcgMTUuNi04LjUgMjQuNyA5IC44IDE4LjItNC41IDIzLjgtMTEuMyIvPjwvc3ZnPg==);
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+.pca-hold .pca-sub .pca-mid {
+  display: block;
+  text-align: center;
+  height: 14.4px;
+  width: 100%;
+  position: relative;
+  z-index: 1;
+}
+.pca-hold .pca-sub .pca-mid .pca-part {
+  display: block;
+  margin: 0 auto;
+  border-bottom: 18px solid #cdcdcd;
+  border-left: 9px solid transparent;
+  border-right: 9px solid transparent;
+  height: 0;
+  width: 54px;
+}
+.pca-hold .pca-sub .pca-bot {
+  position: relative;
+  display: block;
+  width: 72px;
+  height: 5.4px;
+  margin: 0 auto;
+  background-color: #e8e8e8;
+  border-radius: 3.6px 3.6px 0 0;
+  opacity: 1;
+  z-index: 2;
+}
+
+//Screen cursor
+.ityped-cursor{
+
+	opacity: 1;
+	-webkit-animation: blink 0.7s infinite;
+	-moz-animation: blink 0.7s infinite;
+	animation: blink 0.7s infinite;
+}
+@keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-webkit-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+@-moz-keyframes blink{
+	0% { opacity:1; }
+	50% { opacity:0; }
+	100% { opacity:1; }
+}
+
+
+//Developper
+//developper
+.developer {
+	position:relative;
+	width:160px;
+	height:160px;
+
+  margin:auto;
+  margin-top:-50px;
+
+	/*image fallback*/
+	background-image:url('./images/stephane.png');
+  background-repeat:no-repeat;
+  background-position:bottom center;
+  background-size:contain;
+
+  z-index:9;
+}
+
+.developer {
+	background:none;
+}
+
+.stephane,
+.stephane-front {
+  //display: block;
+
+	width: 80px;
+  height: 140px;
+
+	position: relative;
+	top:20px;
+	left:40px;
+
+	background: #B2B2B2;
+
+	border-radius: 15px 15px 20px 20px;
+	-webkit-border-radius: 15px 15px 20px 20px;
+	-moz-border-radius: 15px 15px 20px 20px;
+
+	//margin: 0px auto;
+}
+
+$stephane-rounded-boxes: /*nez et oreilles*/
+		20px -7px 0px 5px #B2B2B2,
+		-14px 23px 0px 6px #B2B2B2,
+		54px 23px 0px 6px #B2B2B2,
+		/*col*/
+		/*coude gauche*/
+		-33px 73px 0 7px #000000,
+		/*coude droit*/
+		73px 73px 0 7px #000000,
+		/*genou gauche*/
+		-35px 117px 0 10px #B2B2B2,
+		/*genou droit*/
+		75px 117px 0 10px #B2B2B2;
+
+@mixin stephane-rounded() {
+$boxes: /*lunettes*/
+		0px 6px 0 8px #FFFFFF,
+		0px 6px 0 11px #000000,
+		40px 0 0 0px #000000,
+		40px 6px 0 8px #FFFFFF,
+		40px 6px 0 11px #000000,
+		$stephane-rounded-boxes;
+
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+$stephane-rounded-boxes-front:
+        /*nez et oreilles*/
+		20px -7px 0px 5px #B2B2B2,
+		-14px 23px 0px 6px #B2B2B2,
+		54px 23px 0px 6px #B2B2B2,
+		/*coude droit*/
+		73px 73px 0 7px #000000,
+		/*genou gauche*/
+		-35px 117px 0 10px #B2B2B2,
+		/*genou droit*/
+		75px 117px 0 10px #B2B2B2;
+
+@mixin stephane-rounded-front() {
+$boxes: /*lunettes*/
+		0px 6px 0 8px #FFFFFF,
+		0px 6px 0 11px #000000,
+		40px 0 0 0px #000000,
+		40px 6px 0 8px #FFFFFF,
+		40px 6px 0 11px #000000,
+		$stephane-rounded-boxes-front;
+
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+@mixin stephane-glimpse-rounded() {
+$boxes: /*lunettes avec clignement*/
+		0px 6px 0 8px #FFFFFF,
+		0px 6px 0 11px #000000,
+		40px 0 0 0px #FFFFFF,
+		40px 6px 0 8px #FFFFFF,
+		40px 6px 0 11px #000000,
+		$stephane-rounded-boxes;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.stephane:after,
+.stephane-front:after{
+    content: "";
+    position: absolute;
+    border-radius: 50%;
+	-webkit-border-radius: 50%;
+	-moz-border-radius: 50%;
+
+    background: black;
+    width: 10px;
+    height: 10px;
+    top: 0px;
+    left: 15px;
+}
+
+.stephane:after {
+    @include stephane-rounded();
+}
+
+.stephane-front:after{
+    @include stephane-rounded-front();
+}
+
+.stephane.glimpse:after {
+
+    background: white;
+	border:none;
+
+	@include stephane-glimpse-rounded();
+}
+
+$stephane-squared-boxes:
+		/*sourcils*/
+		10px -18px 0 -3px #000000,
+		15px -18px 0 -3px #000000,
+		20px -18px 0 -3px #000000,
+		50px -18px 0 -3px #000000,
+		55px -18px 0 -3px #000000,
+		60px -18px 0 -3px #000000,
+		/*pull*/
+	   35px  35px 0 35px #000000,
+	   /*bras gauche*/
+	   -10px 30px 0 5px #000000,
+	   -20px 15px 0 5px #000000,
+	   -20px 0px 0 5px #B2B2B2,
+	   /*bras droite*/
+	   80px 30px 0 5px #000000,
+	   90px 15px 0 5px #000000,
+	   90px 0px 0 5px #B2B2B2,
+	   /*pouces*/
+	   -10px 0px 0 -2px #B2B2B2,
+	   80px 0px 0 -2px #B2B2B2,
+	   /*jambe droite*/
+	   -5px 72px 0 10px #B2B2B2,
+	   /*jambe gauche*/
+	   75px 72px 0 10px #B2B2B2,
+	   /*lunette*/
+	   32px -35px 0 -2px #000000,
+	   37px -35px 0 -2px #000000;
+
+@mixin stephane-squared() {
+$boxes: 	$stephane-squared-boxes;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+$stephane-squared-boxes-front:
+		/*sourcils*/
+		10px -18px 0 -3px #000000,
+		15px -18px 0 -3px #000000,
+		20px -18px 0 -3px #000000,
+		50px -18px 0 -3px #000000,
+		55px -18px 0 -3px #000000,
+		60px -18px 0 -3px #000000,
+		/*pull*/
+	   35px  35px 0 35px #000000,
+	   /*bras droite*/
+	   80px 30px 0 5px #000000,
+	   90px 15px 0 5px #000000,
+	   90px 0px 0 5px #B2B2B2,
+	   /*pouces*/
+	   80px 0px 0 -2px #B2B2B2,
+	   /*jambe droite*/
+	   -5px 72px 0 10px #B2B2B2,
+	   /*jambe gauche*/
+	   75px 72px 0 10px #B2B2B2,
+	   /*lunette*/
+	   32px -35px 0 -2px #000000,
+	   37px -35px 0 -2px #000000;
+
+@mixin stephane-squared-front() {
+$boxes: 	$stephane-squared-boxes-front;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+@mixin stephane-glimpse-squared() {
+$boxes:
+	/*glimpse*/
+	10px -45px 0 -4px #000000,
+	12px -45px 0 -4px #000000,
+	14px -45px 0 -4px #000000,
+	16px -45px 0 -4px #000000,
+	18px -45px 0 -4px #000000,
+	20px -45px 0 -4px #000000,
+
+	50px -45px 0 -4px #000000,
+	52px -45px 0 -4px #000000,
+	54px -45px 0 -4px #000000,
+	56px -45px 0 -4px #000000,
+	58px -45px 0 -4px #000000,
+	60px -45px 0 -4px #000000,
+	$stephane-squared-boxes;
+
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.stephane:before,
+.stephane-front:before{
+    content: "";
+    position: absolute;
+    background: black;
+    width: 10px;
+    height: 10px;
+    top: 45px;
+    left: 0px;
+	z-index:999;
+
+}
+.stephane:before {
+	@include stephane-squared();
+}
+.stephane-front:before{
+    @include stephane-squared-front();
+}
+
+
+.stephane.glimpse:before {
+	@include stephane-glimpse-squared();
+}
+
+.keyboard {
+	position:absolute;
+	top:35px;
+	width:100%;
+	height:40px;
+	background-color:#ffffff;
+}
+
+@mixin keyboard-squared() {
+$boxes: 12px 0 0 0 #EFEFEF,
+	24px 0 0 0 #EFEFEF,
+	36px 0 0 0 #EFEFEF,
+	48px 0 0 0 #EFEFEF,
+	60px 0 0 0 #EFEFEF,
+	72px 0 0 0 #EFEFEF,
+	84px 0 0 0 #EFEFEF,
+	96px 0 0 0 #EFEFEF,
+	108px 0 0 0 #EFEFEF,
+	120px 0 0 0 #EFEFEF,
+	132px 0 0 0 #EFEFEF,
+	144px 0 0 0 #EFEFEF,
+	0px 12px 0 0 #EFEFEF,
+	12px 12px 0 0 #EFEFEF,
+	24px 12px 0 0 #EFEFEF,
+	36px 12px 0 0 #EFEFEF,
+	48px 12px 0 0 #EFEFEF,
+	60px 12px 0 0 #EFEFEF,
+	72px 12px 0 0 #EFEFEF,
+	84px 12px 0 0 #EFEFEF,
+	96px 12px  0 0 #EFEFEF,
+	108px 12px 0 0 #EFEFEF,
+	120px 12px 0 0 #EFEFEF,
+	132px 12px 0 0 #EFEFEF,
+	144px 12px 0 0 #EFEFEF;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.keyboard:after {
+	content: "";
+    position: absolute;
+
+    background: #EFEFEF;
+    width: 10px;
+    height: 10px;
+    top: 8px;
+    left: 2px;
+
+	@include keyboard-squared();
+}
+
+.lefthand {
+	position:absolute;
+	top:40px;
+	left:15px;
+	width:20px;
+	height:20px;
+}
+
+.righthand {
+	position:absolute;
+	top:40px;
+	left:125px;
+	width:20px;
+	height:20px;
+	}
+
+@mixin hand-squared() {
+$boxes: 0 5px 0 0 #B2B2B2,
+	0 10px 0 0 #B2B2B2,
+	7px 0 0 0 #B2B2B2,
+	7px 5px 0 0 #B2B2B2,
+	7px 10px 0 0 #B2B2B2,
+	14px 0 0 0 #B2B2B2,
+	14px 5px 0 0 #B2B2B2,
+	14px 10px 0 0 #B2B2B2;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.righthand:before,
+.lefthand:before {
+	content: "";
+    position: absolute;
+
+    background: #B2B2B2;
+    width: 5px;
+    height: 5px;
+    top: 10px;
+    left: 0px;
+
+	@include hand-squared();
+}
+
+@mixin hand1-squared() {
+$boxes:
+	0 5px 0 0 #B2B2B2,
+	0 10px 0 0 #B2B2B2,
+
+	7px 5px 0 0 #B2B2B2,
+	7px 10px 0 0 #B2B2B2,
+
+	14px 5px 0 0 #B2B2B2,
+	14px 10px 0 0 #B2B2B2;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.righthand.hand1:before,
+.lefthand.hand1:before {
+	content: "";
+    position: absolute;
+
+    background: #B2B2B2;
+    width: 5px;
+    height: 5px;
+    top: 10px;
+    left: 0px;
+
+	@include hand1-squared();
+}
+
+@mixin hand2-squared() {
+$boxes: 0 5px 0 0 #B2B2B2,
+	0 10px 0 0 #B2B2B2,
+
+	7px 5px 0 0 #B2B2B2,
+	7px 10px 0 0 #B2B2B2,
+	14px 0 0 0 #B2B2B2,
+	14px 5px 0 0 #B2B2B2,
+	14px 10px 0 0 #B2B2B2;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.righthand.hand2:before,
+.lefthand.hand2:before {
+	content: "";
+    position: absolute;
+
+    background: #B2B2B2;
+    width: 5px;
+    height: 5px;
+    top: 5px;
+    left: 0px;
+
+	@include hand2-squared();
+}
+
+@mixin hand3-squared() {
+$boxes: 0 5px 0 0 #B2B2B2,
+	0 10px 0 0 #B2B2B2,
+	7px -5px 0 0 #B2B2B2,
+	7px 0px 0 0 #B2B2B2,
+	7px 5px 0 0 #B2B2B2,
+	14px -5px 0 0 #B2B2B2,
+	14px 0px 0 0 #B2B2B2,
+	14px 5px 0 0 #B2B2B2;
+box-shadow: $boxes;
+-webkit-box-shadow:$boxes;
+-moz-box-shadow:$boxes;
+}
+
+.righthand.hand3:before,
+.lefthand.hand3:before {
+	content: "";
+    position: absolute;
+
+    background: #B2B2B2;
+    width: 5px;
+    height: 5px;
+    top: 10px;
+    left: 0px;
+
+	@include hand3-squared();
+}
+
+//particlesJS
+.particles-js-canvas-el {
+  position:absolute;
+  top:0;
+  left:0;
+  z-index:1;
+}
