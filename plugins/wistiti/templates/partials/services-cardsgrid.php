@@ -14,7 +14,8 @@
 <div class="fl w-<?php echo $width; ?> ph4 pb4 tc">
   <?php if (has_post_thumbnail()) : the_post_thumbnail( 'medium_large', ['class' => 'w-100 h-auto']); else :
     if (!empty($iconname)) :?>
-      <!--to do : Display icon -->
+      <!-- For now, override this template and add here : display the icon according to the font loaded by your wistiti child theme -->
+      <!-- Use custom library containing only actually used icons (ie icomoon app).-->
   <?php endif; endif; ?>
   <h3><?php the_title();?></h3>
   <?php the_content();?>
