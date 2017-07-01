@@ -28,7 +28,7 @@ function jumbotron_setup() {
     'show_in_menu' => true,
 		'has_archive' => true,
     'map_meta_cap' => true,
-    'menu_icon' => 'dashicons-carrot',
+    'menu_icon' => 'dashicons-megaphone',
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail','page-attributes' ),
     'taxonomies' => array( 'jumbotron-type' ),
 		)
@@ -126,16 +126,29 @@ function jumbotron_shortcode($atts = [], $content = null, $tag = '') {
 
 		$atts = shortcode_atts(
 		array(
-			'id' => 'main',
+			'id' => '',
+			'display' => 'classic',
+			'firstheadinghierarchy' => '1',
 			'background' => ''
 		), $atts);
-
-		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
+		//Query
+		$jumbotron_query = '';
+		if (isset($atts['id']) && !empty($atts['id'])) {
+			$args = array(
+					'post_type' => 'jumbotron',
+					'name' => $atts['id']
+				);
+
+			$jumbotron_query = new WP_Query( $args );
+			$atts['query'] = $jumbotron_query;
+		}
+
+		//Template
 		ob_start();
 
-		wistiti_get_template('jumbotron.php', $atts);
+		if (!empty($jumbotron_query)) wistiti_get_template('jumbotron.php', $atts);
 
 		return ob_get_clean();
 }

@@ -181,6 +181,9 @@ class wistiti_settings
         if( isset( $input['jumbotron'] ) )
             $new_input['jumbotron'] = true;
 
+        if( isset( $input['jumbotron'] ) )
+            $new_input['card'] = true;
+
         if( isset( $input['service'] ) )
             $new_input['service'] = true ;
 
@@ -214,10 +217,11 @@ class wistiti_settings
         $value = array("name" => "Post Types to include",
         	"desc" => "Select the pages you want to include. All pages are excluded by default",
         	"options" => array( "jumbotron"=>"Jumbotron",
+                              "card"=>"Card",
                               "service"=>"Services",
                               "team"=>"Team",
                               "faq"=>"FAQs",
-                              "contactform"=>"Simple Contact Form")
+                              "contactform"=>"Contact Form")
         );
 
         $markup='<ul>'."\n";
@@ -243,6 +247,7 @@ if( is_admin() )
 
 $options = get_option('wistiti_option_name');
 if ($options['jumbotron']) require_once(__ROOT__.'/types/jumbotron.php');
+if ($options['card']) require_once(__ROOT__.'/types/card.php');
 if ($options['service']) require_once(__ROOT__.'/types/service.php');
 if ($options['team']) require_once(__ROOT__.'/types/team.php');
 if ($options['faq']) {

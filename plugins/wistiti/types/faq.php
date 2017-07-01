@@ -28,7 +28,7 @@ function FAQ_setup() {
     'show_in_menu' => true,
 		'has_archive' => true,
     'map_meta_cap' => true,
-    'menu_icon' => 'dashicons-carrot',
+    'menu_icon' => 'dashicons-info',
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail','page-attributes' ),
     'taxonomies' => array( 'FAQ-group' ),
 		)
@@ -155,12 +155,29 @@ add_action( 'save_post_FAQ', 'FAQ_save_meta_box_data' );
 
 function FAQ_shortcode($atts = [], $content = null, $tag = '') {
 
-		// normalize attribute keys, lowercase
+		$atts = shortcode_atts(
+		array(
+			'layout' => 'list',
+			'display' => 'accordion',
+			'firstheadinghierarchy' => '3'
+		), $atts);
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
+		//Query
+		$args = array(
+		    'post_type' => 'faq',
+		    'orderby'=> 'menu_order',
+		    'order' => 'ASC',
+		    'post_status' => 'publish'
+		  );
+
+		$faqs_query = new WP_Query( $args );
+		$atts['query'] = $faqs_query;
+
+		//Template
 		ob_start();
 
-		wistiti_get_template('faq.php');
+		wistiti_get_template('faqs-'.$atts['layout'].'.php', $atts);
 
 		return ob_get_clean();
 }

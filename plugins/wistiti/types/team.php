@@ -28,7 +28,7 @@ function teammember_setup() {
     'show_in_menu' => true,
 		'has_archive' => true,
     'map_meta_cap' => true,
-    'menu_icon' => 'dashicons-carrot',
+    'menu_icon' => 'dashicons-groups',
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail','page-attributes' ),
     'taxonomies' => array( 'teammember-team' ),
 		)
@@ -114,16 +114,28 @@ function team_shortcode($atts = [], $content = null, $tag = '') {
 
 		$atts = shortcode_atts(
 		array(
-			'layout' => 'cardsgrid',
-			'col' => 3
+			'layout' => 'grid',
+			'col' => 3,
+			'display' => 'card',
+ 			'firstheadinghierarchy' => '3'
 		), $atts);
-
-		// normalize attribute keys, lowercase
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
+		//Query
+		$args = array(
+	      'post_type' => 'teammember',
+	      'orderby'=> 'menu_order',
+	      'order' => 'ASC',
+	      'post_status' => 'publish'
+	    );
+
+	  $teammembers_query = new WP_Query( $args );
+		$atts['query'] = $teammembers_query;
+
+		//Template
 		ob_start();
 
-		wistiti_get_template('teammembers.php', $atts);
+		wistiti_get_template('teammembers-'.$atts['layout'].'.php', $atts);
 
 		return ob_get_clean();
 }
