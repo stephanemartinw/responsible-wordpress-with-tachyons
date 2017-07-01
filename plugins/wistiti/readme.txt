@@ -20,40 +20,50 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Documentation ==
 
+Templates
+
+Templates and their partials can all be overriden in the /plugins/wistiti/ directory of your wistiti child theme to fully support tachyons classes.
+
+All elements templates can be are organized according 'layout' and 'display' :
+* layout defines the general structure of the element (list, grid....)
+* display defines the element display format (media object, card, ...)
+
+
 Shortcodes
 
 * [wistiti_jumbotron] : displays the jumbotron selected by the id attribute. Use jumbotron's slug as id. 'main' is default one.
 Attributes :
 'id' : id of the jumbotron (Use jumbotron's slug as id.)
 'display' : display mode (classic)
-'firstheadinghierarchy' : heading hierachy starting level
+'firstheadinghierarchy' : heading hierarchy starting level
 'background' : relative url of background image
 
 * [wistiti_card] : displays the card selected by the id attribute.
 Attributes :
 'id' : id of the jumbotron (use card's slug as id.)
 'display' : display mode (classic)
-'firstheadinghierarchy' : heading hierachy starting level (1 to 6)
+'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
 'background' : relative url of background image
 
 * [wistiti_services] : displays all the services, ordered by the Order field.
 Attributes :
 'layout' : layout mode (list, grid)
+'col' : grid columns number per row
 'display' : display mode (media, card)
-'firstheadinghierarchy' : heading hierachy starting level (1 to 6)
+'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
 
 * [wistiti_team] : displays all the team members, ordered by the Order field.
 Attributes :
 'layout' : 'layout mode (grid),
-'col' : grid columns number
+'col' : grid columns number per row
 'display' : display  mode (card)
-'firstheadinghierarchy' => heading hierachy starting level (1 to 6)
+'firstheadinghierarchy' => heading hierarchy starting level (1 to 6)
 
 * [wistiti_faq] :display all the FAQS, ordered by the Order field.
 Attributes :
 'layout' : layout mode (list)
 'display': display mode (accordion)
-'firstheadinghierarchy' : heading hierachy starting level (1 to 6)
+'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
 
 * [wistiti_contact_form] : displays a simple contact form.
 Attributes:

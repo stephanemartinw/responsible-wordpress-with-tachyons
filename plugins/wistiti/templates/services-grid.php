@@ -5,7 +5,7 @@
 
       //Layout
       if (isset($atts['col']) && $atts['col']!=0) {
-        $width = 100 / $atts['col'];
+        $width = floor(100 / $atts['col']);
       }
       else {
         $width=33; //default

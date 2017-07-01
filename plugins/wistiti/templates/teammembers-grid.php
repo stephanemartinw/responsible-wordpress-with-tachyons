@@ -4,15 +4,8 @@
     $teammembers_query = $atts['query'];
 
     //Layout
-    if (isset($atts['col']) && $atts['col']!=0) {
-      $width = 100 / $atts['col'];
-      if ($atts['col']==1) $width_avatar = 25;
-      else $width_avatar=50;
-    }
-    else {
-      $width=33; //default
-      $width_avatar=50;
-    }
+    if (isset($atts['col']) && $atts['col']!=0) $width = floor(100 / $atts['col']);
+    else $width=33; //default
 
 ?>
 

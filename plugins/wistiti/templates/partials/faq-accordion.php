@@ -5,10 +5,11 @@
 
   //Default skin
   //Override this template partial in your wistiti child theme to fit your needs
+  $class_accordion = "pv2";
   $class_title = "js-tab-title db bg-custom-green white ma0 pa1 pointer";
 ?>
 
-<div class="js-accordion pv2">
+<div class="js-accordion <?php echo $class_accordion;?>">
     <div class="<?php echo $class_title;?>" id="tab<?php echo $index;?>" tabindex="<?php echo $index;?>" aria-controls="panel<?php echo $index;?>" role="tab">
       <h<?php echo $firstheadinghierarchy;?> class="white"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
     </div>

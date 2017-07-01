@@ -134,6 +134,7 @@ function service_shortcode($atts = [], $content = null, $tag = '') {
 		$atts = shortcode_atts(
 		array(
 			'layout' => 'list',
+			'col' => 3,
 			'display' => 'media',
 			'firstheadinghierarchy' => '3',
 		), $atts);
