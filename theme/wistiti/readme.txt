@@ -1,4 +1,4 @@
-=== Smew Theme ===
+=== Wistiti Theme ===
 
 Contributors:
 Tags:
@@ -11,7 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
 == Description ==
 
-A smew starter theme
+A Wistiti starter theme
 
 == Installation ==
 
@@ -19,16 +19,9 @@ A smew starter theme
 2. Click Upload and Choose File, then select the theme's .zip file. Click Install Now.
 3. Click Activate to use your new theme right away.
 
-== Frequently Asked Questions ==
-
-= Does this theme support any plugins? =
-
-Smew Theme includes support for Jetpack's Infinite Scroll as well as other features.
-
 == Changelog ==
 
-= 1.0 - [Date] =
-* Initial release
+* 1.0 = Initial release
 
 == Credits ==
 

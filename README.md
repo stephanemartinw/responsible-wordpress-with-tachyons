@@ -54,6 +54,8 @@ Some modifications have been done :
 
 A child theme model (mywistiti) is available. Start from it to create your own Wistiti.
 
+Check readme.txt for more information and documentation.
+
 
 ## The plugin
 
@@ -75,6 +77,8 @@ New elements are currently developed and will be added soon :
 
 These elements are by default all inactive but can be separately activated, according to the need of the built website.
 
+Check readme.txt for more information and documentation.
+
 
 ## Getting Started
 
@@ -86,17 +90,6 @@ Start from the Wistiti child theme (mywistiti) and start building your theme by 
 * overriding Wistiti's elements templates to fit your specific needs.
 * extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 * adding content via the generated custom post types interfaces.
-
-
-## Shortcodes
-
-To be used in posts, pages and custom templates :
-
-* [wistiti_jumbotron id="id of the jumbotron" background="relative url of background image"] : displays the jumbotron selected by the id attribute. Use jumbotron's slug as id. 'main' is default one.
-* [wistiti_services] : displays all the services, ordered by the Order field.
-* [wistiti_team] : displays all the team members, ordered by the Order field.
-* [wistiti_faq] :display all the FAQS, ordered by the Order field.
-* [wistiti_contact_form] : displays a simple contact form.
 
 
 ## Already existing wistitis on the web
