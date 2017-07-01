@@ -64,8 +64,9 @@ The plugin proposes so far following elements :
 * FAQ
 * Contact Form
 
-These elements use custom post types (so the content management is easy with WP), overridable templates(so that you can customize layout and skin with tachyons).
-They propose each a shortcode to be uses in pages and templates.
+These elements use custom post types (so the content management is easy within WP's administration), with overridable templates using layout and display variations that you can fully customize with tachyons classes.
+
+They also propose each a shortcode to be uses in pages and templates.
 
 New elements are currently developed and will be added soon :
 * Text block
@@ -107,9 +108,9 @@ Send your wistiti website url and we will add it here.
 
 ## In progress
 
+* Improving existing elements to be more flexible and powerful.
 * Supporting blogs, post/page comments and associated widgets.
 * New elements for the Wistiti plugin.
-* Improving existing elements to be more flexible.
 * More theme options to avoid tedious overrides in theme child.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
