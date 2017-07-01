@@ -128,7 +128,6 @@ function card_shortcode($atts = [], $content = null, $tag = '') {
 		array(
 			'id' => '',
 			'display' => 'classic',
-      'skin' => 'basic',
 			'firstheadinghierarchy' => '3',
 			'background' => ''
 		), $atts);
