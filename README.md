@@ -62,6 +62,7 @@ Check readme.txt for more information and documentation.
 The plugin proposes so far following elements :
 
 * Jumbotron (inspired from Bootstrap)
+* Card (inspired from Bootstrap)
 * Services
 * FAQ
 * Contact Form
