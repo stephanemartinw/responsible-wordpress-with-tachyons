@@ -7931,6 +7931,21 @@ code, .code {
 .js .dn-js {
   display: none; }
 
+.bt--transparent {
+  border-left-color: transparent; }
+
+.br--transparent {
+  border-right-color: transparent; }
+
+.bl--transparent {
+  border-left-color: transparent; }
+
+.bb--transparent {
+  border-right-color: transparent; }
+
+@media screen and (min-width: 60em) {
+  .bt--black-l {
+    border-top-color: #000; } }
 .toggler.toggled > ul {
   display: block; }
 

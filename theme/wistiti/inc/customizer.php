@@ -15,6 +15,7 @@ function smew_theme_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
+
 	//Add site branding options
 	$wp_customize->add_section( 'smew_branding' , array(
 		'title'      => 'Site branding',
@@ -43,9 +44,27 @@ function smew_theme_customize_register( $wp_customize ) {
 			'type'	 => 'checkbox',
 	) );
 
+	//Add mini logo to Site identity
+	$wp_customize->add_setting( 'smew_branding_minilogo' , array(
+		'default'     => true,
+		'transport'   => 'postMessage',
+	) );
+
+	$wp_customize->add_control( new WP_Customize_Image_Control(
+           $wp_customize,
+           'smew_branding_minilogo',
+           array(
+               'label'      => __( 'Upload a mini logo', 'wistiti' ),
+               'section'    => 'title_tagline',
+               'settings'   => 'smew_branding_minilogo'
+           )
+    ) );
+
+
 	//Live Preview
 	$wp_customize->get_setting( 'smew_branding_header' )->transport = 'postMessage';
 	$wp_customize->get_setting( 'smew_branding_description' )->transport = 'postMessage';
+	$wp_customize->get_setting( 'smew_branding_minilogo' )->transport = 'postMessage';
 
 	//Add tachyons colors choice
 	//Test from https://premium.wpmudev.org/blog/wordpress-theme-customizer-guide/?imob=b&utm_expid=3606929-106.UePdqd0XSL687behGg-9FA.1&utm_referrer=https%3A%2F%2Fwww.google.fr%2F

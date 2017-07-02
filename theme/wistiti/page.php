@@ -15,7 +15,7 @@
 get_header(); ?>
 
 	<div id="primary" class="content-area">
-		<main id="main" class="mw8 center" role="main">
+		<main id="main" role="main">
 
 			<?php
 			while ( have_posts() ) : the_post();

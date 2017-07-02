@@ -1,0 +1,13 @@
+//Added to create a caret
+.bt--transparent { border-left-color: $transparent; }
+.br--transparent { border-right-color: $transparent; }
+.bl--transparent { border-left-color: $transparent; }
+.bb--transparent { border-right-color: $transparent; }
+
+@media #{$breakpoint-large} {
+
+    .bt--black-l {
+      border-top-color: $black;
+    }
+
+}

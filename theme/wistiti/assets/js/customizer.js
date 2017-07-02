@@ -36,6 +36,14 @@
 		} );
 	} );
 
+	//Hide/show minilogo in header/site-branding
+	wp.customize( 'smew_branding_minilogo', function( value ) {
+		value.bind( function( to ) {
+			if (to) $( '.cmzr-site-minilogo' ).show();
+			else $( '.cmzr-site-minilogo' ).hide();
+		} );
+	} );
+
 	//Brand color
 	wp.customize( 'smew_colors_brand', function( value ) {
 		value.bind( function( to ) {

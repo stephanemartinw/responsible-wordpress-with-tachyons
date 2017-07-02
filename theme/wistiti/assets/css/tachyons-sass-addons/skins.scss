@@ -1,8 +1,14 @@
 
 @media #{$breakpoint-large} {
-  
+
+    //Colors
     .black-l {
       color: $black!important;
+    }
+
+    //Backgrounds
+    .bg-white-l {
+      background-color: white;
     }
 
     .bg-transparent-l {

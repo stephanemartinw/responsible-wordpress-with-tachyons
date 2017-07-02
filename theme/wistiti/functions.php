@@ -108,7 +108,7 @@ function wistiti_theme_the_custom_logo_src() {
     if (has_custom_logo()) {
       $custom_logo_id = get_theme_mod( 'custom_logo' );
       $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-      echo $image[0];
+      return $image[0];
     }
   }
 
@@ -203,14 +203,13 @@ function wistiti_theme_dequeue_jquery_migrate( $scripts ) {
 add_action( 'wp_default_scripts', 'wistiti_theme_dequeue_jquery_migrate' );
 
 
-
 /*
 * Add editor's Format button
 * Custom styles can be added in child theme
 */
 add_editor_style();
 
-function wistiti_child_mce_buttons_2($buttons) {
+function wistiti_theme_mce_buttons_2($buttons) {
 	array_unshift($buttons, 'styleselect');
 	return $buttons;
 }
@@ -221,7 +220,7 @@ add_filter('mce_buttons_2', 'wistiti_child_mce_buttons_2');
 * Callback function to filter the MCE settings
 * For future use
 */
-/*function wistiti_child_mce_before_init_insert_formats( $init_array ) {
+/*function wistiti_theme_mce_before_init_insert_formats( $init_array ) {
 
 	$style_formats = array(
 			array(
@@ -255,14 +254,23 @@ if (!class_exists('Walker_Main_Menu')) {
 				'id'     => 'db_id'
 		);
 
+		//Menu levels (from level 1, level 0 is not managed here)
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
 
-			if ($depth==0)//level 1
-				$classes_list = 'dn relative absolute-l top-100 left-0 pa0';
-
-			//To do !
-			if ($depth==1)//level 2
-				$classes_list = 'dn relative absolute-l top-0 right-0 dn pa0';
+			//ul
+			//level 1
+			if ($depth==0) {
+				$classes_list = "dn relative absolute-l top-100 left-0"; //position and display
+				$classes_list .= " ph3 pv2"; //spacings
+				$classes_list .= " bg-white-l"; //background
+				$classes_list .= " bw0 bw1-l b--solid b--light-gray"; //borders
+			} else if ($depth==1) {
+				//To do !
+				//level 2
+				$classes_list  = "dn relative absolute-l top-0 right-0"; //position and position
+				$classes_list .= " bg-white"; //background
+				$classes_list .= " pa0"; //spacings
+			}
 
 			$output .= "<ul class='".$classes_list."'>";
 		}
@@ -271,28 +279,46 @@ if (!class_exists('Walker_Main_Menu')) {
 			$output .= "</ul>";
 		}
 
+		//Menu items
 		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
 
-			//Root items, level 0
+			//Root items
 			if ($item->menu_item_parent=='0') {
-				$classes_item = 'relative db dib-l pa3 ph0-l mh3-l pv1-l';
-				$classes_link = 'db link black-l white f5-l f4';
+
+				//li
+				$classes_item = "relative db dib-l"; //position and display
+				$classes_item .= " pa3 ph0-l ph3-l pv1-l"; //spacings
+
+				//a
+				$classes_link = 'dib link black f5-l f4 underline-hover';
 			}
-			//Other levels
+			//Sub items
 			else {
-				$classes_item = 'db pa3';
-				$classes_link = 'db link black-l white f5-l f4';
+
+				//li
+				$classes_item = "db"; //display and position
+				$classes_item .= " pa3 ph0-l pv2-l"; //spacings
+
+				//a
+				$classes_link = 'dib link black f5-l f4 underline-hover';
 			}
 
-			//Menu has children
+			//Item has children
 			if ($args->walker->has_children) $classes_item .= " js-menu-has-children toggler";
 
-			if ( $item->current ) $classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
+			//Current item
+			if ( $item->current )
+			  //$classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
+				$classes_link .= " underline";
 
 			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
 					$item->url,
 					$item->title
 			);
+
+			//Add a caret here
+			if ($args->walker->has_children) $output .= "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
+
 		}
 
 		public function end_el( &$output, $item, $depth = 0, $args = array() ) {
@@ -301,6 +327,7 @@ if (!class_exists('Walker_Main_Menu')) {
 
 	}
 }
+
 
 /**
  * Custom template tags for this theme.
