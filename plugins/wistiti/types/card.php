@@ -60,7 +60,7 @@ add_action( 'init', 'card_register_taxonomies' );
 
 //Custom post fields for Card
 function card_add_meta_boxes( $post ){
-	add_meta_box( 'card_meta_box', __( 'Card action', 'wistiti' ), 'card_build_meta_box', 'card', 'normal', 'low' );
+	add_meta_box( 'card_meta_box', __( 'Card', 'wistiti' ), 'card_build_meta_box', 'card', 'normal', 'low' );
 }
 add_action( 'add_meta_boxes_card', 'card_add_meta_boxes' );
 
@@ -69,14 +69,17 @@ function card_build_meta_box( $post ){
 	// make sure the form request comes from WordPress
 	wp_nonce_field( basename( __FILE__ ), 'card_meta_box_nonce' );
 
-	// retrieve the _card_action_label current value
+  $current_id = get_post_meta( $post->ID, '_card_id', true );
 	$current_action_label = get_post_meta( $post->ID, '_card_action_label', true );
-
-  // retrieve the _card_action_url current value
 	$current_action_url = get_post_meta( $post->ID, '_card_action_url', true );
 
 	?>
 	<div class='inside'>
+
+		<h3><?php _e( 'ID', 'wistiti' ); ?></h3>
+		<p>
+			<input type="text" name="cid" value="<?php echo $current_id; ?>" />
+		</p>
 
 		<h3><?php _e( 'Action label', 'wistiti' ); ?></h3>
 		<p>
@@ -108,17 +111,17 @@ function card_save_meta_box_data( $post_id ){
 		return;
 	}
 
-	// Action label string
+	if ( isset( $_REQUEST['cid'] ) ) {
+		update_post_meta( $post_id, '_card_id', sanitize_text_field( $_POST['cid'] ) );
+	}
+
 	if ( isset( $_REQUEST['action-label'] ) ) {
 		update_post_meta( $post_id, '_card_action_label', sanitize_text_field( $_POST['action-label'] ) );
 	}
 
-  // Action URL string
   if ( isset( $_REQUEST['action-url'] ) ) {
     update_post_meta( $post_id, '_card_action_url', sanitize_text_field( $_POST['action-url'] ) );
   }
-
-
 }
 add_action( 'save_post_card', 'card_save_meta_box_data' );
 
@@ -138,7 +141,8 @@ function card_shortcode($atts = [], $content = null, $tag = '') {
     if (isset($atts['id']) && !empty($atts['id'])) {
       $args = array(
           'post_type' => 'card',
-          'name' => $id
+					'meta_key' => '_card_id',
+					'meta_value' => $atts['id']
         );
 
       $card_query = new WP_Query( $args );

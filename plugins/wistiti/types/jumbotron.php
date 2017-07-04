@@ -60,7 +60,7 @@ add_action( 'init', 'jumbotron_register_taxonomies' );
 
 //Custom post fields for Jumbotron
 function jumbotron_add_meta_boxes( $post ){
-	add_meta_box( 'jumbotron_meta_box', __( 'Jumbotron action', 'wistiti' ), 'jumbotron_build_meta_box', 'jumbotron', 'normal', 'low' );
+	add_meta_box( 'jumbotron_meta_box', __( 'Jumbotron', 'wistiti' ), 'jumbotron_build_meta_box', 'jumbotron', 'normal', 'low' );
 }
 add_action( 'add_meta_boxes_jumbotron', 'jumbotron_add_meta_boxes' );
 
@@ -69,14 +69,17 @@ function jumbotron_build_meta_box( $post ){
 	// make sure the form request comes from WordPress
 	wp_nonce_field( basename( __FILE__ ), 'jumbotron_meta_box_nonce' );
 
-	// retrieve the _jumbotron_action_label current value
+	$current_jid = get_post_meta( $post->ID, '_jumbotron_id', true );
 	$current_action_label = get_post_meta( $post->ID, '_jumbotron_action_label', true );
-
-  // retrieve the _jumbotron_action_url current value
 	$current_action_url = get_post_meta( $post->ID, '_jumbotron_action_url', true );
 
 	?>
 	<div class='inside'>
+
+		<h3><?php _e( 'ID', 'wistiti' ); ?></h3>
+		<p>
+			<input type="text" name="jid" value="<?php echo $current_id; ?>" />
+		</p>
 
 		<h3><?php _e( 'Action label', 'wistiti' ); ?></h3>
 		<p>
@@ -108,12 +111,14 @@ function jumbotron_save_meta_box_data( $post_id ){
 		return;
 	}
 
-	// Action label string
+	if ( isset( $_REQUEST['jid'] ) ) {
+		update_post_meta( $post_id, '_jumbotron_id', sanitize_text_field( $_POST['jid'] ) );
+	}
+
 	if ( isset( $_REQUEST['action-label'] ) ) {
 		update_post_meta( $post_id, '_jumbotron_action_label', sanitize_text_field( $_POST['action-label'] ) );
 	}
 
-  // Action URL string
   if ( isset( $_REQUEST['action-url'] ) ) {
     update_post_meta( $post_id, '_jumbotron_action_url', sanitize_text_field( $_POST['action-url'] ) );
   }
@@ -138,7 +143,8 @@ function jumbotron_shortcode($atts = [], $content = null, $tag = '') {
 		if (isset($atts['id']) && !empty($atts['id'])) {
 			$args = array(
 					'post_type' => 'jumbotron',
-					'name' => $atts['id']
+					'meta_key' => '_jumbotron_id',
+					'meta_value' => $atts['id']
 				);
 
 			$jumbotron_query = new WP_Query( $args );

@@ -31,16 +31,16 @@ All elements templates can be are organized according 'layout' and 'display' :
 
 Shortcodes
 
-* [wistiti_jumbotron] : displays the jumbotron selected by the id attribute. Use jumbotron's slug as id. 'main' is default one.
+* [wistiti_jumbotron] : displays the jumbotron selected by the id attribute.
 Attributes :
-'id' : id of the jumbotron (Use jumbotron's slug as id.)
+'id' : id of the jumbotron
 'display' : display mode (classic)
 'firstheadinghierarchy' : heading hierarchy starting level
 'background' : relative url of background image
 
 * [wistiti_card] : displays the card selected by the id attribute.
 Attributes :
-'id' : id of the jumbotron (use card's slug as id.)
+'id' : id of the jumbotron
 'display' : display mode (classic)
 'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
 'background' : relative url of background image

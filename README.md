@@ -5,11 +5,11 @@ An experiment for lightened WordPress websites with [tachyons.io](https://github
 
 ## Presentation
 
-This Wistiti project is experimental. It wants to explore a way for creating efficient, lightweight and fast websites with WP.
+This Wistiti project is experimental. It wants to explore a way for creating efficient, lightweight and fast websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
-* fighting against enormous and over-sized WP themes is not fun.
+* fighting against enormous and over-sized WordPress themes is not fun.
 * for many 'small' websites in any case, building and maintaining OOCSS libraries is painful and time-consuming.
 * it's so exciting and enriching to fully master the code of the site that is being built.
 * it's also gives the possibility to understand and integrate disliked features like accessibility !
@@ -45,7 +45,7 @@ It should all be defined and accessible via Custom Post Types interfaces.
 The Wistiti starter theme is based on the base package of [Components](http://components.underscores.me/).
 Some modifications have been done :
 
-* No CSS but Tachyons.
+* No CSS but Tachyons only.
 * No jQuery loaded.
 * A fully customizable navigation menu.
 * A three widgets footer.
@@ -64,6 +64,7 @@ The plugin proposes so far following elements :
 * Jumbotron (inspired from Bootstrap)
 * Card (inspired from Bootstrap)
 * Services
+* Links
 * FAQ
 * Contact Form
 
@@ -87,7 +88,7 @@ Install and activate both theme and plugin in your WordPress project. In the Wis
 
 Start from the Wistiti child theme (mywistiti) and start building your theme by :
 
-* building your custom templates or pages. For that, use Wistiti's elements shortcodes and tachyons classes.
+* building your custom templates or pages. For that, use Wistiti's elements shortcodes and tachyons.io classes.
 * overriding Wistiti's elements templates to fit your specific needs.
 * extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 * adding content via the generated custom post types interfaces.
@@ -103,7 +104,7 @@ Send your wistiti website url and we will add it here.
 ## In progress
 
 * Improving existing elements to be more flexible and powerful.
-* Supporting blogs, post/page comments and associated widgets.
+* Better support of blogs, post/page comments and associated widgets.
 * New elements for the Wistiti plugin.
 * More theme options to avoid tedious overrides in theme child.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.

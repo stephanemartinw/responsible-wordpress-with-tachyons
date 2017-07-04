@@ -187,6 +187,9 @@ class wistiti_settings
         if( isset( $input['service'] ) )
             $new_input['service'] = true ;
 
+        if( isset( $input['link'] ) )
+            $new_input['link'] = true ;
+
         if( isset( $input['team'] ) )
             $new_input['team'] = true ;
 
@@ -219,6 +222,7 @@ class wistiti_settings
         	"options" => array( "jumbotron"=>"Jumbotron",
                               "card"=>"Card",
                               "service"=>"Services",
+                              "link"=>"Links",
                               "team"=>"Team",
                               "faq"=>"FAQs",
                               "contactform"=>"Contact Form")
@@ -249,6 +253,7 @@ $options = get_option('wistiti_option_name');
 if ($options['jumbotron']) require_once(__ROOT__.'/types/jumbotron.php');
 if ($options['card']) require_once(__ROOT__.'/types/card.php');
 if ($options['service']) require_once(__ROOT__.'/types/service.php');
+if ($options['link']) require_once(__ROOT__.'/types/link.php');
 if ($options['team']) require_once(__ROOT__.'/types/team.php');
 if ($options['faq']) {
 

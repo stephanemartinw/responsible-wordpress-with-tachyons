@@ -7,7 +7,7 @@ $partial_args =array('classes' => array(
   'media_image' => 'fl w-100 w-50-ns tc pa2',
   'thumbnail' => 'w-100 h-auto',
   'media_body' => 'fl w-100 w-50-ns pa2',
-  'title' => 'f2 f1-l lh-title'
+  'title' => 'f2 f1-l lh-title',
   'excerpt' => 'fw6'
 ));
 ?>
