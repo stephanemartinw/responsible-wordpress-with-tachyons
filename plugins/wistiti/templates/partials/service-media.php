@@ -1,6 +1,6 @@
 <?php
 
-  //Hierarchy
+  //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
 
@@ -10,33 +10,28 @@
   $thecontent = get_the_content();
 
   //Default skin
-  //Override this template partial in your wistiti child theme to fit your needs
-  $class_media_image = "fl w-100 w-50-ns tc pa2";
-  $class_thumbnail = "w-100 h-auto";
-
-  $class_media_body = "fl w-100 w-50-ns pa2";
-  $class_title = "f2 f1-l lh-title";
-  $class_excerpt = "fw6";
-
+  //Do not add tachyons classes here ! User appropriate customizer !
+  global $partial_args;
+  wistiti_get_template('/partials/customizers/service-media-customizer.php', $atts);
 ?>
 
-<div class="cf pv3">
+<div class="<?php echo $partial_args['classes']['wrapper'];?>">
 
   <?php if ($index % 2 == 0): ?>
-    <div class="<?php echo $class_media_image;?>">
-      <?php the_post_thumbnail( 'medium_large', ['class' => $class_thumbnail] ); ?>
+    <div class="<?php echo $partial_args['classes']['media_image'];?>">
+      <?php the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']] ); ?>
     </div>
   <?php endif;?>
 
-  <div class="<?php echo $class_media_body;?>">
-    <h<?php echo $firstheadinghierarchy;?> class="<?php echo $class_title;?>"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
-    <h<?php echo $secondheadinghierarchy;?> class="<?php echo $class_excerpt;?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>>
+  <div class="<?php echo $partial_args['classes']['media_body'];?>">
+    <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
+    <h<?php echo $secondheadinghierarchy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>>
     <?php echo $thecontent;?>
   </div>
 
   <?php if ($index % 2 !== 0): ?>
-    <div class="<?php echo $class_media_image;?>">
-      <?php the_post_thumbnail( 'medium_large', ['class' => $class_thumbnail]); ?>
+    <div class="<?php echo $$partial_args['classes']['media_image'];?>">
+      <?php the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']]); ?>
     </div>
   <?php endif;?>
 

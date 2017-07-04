@@ -47,6 +47,7 @@ Attributes :
 
 * [wistiti_services] : displays all the services, ordered by the Order field.
 Attributes :
+'family' : service family (taxonomy)
 'layout' : layout mode (list, grid)
 'col' : grid columns number per row
 'display' : display mode (media, card)
@@ -54,6 +55,7 @@ Attributes :
 
 * [wistiti_team] : displays all the team members, ordered by the Order field.
 Attributes :
+'team' : team (taxonomy)
 'layout' : 'layout mode (grid),
 'col' : grid columns number per row
 'display' : display  mode (card)

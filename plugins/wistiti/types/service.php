@@ -69,14 +69,14 @@ function service_build_meta_box( $post ){
 	// make sure the form request comes from WordPress
 	wp_nonce_field( basename( __FILE__ ), 'service_meta_box_nonce' );
 
-	$current_iconname = get_post_meta( $post->ID, '_service_iconname', true );
+	$current_iconname = get_post_meta( $post->ID, '_service_iconname',true );
 	$current_iconsize = get_post_meta( $post->ID, '_service_iconsize', true );
 	$current_iconcolor = get_post_meta( $post->ID, '_service_iconcolor', true );
-
 	?>
 	<div class='inside'>
 
 		<h3><?php _e( 'Icon name', 'wistiti' ); ?></h3>
+		<em><?php _e('Use native SVG defs in your HTML. See for example : https://github.com/jxnblk/geomicons-open', 'wistiti');?></em>
 		<p>
 			<input type="text" name="iconname" value="<?php echo $current_iconname; ?>" />
 		</p>
@@ -88,7 +88,7 @@ function service_build_meta_box( $post ){
 
 		<h3><?php _e( 'Icon color', 'wistiti' ); ?></h3>
 		<p>
-			<input type="text" name="iconcolor" value="<?php echo $current_iconvalue; ?>" />
+			<input type="text" name="iconcolor" value="<?php echo $current_iconcolor; ?>" />
 		</p>
 
 		</p>
@@ -133,6 +133,7 @@ function service_shortcode($atts = [], $content = null, $tag = '') {
 		//Attributes
 		$atts = shortcode_atts(
 		array(
+			'family' => '',
 			'layout' => 'list',
 			'col' => 3,
 			'display' => 'media',
@@ -141,8 +142,17 @@ function service_shortcode($atts = [], $content = null, $tag = '') {
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
 		//Query
+		$tax_arg = null;
+		if (!empty($atts['family']))
+			$tax_arg = array(
+					array(
+							'taxonomy' => 'service-family',
+							'field' => 'slug',
+							'terms' => $atts['family']
+			));
 		$args = array(
 				'post_type' => 'service',
+				'tax_query' => $tax_arg,
 				'orderby'=> 'menu_order',
 				'order' => 'ASC',
 				'post_status' => 'publish'

@@ -5,7 +5,7 @@
   if (isset($atts['background']))
     $style="background:url('".$base_url . $atts['background']. "')  no-repeat center ; background-size:cover";
 
-  //Hierarchy
+  //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
 
@@ -16,33 +16,18 @@
   $theaction = get_post_meta( get_the_ID(), '_jumbotron_action_url', true );
 
   //Default skin
-  //Override this template partial in your wistiti child theme to fit your needs
-  $class_title = "f2";
-  $class_excerpt = "f3";
-  $class_content = "";
-  $class_hr='';
-  $class_action = "dib bg-".get_theme_mod( 'smew_colors_brand', 'blue' )." white pa3 mv3 link";
-
-  //Extend or override here the default skin, according to $id if necessary
-  /*switch ($atts['id']) {
-    case '<id>':
-      $class_title = / += ...
-    break;
-
-    default:
-    break;
-  }*/
-
+  global $partial_args;
+  wistiti_get_template('/partials/customizers/card-classic-customizer.php', $atts);
 ?>
 
-<div style="<?php echo $style;?>">
+<div class="<?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">
 
-    <h<?php echo $firstheadinghierarchy;?> class="<?php echo $class_title;?>"><?php echo get_the_title();?></h<?php echo $firstheadinghierarchy;?>>
+    <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php echo get_the_title();?></h<?php echo $firstheadinghierarchy;?>>
 
-    <?php if (!empty($theexcerpt)):?><h<?php echo $secondheadinghierachy;?> class="<?php echo $class_excerpt;?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierachy;?>><?php endif; ?>
+    <?php if (!empty($theexcerpt)):?><h<?php echo $secondheadinghierachy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierachy;?>><?php endif; ?>
 
-    <?php if (!empty($thecontent)):?><hr class="<?php echo $class_hr;?>"><?php endif;?>
-    <?php if (!empty($thecontent)):?><div class="<?php echo $class_content;?>"><?php echo $thecontent;?></div><?php endif;?>
-    <?php if (!empty($theaction)):?><a class="<?php echo $class_action;?>" href="<?php echo get_post_meta( get_the_ID(), '_jumbotron_action_url', true );?>" target="_blank"><?php echo get_post_meta( get_the_ID(), '_jumbotron_action_label', true );?></a><?php endif;?>
+    <?php if (!empty($thecontent)):?><hr class="<?php echo $partial_args['classes']['hr'];?>"><?php endif;?>
+    <?php if (!empty($thecontent)):?><div class="<?php echo $partial_args['classes']['content'];?>"><?php echo $thecontent;?></div><?php endif;?>
+    <?php if (!empty($theaction)):?><a class="<?php echo $partial_args['classes']['action'];?>" href="<?php echo get_post_meta( get_the_ID(), '_jumbotron_action_url', true );?>" target="_blank"><?php echo get_post_meta( get_the_ID(), '_jumbotron_action_label', true );?></a><?php endif;?>
 
 </div>

@@ -28,7 +28,7 @@
 
 			<header id="masthead" class="cf cmzr-site-header" role="banner">
 
-				<div class="relative flex items-center mw8 center">
+				<div class="relative flex items-center">
 					<?php get_template_part( 'components/header/site', 'branding' ); ?>
 
 					<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>

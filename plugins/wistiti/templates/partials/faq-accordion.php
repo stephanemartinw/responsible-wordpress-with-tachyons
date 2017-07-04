@@ -1,19 +1,20 @@
 <?php
-  //Hierarchy
+
+  //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
 
   //Default skin
-  //Override this template partial in your wistiti child theme to fit your needs
-  $class_accordion = "pv2";
-  $class_title = "js-tab-title db bg-custom-green white ma0 pa1 pointer";
+  global $partial_args;
+  wistiti_get_template('/partials/customizers/faq-accordion-customizer.php', $atts);
+
 ?>
 
-<div class="js-accordion <?php echo $class_accordion;?>">
-    <div class="<?php echo $class_title;?>" id="tab<?php echo $index;?>" tabindex="<?php echo $index;?>" aria-controls="panel<?php echo $index;?>" role="tab">
-      <h<?php echo $firstheadinghierarchy;?> class="white"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
+<div class="js-accordion <?php echo $partial_args['classes']['wrapper'];?>">
+    <div class="js-tab-title <?php echo $partial_args['classes']['tab'];?>" id="tab<?php echo $index;?>" tabindex="<?php echo $index;?>" aria-controls="panel<?php echo $index;?>" role="tab">
+      <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
     </div>
-    <div class="js-tab-collapsing dn-js" id="panel<?php echo $index;?>" aria-labelledby="tab<?php echo $index;?>" role="tabpanel">
+    <div class="js-tab-collapsing <?php echo $partial_args['classes']['panel'];?>" id="panel<?php echo $index;?>" aria-labelledby="tab<?php echo $index;?>" role="tabpanel">
       <?php the_content();?>
     </div>
 </div>

@@ -9,9 +9,9 @@
 
 ?>
 
-<section class="no-results not-found">
+<section>
 	<header class="page-header">
-		<h1 class="page-title"><?php esc_html_e( 'Nothing Found', 'smew_theme' ); ?></h1>
+		<h1 class="f1"><?php esc_html_e( 'Nothing Found', 'wistiti' ); ?></h1>
 	</header>
 	<div class="page-content">
 		<?php

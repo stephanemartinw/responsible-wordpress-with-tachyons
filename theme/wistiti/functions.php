@@ -42,8 +42,6 @@ function wistiti_theme_setup() {
 	 */
 	add_theme_support( 'post-thumbnails' );
 
-	//add_image_size( 'wistiti_theme-featured-image', 640, 9999 );
-
 	// This theme uses wp_nav_menu() in one location.
 	register_nav_menus( array(
 		'menu-1' => esc_html__( 'Top', 'wistiti_theme' ),
@@ -213,7 +211,7 @@ function wistiti_theme_mce_buttons_2($buttons) {
 	array_unshift($buttons, 'styleselect');
 	return $buttons;
 }
-add_filter('mce_buttons_2', 'wistiti_child_mce_buttons_2');
+add_filter('mce_buttons_2', 'wistiti_theme_mce_buttons_2');
 
 
 /*
@@ -240,13 +238,145 @@ add_filter('mce_buttons_2', 'wistiti_child_mce_buttons_2');
 add_filter( 'tiny_mce_before_init', 'wistiti_child_mce_before_init_insert_formats' );
 */
 
+
+/*
+* Posts : Modify The Read More Link Text
+*/
+function wistiti_modify_read_more_link() {
+
+    return '<a class="link underline" href="' . get_permalink() . '">'.sprintf(
+			/* translators: %s: Name of current post. */
+		  __( 'Continue reading %s', 'wistiti'),
+			the_title( '<span class="clip screen-reader-text">"', '"</span>', false )
+		).'</a>';
+}
+add_filter( 'the_content_more_link', 'wistiti_modify_read_more_link' );
+
+/******
+* TO DO : Custon Post/Posts navigation
+******/
+
+//https://developer.wordpress.org/reference/functions/get_the_post_navigation/
+//https://developer.wordpress.org/reference/functions/get_adjacent_post_link/
+//https://developer.wordpress.org/reference/functions/_navigation_markup/
+
+function wistiti_post_navigation()
+{
+		//By default
+		echo get_the_post_navigation();
+}
+
+function wistiti_posts_navigation() {
+		//By default
+		echo get_the_posts_navigation();
+}
+
+// define the previous_posts_link_attributes callback
+//For future use
+/*function wistiti_filter_previous_posts_link_attributes( $var ) {
+	return $var;
+};
+add_filter( 'previous_posts_link_attributes', 'wistiti_filter_previous_posts_link_attributes', 10, 1 );
+
+function wistiti_filter_next_posts_link_attributes( $var ) {
+		return  $var;
+};
+add_filter( 'next_posts_link_attributes', 'wistiti_filter_next_posts_link_attributes', 10, 1 );*/
+
+
+/*
+* WP Override comments list
+* Let child themes override it again.
+* Inspired from https://gist.github.com/georgiecel/9445357
+*/
+if (!class_exists('Wistiti_Walker_Comment')) {
+	class Wistiti_Walker_Comment extends Walker_Comment {
+			var $tree_type = 'comment';
+			var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
+
+			// constructor – wrapper for the comments list
+			function __construct($args) {?>
+
+				<section>
+
+			<?php }
+
+			// start_lvl – wrapper for child comments list
+			function start_lvl( &$output, $depth = 0, $args = array() ) {
+				$GLOBALS['comment_depth'] = $depth + 2; ?>
+
+				<section>
+
+			<?php }
+
+			// end_lvl – closing wrapper for child comments list
+			function end_lvl( &$output, $depth = 0, $args = array() ) {
+				$GLOBALS['comment_depth'] = $depth + 2; ?>
+
+				</section>
+
+			<?php }
+
+			// start_el – HTML for comment template
+			function start_el( &$output, $comment, $depth = 0, $args = array(), $id = 0 ) {
+				$depth++;
+				$GLOBALS['comment_depth'] = $depth;
+				$GLOBALS['comment'] = $comment;
+				$parent_class = ( empty( $args['has_children'] ) ? '' : 'parent' );
+
+				if ( 'article' == $args['style'] ) {
+					$tag = 'article';
+					$add_below = 'comment';
+				} else {
+					$tag = 'article';
+					$add_below = 'comment';
+				} ?>
+
+				<article <?php comment_class(empty( $args['has_children'] ) ? '' :'parent') ?> id="comment-<?php comment_ID() ?>">
+					<figure class="ma0"><?php echo get_avatar( $comment, 65, '[default gravatar URL]', 'Author’s gravatar' ); ?></figure>
+					<div role="complementary">
+						<h3 class="f3">
+							<a class="link" href="<?php comment_author_url(); ?>"><?php comment_author(); ?></a>
+						</h2>
+						<time datetime="<?php comment_date('Y-m-d') ?>T<?php comment_time('H:iP') ?>"><?php comment_date('jS F Y') ?>, <a class="link" href="#comment-<?php comment_ID() ?>"><?php comment_time() ?></a></time>
+						<?php edit_comment_link('<p class="db">'._e('Edit this comment','wistiti').'</p>','',''); ?>
+						<?php if ($comment->comment_approved == '0') : ?>
+							<p><e_('Your comment is awaiting moderation.', 'wistiti');?></p>
+						<?php endif; ?>
+					</div>
+					<div>
+						<?php comment_text() ?>
+						<?php
+						//To customize ! See https://developer.wordpress.org/reference/functions/get_comment_reply_link/
+						comment_reply_link(array_merge( $args, array('add_below' => $add_below, 'depth' => $depth, 'max_depth' => $args['max_depth']))) ?>
+					</div>
+
+			<?php }
+
+			// end_el – closing HTML for comment template
+			function end_el(&$output, $comment, $depth = 0, $args = array() ) { ?>
+
+				</article>
+
+			<?php }
+
+			// destructor – closing wrapper for the comments list
+			function __destruct() { ?>
+
+				</section>
+
+			<?php }
+
+	}
+}
+
 /*
 * WP Override navigation menu
 * Let child themes override it again.
 */
 
-if (!class_exists('Walker_Main_Menu')) {
-	class Walker_Main_Menu extends Walker  {
+if (!class_exists('Wistiti_Walker_Main_Menu')) {
+	class Wistiti_Walker_Main_Menu extends Walker  {
 
 		// Tell Walker where to inherit it's parent and id values
 		var $db_fields = array(

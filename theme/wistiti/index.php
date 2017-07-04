@@ -21,24 +21,19 @@ get_header(); ?>
 
 			if ( is_home() && ! is_front_page() ) : ?>
 				<header>
-					<h1 class="page-title screen-reader-text"><?php single_post_title(); ?></h1>
+					<h1 class="clip f1 screen-reader-text"><?php single_post_title(); ?></h1>
 				</header>
 			<?php
 			endif;
 
-			/* Start the Loop */
-			while ( have_posts() ) : the_post();
+			//Layout
+			//To do : add theme options !
+			//For now, override index template.
+			$layout = "grid";
+			get_template_part( 'components/post/content', $layout );
 
-				/*
-				 * Include the Post-Format-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Format name) and that will be used instead.
-				 */
-				get_template_part( 'components/post/content', get_post_format() );
-
-			endwhile;
-
-			the_posts_navigation();
+			// To customize !
+			//wisiti_posts_navigation();
 
 		else :
 

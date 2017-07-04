@@ -12,7 +12,7 @@
 
 	</div>
 	<footer id="colophon" role="contentinfo">
-		<div class="mw8 center">
+		<div>
 			<?php get_template_part( 'components/footer/site', 'info' ); ?>
 		</div>
 	</footer>

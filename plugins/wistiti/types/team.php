@@ -114,6 +114,7 @@ function team_shortcode($atts = [], $content = null, $tag = '') {
 
 		$atts = shortcode_atts(
 		array(
+			'team' => '',
 			'layout' => 'grid',
 			'col' => 3,
 			'display' => 'card',
@@ -122,8 +123,17 @@ function team_shortcode($atts = [], $content = null, $tag = '') {
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
 		//Query
+		$tax_arg = null;
+		if (!empty($atts['family']))
+			$tax_arg = array(
+					array(
+							'taxonomy' => 'teammember-team',
+							'field' => 'slug',
+							'terms' => $atts['team']
+			));
 		$args = array(
 	      'post_type' => 'teammember',
+				'tax_query' => $tax_arg,
 	      'orderby'=> 'menu_order',
 	      'order' => 'ASC',
 	      'post_status' => 'publish'
