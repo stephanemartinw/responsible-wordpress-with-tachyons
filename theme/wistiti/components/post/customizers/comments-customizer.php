@@ -6,7 +6,8 @@ $comments_args = array(
     'firstheadinghierarchy' => '2'
   ),
   'classes' => array(
-    'heading' => 'f2'
+    'heading' => 'f2',
+    'items' => array()
   ),
   //Comment form
   'form' => array(

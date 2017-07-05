@@ -15,56 +15,23 @@ function smew_theme_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
 
-
-	//Add site branding options
-	$wp_customize->add_section( 'smew_branding' , array(
-		'title'      => 'Site branding',
-		'priority'   => 90,
-	) );
-
-	$wp_customize->add_setting( 'smew_branding_header' , array(
-		'default'     => true,
-		'transport'   => 'postMessage',
-	) );
-
-	$wp_customize->add_control( 'smew_branding_header', array(
-			'label' => 'Display header',
-			'section'	=> 'smew_branding',
-			'type'	 => 'checkbox',
-	) );
-
-	$wp_customize->add_setting( 'smew_branding_description' , array(
-		'default'     => false,
-		'transport'   => 'postMessage',
-	) );
-
-	$wp_customize->add_control( 'smew_branding_description', array(
-			'label' => 'Display description',
-			'section'	=> 'smew_branding',
-			'type'	 => 'checkbox',
-	) );
-
 	//Add mini logo to Site identity
-	$wp_customize->add_setting( 'smew_branding_minilogo' , array(
-		'default'     => true,
+	$wp_customize->add_setting( 'smew_siteidentity_minilogo' , array(
 		'transport'   => 'postMessage',
 	) );
 
 	$wp_customize->add_control( new WP_Customize_Image_Control(
            $wp_customize,
-           'smew_branding_minilogo',
+           'smew_siteidentity_minilogo',
            array(
                'label'      => __( 'Upload a mini logo', 'wistiti' ),
                'section'    => 'title_tagline',
-               'settings'   => 'smew_branding_minilogo'
+               'settings'   => 'smew_siteidentity_minilogo'
            )
     ) );
 
-
 	//Live Preview
-	$wp_customize->get_setting( 'smew_branding_header' )->transport = 'postMessage';
-	$wp_customize->get_setting( 'smew_branding_description' )->transport = 'postMessage';
-	$wp_customize->get_setting( 'smew_branding_minilogo' )->transport = 'postMessage';
+	$wp_customize->get_setting( 'smew_siteidentity_minilogo' )->transport = 'postMessage';
 
 	//Add tachyons colors choice
 	//Test from https://premium.wpmudev.org/blog/wordpress-theme-customizer-guide/?imob=b&utm_expid=3606929-106.UePdqd0XSL687behGg-9FA.1&utm_referrer=https%3A%2F%2Fwww.google.fr%2F
@@ -85,6 +52,39 @@ function smew_theme_customize_register( $wp_customize ) {
 
 	//Live Preview
 	$wp_customize->get_setting( 'smew_colors_brand' )->transport = 'postMessage';
+
+
+	//Add site layout options
+	$wp_customize->add_section( 'smew_layout' , array(
+		'title'      => 'Layout',
+		'priority'   => 90,
+	) );
+
+	$wp_customize->add_setting( 'smew_layout_header' , array(
+		'default'     => true,
+		'transport'   => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'smew_layout_header', array(
+			'label' => 'Display header',
+			'section'	=> 'smew_layout',
+			'type'	 => 'checkbox',
+	) );
+
+	$wp_customize->add_setting( 'smew_layout_description' , array(
+		'default'     => true,
+		'transport'   => 'postMessage',
+	) );
+
+	$wp_customize->add_control( 'smew_layout_description', array(
+			'label' => 'Display description',
+			'section'	=> 'smew_layout',
+			'type'	 => 'checkbox',
+	) );
+
+	//Live preview
+	$wp_customize->get_setting( 'smew_layout_header' )->transport = 'postMessage';
+	$wp_customize->get_setting( 'smew_layout_description' )->transport = 'postMessage';
 
 }
 add_action( 'customize_register', 'smew_theme_customize_register' );

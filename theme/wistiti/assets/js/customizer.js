@@ -21,7 +21,7 @@
 	} );
 
 	//Hide/show header in branding
-	wp.customize( 'smew_branding_description', function( value ) {
+	wp.customize( 'smew_layout_description', function( value ) {
 		value.bind( function( to ) {
 			if (to) $( '.cmzr-site-header' ).show();
 			else $( '.cmzr-site-header' ).hide();
@@ -29,7 +29,7 @@
 	} );
 
 	//Hide/show description in header/site-branding
-	wp.customize( 'smew_branding_description', function( value ) {
+	wp.customize( 'smew_layout_description', function( value ) {
 		value.bind( function( to ) {
 			if (to) $( '.cmzr-site-description' ).show();
 			else $( '.cmzr-site-description' ).hide();
@@ -37,7 +37,7 @@
 	} );
 
 	//Hide/show minilogo in header/site-branding
-	wp.customize( 'smew_branding_minilogo', function( value ) {
+	wp.customize( 'smew_siteidentity_minilogo', function( value ) {
 		value.bind( function( to ) {
 			if (to) $( '.cmzr-site-minilogo' ).show();
 			else $( '.cmzr-site-minilogo' ).hide();

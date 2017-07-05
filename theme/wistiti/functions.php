@@ -252,36 +252,100 @@ function wistiti_modify_read_more_link() {
 }
 add_filter( 'the_content_more_link', 'wistiti_modify_read_more_link' );
 
-/******
-* TO DO : Custon Post/Posts navigation
-******/
+/*
+* WP Override navigation menu
+* Let child themes override it again.
+*/
 
-//https://developer.wordpress.org/reference/functions/get_the_post_navigation/
-//https://developer.wordpress.org/reference/functions/get_adjacent_post_link/
-//https://developer.wordpress.org/reference/functions/_navigation_markup/
+if (!class_exists('Wistiti_Walker_Main_Menu')) {
+	class Wistiti_Walker_Main_Menu extends Walker  {
 
-function wistiti_post_navigation()
-{
-		//By default
-		echo get_the_post_navigation();
+		var $wargs = array();
+
+		// Tell Walker where to inherit it's parent and id values
+		var $db_fields = array(
+				'parent' => 'menu_item_parent',
+				'id'     => 'db_id'
+		);
+
+	 function __construct($args) {
+		 $this->wargs = $args;
+	 }
+	 function __destruct() {}
+
+		//Menu levels (from level 1, level 0 is not managed here)
+		public function start_lvl( &$output, $depth = 0, $args = array() ) {
+
+			//ul
+			//level 1
+			if ($depth==0) {
+				$classes_list = "dn relative absolute-l top-100 left-0"; //position and display
+				$classes_list .= " ph3 pv2"; //spacings
+				$classes_list .= " bg-white-l"; //background
+				$classes_list .= " bw0 bw1-l b--solid b--light-gray"; //borders
+			} else if ($depth==1) {
+				//To do !
+				//level 2
+				$classes_list  = "dn relative absolute-l top-0 right-0"; //position and position
+				$classes_list .= " bg-white"; //background
+				$classes_list .= " pa0"; //spacings
+			}
+
+			$output .= "<ul class='".$classes_list."'>";
+		}
+
+		public function end_lvl( &$output, $depth = 0, $args = array() ) {
+			$output .= "</ul>";
+		}
+
+		//Menu items
+		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+
+			//Root items
+			if ($item->menu_item_parent=='0') {
+
+				//li
+				$classes_item = "relative db dib-l"; //position and display
+				$classes_item .= " pa3 ph0-l ph3-l pv1-l"; //spacings
+
+				//a
+				$classes_link = 'dib link black f5-l f4 underline-hover';
+			}
+			//Sub items
+			else {
+
+				//li
+				$classes_item = "db"; //display and position
+				$classes_item .= " pa3 ph0-l pv2-l"; //spacings
+
+				//a
+				$classes_link = 'dib link black f5-l f4 underline-hover';
+			}
+
+			//Item has children
+			if ($args->walker->has_children) $classes_item .= " js-menu-has-children toggler";
+
+			//Current item
+			if ( $item->current )
+			  //$classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
+				$classes_link .= " underline";
+
+			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
+					$item->url,
+					$item->title
+			);
+
+			//Add a caret here
+			if ($args->walker->has_children) $output .= "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
+
+		}
+
+		public function end_el( &$output, $item, $depth = 0, $args = array() ) {
+			$output .= "</li>";
+		}
+
+	}
 }
-
-function wistiti_posts_navigation() {
-		//By default
-		echo get_the_posts_navigation();
-}
-
-// define the previous_posts_link_attributes callback
-//For future use
-/*function wistiti_filter_previous_posts_link_attributes( $var ) {
-	return $var;
-};
-add_filter( 'previous_posts_link_attributes', 'wistiti_filter_previous_posts_link_attributes', 10, 1 );
-
-function wistiti_filter_next_posts_link_attributes( $var ) {
-		return  $var;
-};
-add_filter( 'next_posts_link_attributes', 'wistiti_filter_next_posts_link_attributes', 10, 1 );*/
 
 
 /*
@@ -366,94 +430,6 @@ if (!class_exists('Wistiti_Walker_Comment')) {
 				</section>
 
 			<?php }
-
-	}
-}
-
-/*
-* WP Override navigation menu
-* Let child themes override it again.
-*/
-
-if (!class_exists('Wistiti_Walker_Main_Menu')) {
-	class Wistiti_Walker_Main_Menu extends Walker  {
-
-		// Tell Walker where to inherit it's parent and id values
-		var $db_fields = array(
-				'parent' => 'menu_item_parent',
-				'id'     => 'db_id'
-		);
-
-		//Menu levels (from level 1, level 0 is not managed here)
-		public function start_lvl( &$output, $depth = 0, $args = array() ) {
-
-			//ul
-			//level 1
-			if ($depth==0) {
-				$classes_list = "dn relative absolute-l top-100 left-0"; //position and display
-				$classes_list .= " ph3 pv2"; //spacings
-				$classes_list .= " bg-white-l"; //background
-				$classes_list .= " bw0 bw1-l b--solid b--light-gray"; //borders
-			} else if ($depth==1) {
-				//To do !
-				//level 2
-				$classes_list  = "dn relative absolute-l top-0 right-0"; //position and position
-				$classes_list .= " bg-white"; //background
-				$classes_list .= " pa0"; //spacings
-			}
-
-			$output .= "<ul class='".$classes_list."'>";
-		}
-
-		public function end_lvl( &$output, $depth = 0, $args = array() ) {
-			$output .= "</ul>";
-		}
-
-		//Menu items
-		public function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
-
-			//Root items
-			if ($item->menu_item_parent=='0') {
-
-				//li
-				$classes_item = "relative db dib-l"; //position and display
-				$classes_item .= " pa3 ph0-l ph3-l pv1-l"; //spacings
-
-				//a
-				$classes_link = 'dib link black f5-l f4 underline-hover';
-			}
-			//Sub items
-			else {
-
-				//li
-				$classes_item = "db"; //display and position
-				$classes_item .= " pa3 ph0-l pv2-l"; //spacings
-
-				//a
-				$classes_link = 'dib link black f5-l f4 underline-hover';
-			}
-
-			//Item has children
-			if ($args->walker->has_children) $classes_item .= " js-menu-has-children toggler";
-
-			//Current item
-			if ( $item->current )
-			  //$classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
-				$classes_link .= " underline";
-
-			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
-					$item->url,
-					$item->title
-			);
-
-			//Add a caret here
-			if ($args->walker->has_children) $output .= "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
-
-		}
-
-		public function end_el( &$output, $item, $depth = 0, $args = array() ) {
-			$output .= "</li>";
-		}
 
 	}
 }

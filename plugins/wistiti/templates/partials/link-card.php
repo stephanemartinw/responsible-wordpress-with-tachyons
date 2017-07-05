@@ -26,6 +26,6 @@
   <h<?php echo $secondheadinghierarchy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>>
   <?php echo $thecontent;?>
   <span class="<?php echo $partial_args['classes']['label'];?>"><a class="<?php echo $partial_args['classes']['label_link'];?>" href="<?php echo $url;?>"><?php echo $label;?></a></span>
-  <span><?php _e('on', "wistiti");?></span>
+  <span><?php _e('Source:', "wistiti");?></span>
   <span class="<?php echo $partial_args['classes']['source'];?>"><a class="<?php echo $partial_args['classes']['source_link'];?>" href="<?php echo $sourceurl;?>"><?php echo $source;?></a></span>
 </div>

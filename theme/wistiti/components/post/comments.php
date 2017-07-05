@@ -37,7 +37,7 @@ $secondheadinghierarchy = $comments_args['attributes']['firstheadinghierarchy']+
 		<?php
 			$list_comment_args = array();
 			wp_list_comments( array(
-				'walker' => new Wistiti_Walker_Comment($comments_args)
+				'walker' => new Wistiti_Walker_Comment($comments_args['classes']['items'])
 			) );
 		?>
 
@@ -108,5 +108,5 @@ $secondheadinghierarchy = $comments_args['attributes']['firstheadinghierarchy']+
   'submit_button' => '<input name="%1$s" type="submit" id="%2$s" class="'.$comments_args['form']['classes']['submit_button'].'" value="%4$s" />'
   );
   comment_form($comment_form);?>
-  
+
 </div>

@@ -181,7 +181,7 @@ class wistiti_settings
         if( isset( $input['jumbotron'] ) )
             $new_input['jumbotron'] = true;
 
-        if( isset( $input['jumbotron'] ) )
+        if( isset( $input['card'] ) )
             $new_input['card'] = true;
 
         if( isset( $input['service'] ) )

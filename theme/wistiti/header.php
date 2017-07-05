@@ -23,18 +23,6 @@
 <body <?php body_class(); ?>>
 	<div id="page">
 
-		<?php if (get_theme_mod( 'smew_branding_header', true )) :?>
-			<a class="clip skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'smew_theme' ); ?></a>
-
-			<header id="masthead" class="cf cmzr-site-header" role="banner">
-
-				<div class="relative flex items-center">
-					<?php get_template_part( 'components/header/site', 'branding' ); ?>
-
-					<?php get_template_part( 'components/navigation/navigation', 'top' ); ?>
-				</div>
-
-			</header>
-	<?php endif;?>
+	  <?php get_template_part( 'components/header/site', 'header' ); ?>
 
 		<div id="content" class="site-content">

@@ -17,7 +17,7 @@ get_header(); ?>
 
 			get_template_part( 'components/post/content', get_post_format() );
 
-			//To customize !
+			//To do : override with tachyons ! Disabled for now....
 			//wistiti_post_navigation();
 
 			// If comments are open or we have at least one comment, load up the comment template.

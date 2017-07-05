@@ -1,9 +1,17 @@
+<?php
+global $branding_args;
+get_template_part( 'components/header/site-branding', 'customizer' );
+
+//To do : use args in this template !
+?>
+
+
 <div class="flex-auto">
 	<div class="flex items-center ">
 
-	<?php if (get_theme_mod( 'smew_branding_minilogo', true )) : ?>
+	<?php if (!empty(get_theme_mod( 'smew_siteidentity_minilogo', '' ))) : ?>
 		<div class="cmzr-site-minilogo">
-			<img class="w2 w3-l mr2" src="<?php echo get_theme_mod( 'smew_branding_minilogo', '' );?>" alt="<?php bloginfo( 'name' ); ?>">
+			<img class="w2 w3-l mr2" src="<?php echo get_theme_mod( 'smew_siteidentity_minilogo', '' );?>" alt="<?php bloginfo( 'name' ); ?>">
 		</div>
 	<?php endif;?>
 
@@ -15,11 +23,11 @@
 		<?php endif;
 
 		//Brandig description
-		if (get_theme_mod( 'smew_branding_description', true )) :
-		$description = get_bloginfo( 'description', 'display' );
-			if ( $description || is_customize_preview() ) : ?>
-				<p class="f7 f6-m f5-ns ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-			<?php endif; ?>
+		if ($branding_args['attributes']['activate']) :
+			$description = get_bloginfo( 'description', 'display' );
+				if ( $description || is_customize_preview() ) : ?>
+					<p class="f7 f6-m f5-ns ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+				<?php endif; ?>
 		<?php endif; ?>
 	</div>
   </div>

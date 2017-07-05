@@ -8,7 +8,7 @@
         $width = floor(100 / $atts['col']);
       }
       else {
-          $width=33; //default
+          $width=50; //default
       }
 
 ?>
