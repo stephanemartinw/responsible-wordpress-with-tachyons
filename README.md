@@ -89,6 +89,8 @@ Start from the Wistiti child theme (mywistiti) and start building your theme by 
 * extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 * adding content via the generated custom post types interfaces.
 
+For more information and detailled documenation, a [wistiti Wiki](https://github.com/stephanemartinw/wistiti/wiki) is under construction.
+
 
 ## Already existing wistitis on the web
 
