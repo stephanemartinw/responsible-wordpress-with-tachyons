@@ -6,6 +6,6 @@ $partial_args =array(
         'wrapper' => "pv2",
         'tab' => "db bg-".get_theme_mod( 'smew_colors_brand', 'blue' )." white ma0 pa1 pointer",
         'title' => 'white tc',
-        'panel' => 'dn-js'
+        'collapse' => 'dn-js'
       )
 );?>

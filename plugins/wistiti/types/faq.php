@@ -159,7 +159,7 @@ function FAQ_shortcode($atts = [], $content = null, $tag = '') {
 		array(
 			'type' => 'faq',
 			'layout' => 'list',
-			'display' => 'accordion',
+			'display' => 'collapsible',
 			'firstheadinghierarchy' => '3'
 		), $atts);
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);

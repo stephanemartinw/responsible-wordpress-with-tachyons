@@ -14,7 +14,10 @@
       //Do not add tachyons classes here ! User appropriate customizer !
       global $template_args;
       if (!wistiti_get_template('/customizers/'.$atts['type'].'-grid-customizer.php', $atts))
-        wistiti_get_template('/customizers/grid-customizer.php', $atts)
+        wistiti_get_template('/customizers/grid-customizer.php', $atts);
+
+      global $partial_args;
+      wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 ?>
 
 <div class="<?php echo $template_args['classes']['wrapper'];?>" role="<?php echo $template_args['classes']['role'];?>">
@@ -39,6 +42,11 @@
 
     <?php $index++; endwhile; endif;
 
-    wp_reset_query(); ?>
+    wp_reset_query();
+
+    unset($template_args);
+    unset($partial_args);
+
+    ?>
 
 </div>

@@ -7,9 +7,9 @@
  * @package Wistiti
  */
 
+ //Customize
  //Do not use tachyons classes heren, use the appropriate customizer !
  global $post_args;
- get_template_part( 'components/post/partials/customizers/post-full', 'customizer' );
 
 ?>
 
@@ -53,5 +53,5 @@
   <footer class="entry-footer">
 		<?php wistiti_entry_footer($post_args['classes']['footer']); ?>
 	</footer>
-  
-</article><!-- #post-## -->
+
+</article>

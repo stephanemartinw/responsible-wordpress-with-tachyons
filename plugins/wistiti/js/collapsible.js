@@ -1,7 +1,7 @@
 document.onreadystatechange = function () {
   if (document.readyState === 'complete') {
     // Handler when the DOM is fully loaded
-    var acc = document.getElementsByClassName("js-tab-title");
+    var acc = document.getElementsByClassName("js-collapsible-toggle");
     var i;
 
     for (i = 0; i < acc.length; i++) {

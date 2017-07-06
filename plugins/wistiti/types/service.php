@@ -70,8 +70,6 @@ function service_build_meta_box( $post ){
 	wp_nonce_field( basename( __FILE__ ), 'service_meta_box_nonce' );
 
 	$current_iconname = get_post_meta( $post->ID, '_service_iconname',true );
-	$current_iconsize = get_post_meta( $post->ID, '_service_iconsize', true );
-	$current_iconcolor = get_post_meta( $post->ID, '_service_iconcolor', true );
 	?>
 	<div class='inside'>
 
@@ -81,17 +79,6 @@ function service_build_meta_box( $post ){
 			<input type="text" name="iconname" value="<?php echo $current_iconname; ?>" />
 		</p>
 
-		<h3><?php _e( 'Icon size', 'wistiti' ); ?></h3>
-		<p>
-			<input type="text" name="iconsize" value="<?php echo $current_iconsize; ?>" />
-		</p>
-
-		<h3><?php _e( 'Icon color', 'wistiti' ); ?></h3>
-		<p>
-			<input type="text" name="iconcolor" value="<?php echo $current_iconcolor; ?>" />
-		</p>
-
-		</p>
 	</div>
 	<?php
 }
@@ -115,14 +102,6 @@ function service_save_meta_box_data( $post_id ){
 	// Store custom fields values
 	if ( isset( $_REQUEST['iconname'] ) ) {
 		update_post_meta( $post_id, '_service_iconname', sanitize_text_field( $_POST['iconname'] ) );
-	}
-
-	if ( isset( $_REQUEST['iconsize'] ) ) {
-		update_post_meta( $post_id, '_service_iconsize', sanitize_text_field( $_POST['iconsize'] ) );
-	}
-
-	if ( isset( $_REQUEST['iconcolor'] ) ) {
-		update_post_meta( $post_id, '_service_iconcolor', sanitize_text_field( $_POST['iconcolor'] ) );
 	}
 
 }

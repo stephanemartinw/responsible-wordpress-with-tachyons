@@ -10,6 +10,8 @@
  global $content_args;
  get_template_part( 'components/post/customizers/content-list', 'customizer' );
 
+ global $post_args;
+ get_template_part( 'components/post/partials/customizers/post-'.$content_args['display'], 'customizer' );
 ?>
 <?php while ( have_posts() ) : the_post();?>
 
@@ -20,4 +22,9 @@
    */
  	get_template_part( 'components/post/partials/post', $content_args['display'] );?>
 
-<?php endwhile; ?>
+<?php endwhile;
+
+unset($content_args);
+unset($post_args);
+
+?>

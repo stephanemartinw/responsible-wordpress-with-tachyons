@@ -14,10 +14,9 @@
   $source = get_post_meta( get_the_ID(), '_link_source', true );
   $sourceurl = get_post_meta( get_the_ID(), '_link_sourceurl', true );
 
-  //Default skin
+  //Customize
   //Do not add tachyons classes here ! User appropriate customizer !
   global $partial_args;
-  wistiti_get_template('/partials/customizers/link-card-customizer.php', $atts);
  ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">

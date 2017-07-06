@@ -7,9 +7,9 @@
  * @package Wistiti
  */
 
+	//Customize
 	//Do not use tachyons classes heren, use the appropriate customizer !
   global $post_args;
-  get_template_part( 'components/post/partials/customizers/post-media', 'customizer' );
 
 ?>
 

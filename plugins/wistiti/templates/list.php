@@ -5,7 +5,10 @@
     //Do not add tachyons classes here ! User appropriate customizer !
     global $template_args;
     if (!wistiti_get_template('/customizers/'.$atts['type'].'-list-customizer.php', $atts))
-      wistiti_get_template('/customizers/list-customizer.php', $atts)
+      wistiti_get_template('/customizers/list-customizer.php', $atts);
+
+    global $partial_args;
+    wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 ?>
 
 <div class="<?php echo $template_args['classes']['wrapper'];?>" role="<?php echo $template_args['classes']['role'];?>">
@@ -20,6 +23,12 @@
 
   $index++; endwhile; endif;
 
-  wp_reset_query(); ?>
+  wp_reset_query();
+
+  unset($template_args);
+  unset($partial_args);
+
+
+  ?>
 
 </div>

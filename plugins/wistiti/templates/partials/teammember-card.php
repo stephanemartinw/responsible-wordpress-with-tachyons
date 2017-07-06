@@ -7,7 +7,6 @@
   //Default skin
   //Do not add tachyons classes here ! User appropriate customizer !
   global $partial_args;
-  wistiti_get_template('/partials/customizers/teammember-card-customizer.php', $atts);
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">

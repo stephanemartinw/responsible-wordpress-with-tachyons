@@ -259,7 +259,7 @@ if ($options['faq']) {
 
 	add_action('wp_enqueue_scripts','wistiti_enqueue_scripts');
 	function wistiti_enqueue_scripts() {
-	    wp_enqueue_script( 'wistiti-accordion', plugins_url( '/js/accordion.js', __FILE__ ), array());
+	    wp_enqueue_script( 'wistiti-collapsible', plugins_url( '/js/collapsible.js', __FILE__ ), array());
 	}
 
 	require_once(__ROOT__.'/types/faq.php');

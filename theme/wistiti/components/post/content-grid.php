@@ -9,6 +9,9 @@
   global $content_args;
   get_template_part( 'components/post/customizers/content-grid', 'customizer' );
 
+  global $post_args;
+  get_template_part( 'components/post/partials/customizers/post-'.$content_args['display'], 'customizer' );
+
 ?>
 
 <div class="cf">
@@ -26,6 +29,10 @@
 
      </div>
 
-  <?php endwhile; ?>
+  <?php endwhile;
+
+  unset($content_args);
+  unset($post_args);
+  ?>
 
 </div>

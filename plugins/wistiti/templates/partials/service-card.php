@@ -10,13 +10,9 @@
   $thecontent = get_the_content();
 
   $iconname = get_post_meta( get_the_ID(), '_service_iconname', true );
-  $iconsize = get_post_meta( get_the_ID(), '_service_iconsize', true );
-  $iconcolor = get_post_meta( get_the_ID(), '_service_iconcolor', true );
 
-  //Default skin
-  //Do not add tachyons classes here ! User appropriate customizer !
+  //Customize
   global $partial_args;
-  wistiti_get_template('/partials/customizers/service-card-customizer.php', $atts);
  ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">
@@ -24,12 +20,10 @@
     <figure class="<?php echo $partial_args['classes']['thumbnail_wrapper'];?>"><?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' =>  $partial_args['classes']['thumbnail']]); ?></figure>
     <?php else :
     if (!empty($iconname)) :
-      if (empty($iconsize)) $iconsize= 5;
-      if (empty($iconcolor)) $iconcolor = "black";
     ?>
       <!-- For now, override this template and add here : display the icon according to the SVGs inlined in your wistiti child theme -->
       <!-- Forx example : http://geomicons.com/. Embed only used icons.-->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="<?php echo $iconcolor; ?> w<?php echo $iconsize;?> h<?php echo $iconsize; ?>">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="<?php echo $partial_args['classes']['icon_color']; ?> w<?php echo $partial_args['classes']['icon_size'];?> h<?php echo $partial_args['classes']['icon_size']; ?>">
         <use xlink:href="#<?php echo $iconname;?>"></use>
       </svg>
   <?php endif; endif; ?>
