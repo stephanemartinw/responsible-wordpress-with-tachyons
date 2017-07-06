@@ -100,9 +100,9 @@ Send your wistiti website url and we will add it here.
 ## In progress
 
 * Improving existing elements to be more flexible and powerful.
-* Better support of blogs, post/page comments and associated widgets.
+* Improving support of blogs, post/page comments 
+* Support of widgets
 * New elements for the Wistiti plugin.
-* More theme options to avoid tedious overrides in theme child.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
 * Developing and testing Wistiti in the real world, using it on new adequate projects.
