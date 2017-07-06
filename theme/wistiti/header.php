@@ -9,8 +9,11 @@
  * @package Wistiti
  */
 
+global $wistiti_args;
+get_template_part( 'wistiti', 'customizer' );
+
  ?><!DOCTYPE html>
- <html class="no-js f5 lh-copy sans-serif" <?php language_attributes(); ?>>
+ <html class="<?php echo $wistiti_args['classes']['progressive'];?> <?php echo $wistiti_args['classes']['html'];?>" <?php language_attributes(); ?>>
  <head>
 	 <meta charset="<?php bloginfo( 'charset' ); ?>">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">

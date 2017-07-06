@@ -114,6 +114,7 @@ function team_shortcode($atts = [], $content = null, $tag = '') {
 
 		$atts = shortcode_atts(
 		array(
+			'type' => 'teammember',
 			'team' => '',
 			'layout' => 'grid',
 			'col' => 3,
@@ -145,7 +146,7 @@ function team_shortcode($atts = [], $content = null, $tag = '') {
 		//Template
 		ob_start();
 
-		wistiti_get_template('teammembers-'.$atts['layout'].'.php', $atts);
+		wistiti_get_template($atts['layout'].'.php', $atts);
 
 		return ob_get_clean();
 }

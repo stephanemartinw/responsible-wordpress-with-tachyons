@@ -19,7 +19,7 @@
 
   <?php if ($index % 2 == 0): ?>
     <div class="<?php echo $partial_args['classes']['media_image'];?>">
-      <?php the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']] ); ?>
+      <?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' => $partial_args['classes']['thumbnail']] ); ?>
     </div>
   <?php endif;?>
 

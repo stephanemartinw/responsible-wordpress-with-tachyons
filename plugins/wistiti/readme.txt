@@ -53,6 +53,14 @@ Attributes :
 'display' : display mode (media, card)
 'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
 
+* [wistiti_links] : displays all the links, ordered by the Order field.
+Attributes :
+'group' : link group (taxonomy)
+'layout' : layout mode (grid)
+'col' : grid columns number per row
+'display' : display mode (card)
+'firstheadinghierarchy' : heading hierarchy starting level (1 to 6)
+
 * [wistiti_team] : displays all the team members, ordered by the Order field.
 Attributes :
 'team' : team (taxonomy)

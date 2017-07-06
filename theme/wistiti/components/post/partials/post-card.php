@@ -11,17 +11,14 @@
 	global $post_args;
   get_template_part( 'components/post/partials/customizers/post-card', 'customizer' );
 
-
 ?>
 
 <article id="post-<?php the_ID(); ?>" <?php post_class($post_args['classes']['wrapper']); ?>>
 
 	<?php if ( '' != get_the_post_thumbnail() ) : ?>
-		<div class="post-thumbnail">
 			<a class="link" href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail( 'medium_large', ['class' => $post_args['classes']['thumbnail']] ); ?>
+				 <figure class="<?php echo $post_args['classes']['thumbnail_wrapper'];?>"><?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' =>  $post_args['classes']['thumbnail']]); ?></figure>
 			</a>
-		</div>
 	<?php endif; ?>
 
   <header class="entry-header">

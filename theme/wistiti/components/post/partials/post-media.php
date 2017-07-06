@@ -33,7 +33,7 @@
 	<?php if ( '' != get_the_post_thumbnail() ) : ?>
 		<div class="post-thumbnail">
 			<a class="link" href="<?php the_permalink(); ?>">
-				<?php the_post_thumbnail( 'medium_large', ['class' => $post_args['classes']['thumbnail']] ); ?>
+				<?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' => $post_args['classes']['thumbnail']] ); ?>
 			</a>
 		</div>
 	<?php endif; ?>

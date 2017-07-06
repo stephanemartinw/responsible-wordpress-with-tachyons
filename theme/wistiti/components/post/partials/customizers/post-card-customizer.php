@@ -16,6 +16,8 @@
         'author' => '',
         'author_link' => 'link'
       ),
+      'thumbnail_wrapper' => 'ma0 aspect-ratio aspect-ratio--16x9',
+      'thumbnail' => 'aspect-ratio--object',
       'footer' => array(
         'categories' => 'db',
         'category_link' => 'link',
@@ -23,8 +25,7 @@
         'tag_link' => 'link',
         'comments_popup' => 'db',
         'comments_popup_link' => 'link'
-      ),
-      'thumbnail' => 'w-100 h-auto'
+      )
     )
   );
 ?>

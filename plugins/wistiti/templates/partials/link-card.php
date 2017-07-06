@@ -21,7 +21,7 @@
  ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">
-  <?php if (has_post_thumbnail()) : the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']]);endif; ?>
+  <figure class="<?php echo $partial_args['classes']['thumbnail_wrapper'];?>"><?php if (has_post_thumbnail()) : the_post_thumbnail( 'medium_large', [ 'alt' => '', 'class' =>  $partial_args['classes']['thumbnail']]);endif; ?></figure>
   <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
   <h<?php echo $secondheadinghierarchy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>>
   <?php echo $thecontent;?>

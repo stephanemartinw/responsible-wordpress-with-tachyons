@@ -20,7 +20,9 @@
  ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">
-  <?php if (has_post_thumbnail()) : the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']]); else :
+  <?php if (has_post_thumbnail()) : ?>
+    <figure class="<?php echo $partial_args['classes']['thumbnail_wrapper'];?>"><?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' =>  $partial_args['classes']['thumbnail']]); ?></figure>
+    <?php else :
     if (!empty($iconname)) :
       if (empty($iconsize)) $iconsize= 5;
       if (empty($iconcolor)) $iconcolor = "black";

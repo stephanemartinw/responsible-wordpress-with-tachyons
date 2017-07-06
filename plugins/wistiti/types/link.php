@@ -142,6 +142,7 @@ function link_shortcode($atts = [], $content = null, $tag = '') {
 		//Attributes
 		$atts = shortcode_atts(
 		array(
+      'type' => 'link',
 			'group' => '',
 			'layout' => 'grid',
 			'col' => 3,
@@ -173,7 +174,7 @@ function link_shortcode($atts = [], $content = null, $tag = '') {
 		//Template
 		ob_start();
 
-		wistiti_get_template('links-'.$atts['layout'].'.php', $atts);
+		wistiti_get_template($atts['layout'].'.php', $atts);
 
 		return ob_get_clean();
 }

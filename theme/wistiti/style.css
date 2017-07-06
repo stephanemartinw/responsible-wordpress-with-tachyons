@@ -7923,6 +7923,9 @@ code, .code {
   .black-l {
     color: #000 !important; }
 
+  .bg-white-l {
+    background-color: white; }
+
   .bg-transparent-l {
     background-color: transparent !important; } }
 .top-100 {
@@ -7930,6 +7933,9 @@ code, .code {
 
 .js .dn-js {
   display: none; }
+
+.js .db-js {
+  display: block; }
 
 .bt--transparent {
   border-left-color: transparent; }
