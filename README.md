@@ -54,8 +54,6 @@ Some modifications have been done :
 
 A child theme model (mywistiti) is available. Start from it to create your own Wistiti.
 
-Check readme.txt for more information and documentation.
-
 
 ## The plugin
 
@@ -79,8 +77,6 @@ New elements are currently developed and will be added soon :
 
 These elements are by default all inactive but can be separately activated, according to the need of the built website.
 
-Check readme.txt for more information and documentation.
-
 
 ## Getting Started
 
@@ -93,6 +89,8 @@ Start from the Wistiti child theme (mywistiti) and start building your theme by 
 * extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 * adding content via the generated custom post types interfaces.
 
+For more information and detailled documenation, a [wistiti Wiki](https://github.com/stephanemartinw/wistiti/wiki) is under construction.
+
 
 ## Already existing wistitis on the web
 
@@ -104,9 +102,9 @@ Send your wistiti website url and we will add it here.
 ## In progress
 
 * Improving existing elements to be more flexible and powerful.
-* Better support of blogs, post/page comments and associated widgets.
+* Improving support of blogs, post/page comments 
+* Support of widgets
 * New elements for the Wistiti plugin.
-* More theme options to avoid tedious overrides in theme child.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
 * Developing and testing Wistiti in the real world, using it on new adequate projects.
