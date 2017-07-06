@@ -54,8 +54,6 @@ Some modifications have been done :
 
 A child theme model (mywistiti) is available. Start from it to create your own Wistiti.
 
-Check readme.txt for more information and documentation.
-
 
 ## The plugin
 
@@ -78,8 +76,6 @@ New elements are currently developed and will be added soon :
 * Testimonials
 
 These elements are by default all inactive but can be separately activated, according to the need of the built website.
-
-Check readme.txt for more information and documentation.
 
 
 ## Getting Started
