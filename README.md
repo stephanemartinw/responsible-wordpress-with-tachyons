@@ -1,6 +1,6 @@
 # Wistiti
 
-An experiment for lightened WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
+An experiment for lightweight WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
 
 
 ## Presentation
