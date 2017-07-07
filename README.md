@@ -59,19 +59,27 @@ A child theme model (mywistiti) is available. Start from it to create your own W
 
 The plugin proposes so far following elements :
 
+###Post types
+
 * Jumbotron (inspired from Bootstrap)
-* Card (inspired from Bootstrap)
+* Block
 * Services
 * Links
 * FAQ
-* Contact Form
+
+### Modules
+
+* Simple Contact Form
+
+### Widgets
+* WYSIWYGET text widget
+
 
 These elements use custom post types (so the content management is easy within WP's administration), with overridable templates using layout and display variations that you can fully customize with tachyons classes.
 
 They also propose each a shortcode to be uses in pages and templates.
 
-New elements are currently developed and will be added soon :
-* Text block
+New elements are currently developed and will be added as soon as possible :
 * Portfolio
 * Testimonials
 
@@ -102,8 +110,8 @@ Send your wistiti website url and we will add it here.
 ## In progress
 
 * Improving existing elements to be more flexible and powerful.
-* Improving support of blogs, post/page comments 
-* Support of widgets
+* Improving support of blogs, post/page comments
+* Support of WordPress standard widgets
 * New elements for the Wistiti plugin.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
