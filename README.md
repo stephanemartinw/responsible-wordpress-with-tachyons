@@ -5,7 +5,7 @@ An experiment for lightweight WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for creating efficient, lightweight and fast websites with WordPress.
+This Wistiti project is experimental. It wants to explore a way for creating lightweight,fast and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
