@@ -136,48 +136,4 @@ function link_save_meta_box_data( $post_id ){
 
 }
 add_action( 'save_post_link', 'link_save_meta_box_data' );
-
-function link_shortcode($atts = [], $content = null, $tag = '') {
-
-		//Attributes
-		$atts = shortcode_atts(
-		array(
-      'type' => 'link',
-			'group' => '',
-			'layout' => 'grid',
-			'col' => 3,
-			'display' => 'card',
-			'firstheadinghierarchy' => '3',
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-		//Query
-		$tax_arg = null;
-		if (!empty($atts['group']))
-			$tax_arg = array(
-					array(
-							'taxonomy' => 'link-group',
-							'field' => 'slug',
-							'terms' => $atts['group']
-			));
-		$args = array(
-				'post_type' => 'link',
-				'tax_query' => $tax_arg,
-				'orderby'=> 'menu_order',
-				'order' => 'ASC',
-				'post_status' => 'publish'
-			);
-
-		$links_query = new WP_Query( $args );
-		$atts['query'] = $links_query;
-
-		//Template
-		ob_start();
-
-		wistiti_get_template($atts['layout'].'.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_links', 'link_shortcode' );
 ?>

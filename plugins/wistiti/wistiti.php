@@ -266,3 +266,5 @@ if ($options['faq']) {
 
 }
 if ($options['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
+
+require_once(__ROOT__.'/shortcodes/wistiti.php');

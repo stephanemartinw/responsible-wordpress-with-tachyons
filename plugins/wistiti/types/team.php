@@ -109,47 +109,4 @@ function teammember_save_meta_box_data( $post_id ){
 
 }
 add_action( 'save_post_teammember', 'teammember_save_meta_box_data' );
-
-function team_shortcode($atts = [], $content = null, $tag = '') {
-
-		$atts = shortcode_atts(
-		array(
-			'type' => 'teammember',
-			'team' => '',
-			'layout' => 'grid',
-			'col' => 3,
-			'display' => 'card',
- 			'firstheadinghierarchy' => '3'
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-		//Query
-		$tax_arg = null;
-		if (!empty($atts['family']))
-			$tax_arg = array(
-					array(
-							'taxonomy' => 'teammember-team',
-							'field' => 'slug',
-							'terms' => $atts['team']
-			));
-		$args = array(
-	      'post_type' => 'teammember',
-				'tax_query' => $tax_arg,
-	      'orderby'=> 'menu_order',
-	      'order' => 'ASC',
-	      'post_status' => 'publish'
-	    );
-
-	  $teammembers_query = new WP_Query( $args );
-		$atts['query'] = $teammembers_query;
-
-		//Template
-		ob_start();
-
-		wistiti_get_template($atts['layout'].'.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_team', 'team_shortcode' );
 ?>

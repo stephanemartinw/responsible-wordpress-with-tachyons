@@ -9,4 +9,6 @@
     if (!wistiti_get_template('/partials/card-'.$atts['display'].'.php', $atts))
       wistiti_get_template('/partials/card-classic.php', $atts);
 
-$index++; endwhile; endif; wp_reset_query(); ?>
+$index++; endwhile; endif;
+wp_reset_query();
+?>

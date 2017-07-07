@@ -126,38 +126,4 @@ function jumbotron_save_meta_box_data( $post_id ){
 
 }
 add_action( 'save_post_jumbotron', 'jumbotron_save_meta_box_data' );
-
-function jumbotron_shortcode($atts = [], $content = null, $tag = '') {
-
-		$atts = shortcode_atts(
-		array(
-			'id' => '',
-			'display' => 'classic',
-			'firstheadinghierarchy' => '1',
-			'background' => ''
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-		//Query
-		$jumbotron_query = '';
-		if (isset($atts['id']) && !empty($atts['id'])) {
-			$args = array(
-					'post_type' => 'jumbotron',
-					'meta_key' => '_jumbotron_id',
-					'meta_value' => $atts['id']
-				);
-
-			$jumbotron_query = new WP_Query( $args );
-			$atts['query'] = $jumbotron_query;
-		}
-
-		//Template
-		ob_start();
-
-		if (!empty($jumbotron_query)) wistiti_get_template('jumbotron.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_jumbotron', 'jumbotron_shortcode' );
 ?>

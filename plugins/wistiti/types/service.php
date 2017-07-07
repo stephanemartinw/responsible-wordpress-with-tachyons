@@ -106,48 +106,4 @@ function service_save_meta_box_data( $post_id ){
 
 }
 add_action( 'save_post_service', 'service_save_meta_box_data' );
-
-function service_shortcode($atts = [], $content = null, $tag = '') {
-
-		//Attributes
-		$atts = shortcode_atts(
-		array(
-			'type' => 'service',
-			'family' => '',
-			'layout' => 'list',
-			'col' => 3,
-			'display' => 'media',
-			'firstheadinghierarchy' => '3',
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-		//Query
-		$tax_arg = null;
-		if (!empty($atts['family']))
-			$tax_arg = array(
-					array(
-							'taxonomy' => 'service-family',
-							'field' => 'slug',
-							'terms' => $atts['family']
-			));
-		$args = array(
-				'post_type' => 'service',
-				'tax_query' => $tax_arg,
-				'orderby'=> 'menu_order',
-				'order' => 'ASC',
-				'post_status' => 'publish'
-			);
-
-		$services_query = new WP_Query( $args );
-		$atts['query'] = $services_query;
-
-		//Template
-		ob_start();
-
-		wistiti_get_template($atts['layout'].'.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_services', 'service_shortcode' );
 ?>

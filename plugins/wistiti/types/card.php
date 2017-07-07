@@ -124,38 +124,4 @@ function card_save_meta_box_data( $post_id ){
   }
 }
 add_action( 'save_post_card', 'card_save_meta_box_data' );
-
-function card_shortcode($atts = [], $content = null, $tag = '') {
-
-		$atts = shortcode_atts(
-		array(
-			'id' => '',
-			'display' => 'classic',
-			'firstheadinghierarchy' => '3',
-			'background' => ''
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-    //Query
-    $card_query = '';
-    if (isset($atts['id']) && !empty($atts['id'])) {
-      $args = array(
-          'post_type' => 'card',
-					'meta_key' => '_card_id',
-					'meta_value' => $atts['id']
-        );
-
-      $card_query = new WP_Query( $args );
-      $atts['query'] = $card_query;
-    }
-
-    //Layout
-		ob_start();
-
-		if (!empty($card_query)) wistiti_get_template('card.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_card', 'card_shortcode' );
 ?>

@@ -6,7 +6,7 @@
 function FAQ_setup() {
 	// set up labels
 	$labels = array(
- 		'name' => 'FAQs',
+ 			'name' => 'FAQs',
     	'singular_name' => 'FAQ',
     	'add_new' => 'Add New FAQ',
     	'add_new_item' => 'Add New FAQ',
@@ -152,36 +152,4 @@ function FAQ_save_meta_box_data( $post_id ){
 	}
 }
 add_action( 'save_post_FAQ', 'FAQ_save_meta_box_data' );
-
-function FAQ_shortcode($atts = [], $content = null, $tag = '') {
-
-		$atts = shortcode_atts(
-		array(
-			'type' => 'faq',
-			'layout' => 'list',
-			'display' => 'collapsible',
-			'firstheadinghierarchy' => '3'
-		), $atts);
-		$atts = array_change_key_case((array)$atts, CASE_LOWER);
-
-		//Query
-		$args = array(
-		    'post_type' => 'faq',
-		    'orderby'=> 'menu_order',
-		    'order' => 'ASC',
-		    'post_status' => 'publish'
-		  );
-
-		$faqs_query = new WP_Query( $args );
-		$atts['query'] = $faqs_query;
-
-		//Template
-		ob_start();
-
-		wistiti_get_template($atts['layout'].'.php', $atts);
-
-		return ob_get_clean();
-}
-
-add_shortcode( 'wistiti_faq', 'FAQ_shortcode' );
 ?>

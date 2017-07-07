@@ -36,7 +36,7 @@
         $atts['index']=$index;
 
         if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['display'].'.php', $atts))
-          wistiti_get_template('/partials/'.atts['type'].'-media.php', $atts);?>
+          wistiti_get_template('/partials/'.$atts['type'].'-media.php', $atts);?>
 
       </div>
 
