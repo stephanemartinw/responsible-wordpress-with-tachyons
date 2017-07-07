@@ -5,7 +5,7 @@ An experiment for lightweight WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This Wistiti project is experimental. It wants to explore a way for creating efficient, lightweight and fast websites with WordPress.
+This experimental Wistiti project wants to explore a way for creating efficient, lightweight and fast websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
@@ -28,7 +28,7 @@ This prototype wants to be useful to create simple but very lightweight WP websi
 For that it proposes :
 
 * a minimal starter theme,
-* a plugin that proposes very simple and fully overridable elements (layout and skin),
+* a plugin that proposes very simple and fully overridable elements,
 
 so that Tachyons atomic classes can be used everywhere.
 
@@ -72,12 +72,13 @@ The plugin proposes so far following elements :
 * Simple Contact Form
 
 ### Widgets
+
 * WYSIWYGET text widget
 
 
-These elements use custom post types (so the content management is easy within WP's administration), with overridable templates using layout and display variations that you can fully customize with tachyons classes.
+These elements use custom post types (so the content management is easy within WP's administration), with overridable templates using layout and display variations that you can easily and fully customize with tachyons classes.
 
-They also propose each a shortcode to be uses in pages and templates.
+They also propose each a shortcode to be used in pages and templates.
 
 New elements are currently developed and will be added as soon as possible :
 * Portfolio
@@ -92,10 +93,10 @@ Install and activate both theme and plugin in your WordPress project. In the Wis
 
 Start from the Wistiti child theme (mywistiti) and start building your theme by :
 
-* building your custom templates or pages. For that, use Wistiti's elements shortcodes and tachyons.io classes.
-* overriding Wistiti's elements templates to fit your specific needs.
-* extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
+* building your custom templates or pages. For that, use Wistiti's elements shortcodes, widgets and tachyons.io classes.
+* overriding Wistiti's elements templates to fit your specific needs (layout and skin), via the customizer files.
 * adding content via the generated custom post types interfaces.
+* if necessary, extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
 
 For more information and detailled documenation, a [wistiti Wiki](https://github.com/stephanemartinw/wistiti/wiki) is under construction.
 
