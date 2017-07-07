@@ -5,8 +5,10 @@
 Attibutes :
 type = post type
 id = post id (meta)
-key = taxonomy key
-value = taxonomy value
+meta_key = meta key
+meta_value = meta value
+tax_key = taxonomy key
+tax_value = taxonomy value
 layout = list or grid
 col : number of cols for grid layout
 display : media, card or collapsible
@@ -39,6 +41,11 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
       $default_display = 'classic';
       break;
 
+      case 'block':
+      $default_layout = 'block';
+      $default_display = 'card';
+      break;
+
       case 'teammember':
       case 'service':
       case 'link':
@@ -58,8 +65,11 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 		$atts = shortcode_atts(
 		array(
 			'type' => '',
-      'key' => '',
-			'value' => '',
+      'id' => '',
+      'meta_key' => '',
+      'meta_value' => '',
+      'tax_key' => '',
+			'tax_value' => '',
 			'layout' => $default_layout,
 			'col' => $default_col,
 			'display' => $default_display,
@@ -69,23 +79,28 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
 		//Query
+    //Post ID
+
+    //Post meta
     $meta_key = '';
     $meta_value = '';
-    if (isset($atts['id']) && !empty($atts['id'])) {
-      $meta_key = '_'.$atts['type'].'_id';
-      $meta_value = $atts['id'];
+    if (isset($atts['meta_key']) && !empty($atts['meta_key'])) {
+      $meta_key = '_'.$atts['type'].'_'.$atts['meta_key'];
+      $meta_value = $atts['meta_value'];
     }
 
+    //Taxonomy
 		$tax_arg = null;
-		if (isset($atts['key']) && !empty($atts['value']))
+		if (isset($atts['tax_key']) && !empty($atts['tax_value']))
 			$tax_arg = array(
 					array(
-							'taxonomy' => $atts['type'].'-'.$atts['key'],
+							'taxonomy' => $atts['type'].'-'.$atts['tax_key'],
 							'field' => 'slug',
-							'terms' => $atts['value']
+							'terms' => $atts['tax_value']
 			));
 		$args = array(
 	      'post_type' => $atts['type'],
+        'p' => $atts['id'],
         'meta_key' => $meta_key,
         'meta_value' => $meta_value,
 				'tax_query' => $tax_arg,

@@ -69,16 +69,16 @@ function jumbotron_build_meta_box( $post ){
 	// make sure the form request comes from WordPress
 	wp_nonce_field( basename( __FILE__ ), 'jumbotron_meta_box_nonce' );
 
-	$current_jid = get_post_meta( $post->ID, '_jumbotron_id', true );
+	$current_coolid = get_post_meta( $post->ID, '_jumbotron_coolid', true );
 	$current_action_label = get_post_meta( $post->ID, '_jumbotron_action_label', true );
 	$current_action_url = get_post_meta( $post->ID, '_jumbotron_action_url', true );
 
 	?>
 	<div class='inside'>
 
-		<h3><?php _e( 'ID', 'wistiti' ); ?></h3>
+		<h3><?php _e( 'Cool ID', 'wistiti' ); ?></h3>
 		<p>
-			<input type="text" name="jid" value="<?php echo $current_id; ?>" />
+			<input type="text" name="coolid" value="<?php echo $current_coolid; ?>" />
 		</p>
 
 		<h3><?php _e( 'Action label', 'wistiti' ); ?></h3>
@@ -111,8 +111,8 @@ function jumbotron_save_meta_box_data( $post_id ){
 		return;
 	}
 
-	if ( isset( $_REQUEST['jid'] ) ) {
-		update_post_meta( $post_id, '_jumbotron_id', sanitize_text_field( $_POST['jid'] ) );
+	if ( isset( $_REQUEST['coolid'] ) ) {
+		update_post_meta( $post_id, '_jumbotron_coolid', sanitize_text_field( $_POST['coolid'] ) );
 	}
 
 	if ( isset( $_REQUEST['action-label'] ) ) {

@@ -17,7 +17,7 @@
 
   //Default skin
   global $partial_args;
-  wistiti_get_template('/partials/customizers/card-classic-customizer.php', $atts);
+  wistiti_get_template('/partials/customizers/block-card-customizer.php', $atts);
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">

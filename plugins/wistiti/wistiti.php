@@ -184,6 +184,9 @@ class wistiti_settings
         if( isset( $input['card'] ) )
             $new_input['card'] = true;
 
+        if( isset( $input['block'] ) )
+            $new_input['block'] = true;
+
         if( isset( $input['service'] ) )
             $new_input['service'] = true ;
 
@@ -220,7 +223,7 @@ class wistiti_settings
         $value = array("name" => "Post Types to include",
         	"desc" => "Select the pages you want to include. All pages are excluded by default",
         	"options" => array( "jumbotron"=>"Jumbotron",
-                              "card"=>"Card",
+                              "block"=>"Block",
                               "service"=>"Services",
                               "link"=>"Links",
                               "team"=>"Team",
@@ -250,8 +253,8 @@ if( is_admin() )
     $wistiti_settings_page = new wistiti_settings();
 
 $options = get_option('wistiti_option_name');
+if ($options['block']) require_once(__ROOT__.'/types/block.php');
 if ($options['jumbotron']) require_once(__ROOT__.'/types/jumbotron.php');
-if ($options['card']) require_once(__ROOT__.'/types/card.php');
 if ($options['service']) require_once(__ROOT__.'/types/service.php');
 if ($options['link']) require_once(__ROOT__.'/types/link.php');
 if ($options['team']) require_once(__ROOT__.'/types/team.php');
@@ -268,3 +271,4 @@ if ($options['faq']) {
 if ($options['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 
 require_once(__ROOT__.'/shortcodes/wistiti.php');
+require_once(__ROOT__.'/widgets/text.php');
