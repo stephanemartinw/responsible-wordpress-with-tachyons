@@ -1,3 +1,2 @@
 theme: jekyll-theme-minimal
-gems:
-  - jekyll-seo-tag
+title: "lightweight WordPress website with tachyons.io"
