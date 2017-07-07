@@ -59,7 +59,7 @@ A child theme model (mywistiti) is available. Start from it to create your own W
 
 The plugin proposes so far following elements :
 
-###Post types
+### Post types
 
 * Jumbotron (inspired from Bootstrap)
 * Block
