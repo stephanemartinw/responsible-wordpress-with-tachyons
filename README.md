@@ -5,7 +5,7 @@ An experiment for lightweight WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This Wistiti project is experimental. It wants to explore a way for creating efficient, lightweight and fast websites with WordPress.
+This Wistiti project is experimental. It wants to explore a way for creating lightweight,fast and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
@@ -34,8 +34,7 @@ so that Tachyons atomic classes can be used everywhere.
 
 Moreover, as far as possible :
 
-* all content should be manageable without the use of the WP Editor.
-It should all be defined and accessible via Custom Post Types interfaces.
+* the most possible, content should be managed Custom Post Types administration interfaces.
 
 * avoid to use other plugins. For many small sites, all necessary features can be managed without them.
 
