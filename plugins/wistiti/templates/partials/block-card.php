@@ -13,11 +13,10 @@
   $theexcerpt = '';
   if(has_excerpt()) $theexcerpt = get_the_excerpt();
   $thecontent = get_the_content();
-  $theaction = get_post_meta( get_the_ID(), '_jumbotron_action_url', true );
+  $theaction = get_post_meta( get_the_ID(), '_block_action_url', true );
 
   //Default skin
   global $partial_args;
-  wistiti_get_template('/partials/customizers/block-card-customizer.php', $atts);
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">
@@ -28,6 +27,6 @@
 
     <?php if (!empty($thecontent)):?><hr class="<?php echo $partial_args['classes']['hr'];?>"><?php endif;?>
     <?php if (!empty($thecontent)):?><div class="<?php echo $partial_args['classes']['content'];?>"><?php echo $thecontent;?></div><?php endif;?>
-    <?php if (!empty($theaction)):?><a class="<?php echo $partial_args['classes']['action'];?>" href="<?php echo get_post_meta( get_the_ID(), '_jumbotron_action_url', true );?>" target="_blank"><?php echo get_post_meta( get_the_ID(), '_jumbotron_action_label', true );?></a><?php endif;?>
+    <?php if (!empty($theaction)):?><a class="<?php echo $partial_args['classes']['action'];?>" href="<?php echo get_post_meta( get_the_ID(), '_block_action_url', true );?>" target="_blank" role="button" tabindex="0"><?php echo get_post_meta( get_the_ID(), '_jumbotron_action_label', true );?></a><?php endif;?>
 
 </div>

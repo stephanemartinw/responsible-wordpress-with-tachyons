@@ -7934,6 +7934,9 @@ code, .code {
 .js .dn-js {
   display: none; }
 
+@media screen and (max-width: 64em) {
+  .js .dn-js-nl {
+    display: none; } }
 .js .db-js {
   display: block; }
 

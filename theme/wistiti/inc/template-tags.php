@@ -34,7 +34,7 @@ function wistiti_posted_on($args) {
 		'<a class="'.$args['author_link'].'" href="' . esc_url( get_author_posts_url( get_the_author_meta( 'ID' ) ) ) . '">' . esc_html( get_the_author() ) . '</a>'
 	);
 
-	echo '<span class="'.$args['date'].'">' . $posted_on . '</span><span class="'.$args['author'].'">' . $byline . '</span>'; 
+	echo '<span class="'.$args['date'].'">' . $posted_on . '</span><span class="'.$args['author'].'">' . $byline . '</span>';
 
 }
 endif;
@@ -46,6 +46,9 @@ if ( ! function_exists( 'wistiti_entry_footer' ) ) :
 function wistiti_entry_footer($args) {
 	// Hide category and tag text for pages.
 	if ( 'post' === get_post_type() ) {
+
+		wistiti_element_footer('post','',$args);
+
 		/* translators: used between list items, there is a space after the comma */
 		//https://developer.wordpress.org/reference/functions/get_the_category_list/
 		// No way to customize markup !
@@ -54,7 +57,7 @@ function wistiti_entry_footer($args) {
 			printf( '<span>' . esc_html__( 'Posted in %1$s', 'wistiti' ) . '</span>', $categories_list ); // WPCS: XSS OK.
 		}*/
 		//To be replaced with...???
-		$categories = get_the_category();
+		/*$categories = get_the_category();
 		if (!empty($categories)) {
 				echo '<span class="'.$args['categories'].'">';
 				$thelist='';
@@ -64,7 +67,7 @@ function wistiti_entry_footer($args) {
 				echo apply_filters( 'the_category', $thelist, ',', '' );
 				echo '</span>';
 
-		}
+		}*/
 
 		/* translators: used between list items, there is a space after the comma */
 		//https://developer.wordpress.org/reference/functions/get_the_tag_list/
@@ -74,8 +77,9 @@ function wistiti_entry_footer($args) {
 			printf( ' <span>' . esc_html__( 'Tagged %1$s', 'wistiti' ) . '</span>', $tags_list ); // WPCS: XSS OK.
 		}*/
 		//To be replaced with...???
-		$tags = get_the_tags();
-		if (!empty($tags)) {
+		/*$tags = get_the_tags();
+		wistiti_display_taxonomy_terms('post', 'post_tag', $tags, $args);*/
+		/*if (!empty($tags)) {
 				echo '<span class="'.$args['tags'].'">';
 				$thelist=array();
 				foreach($tags as $tag) {
@@ -85,7 +89,7 @@ function wistiti_entry_footer($args) {
 				$links = apply_filters( "term_links-post_tag", $thelist );
  				echo join( ',' , $links );
 				echo '</span>';
-		}
+		}*/
 	}
 
 	if ( ! is_single() && ! post_password_required() && ( comments_open() || get_comments_number() ) ) {
@@ -103,6 +107,48 @@ function wistiti_entry_footer($args) {
 		'<span>',
 		'</span>'
 	);
+}
+endif;
+
+
+if ( ! function_exists( 'wistiti_element_footer' ) ) :
+/**
+ * Prints HTML with meta information for the taxonomies for Wistiti elements
+ */
+function wistiti_element_footer($type, $taxonomy='', $args=array()) {
+
+	//All taxonomies
+	if ( $type === get_post_type() ) {
+
+		if (empty($taxonomy)) $taxonomy_names = get_post_taxonomies();
+		else $taxonomy_names = explode(',', $taxonomy);
+
+		foreach ($taxonomy_names as $taxonomy_name) {
+			$tags = wp_get_post_terms(get_post()->ID, $taxonomy_name);
+			//Display the terms
+			wistiti_display_taxonomy_terms($type, $taxonomy_name, $tags, $args);
+		}
+	}
+
+}
+endif;
+
+if ( ! function_exists( 'wistiti_display_taxonomy_terms' ) ) :
+/**
+ * Prints HTML with meta information for the taxonomies for Wistiti elements
+ */
+function wistiti_display_taxonomy_terms($type ='post', $taxonomy, $terms, $args=array()) {
+	if (!empty($terms)) {
+		echo '<div class="'.$args['taxonomies'][$taxonomy]['wrapper'].'">';
+		$thelist=array();
+		foreach($terms as $term) {
+			$term_link = get_term_link( $term, $taxonomy );
+			$thelist[] = '<a class= "'.$args['taxonomies'][$taxonomy]['link'].'" href="'.$term_link.'" role="button">' . $term->name . '</a>';
+		}
+		$links = apply_filters( "term_links-".$taxonomy, $thelist );
+		echo join( ',' , $links );
+		echo '</div>';
+	}
 }
 endif;
 

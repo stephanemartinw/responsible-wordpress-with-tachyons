@@ -23,7 +23,7 @@ get_template_part( 'components/header/site-branding', 'customizer' );
 		<?php endif;
 
 		//Brandig description
-		if ($branding_args['attributes']['activate']) :
+		if ($branding_args['options']['activate']) :
 			$description = get_bloginfo( 'description', 'display' );
 				if ( $description || is_customize_preview() ) : ?>
 					<p class="f7 f6-m f5-ns ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>

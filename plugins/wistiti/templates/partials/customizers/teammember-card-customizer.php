@@ -9,8 +9,9 @@ else {
 }
 
 global $partial_args;
-$partial_args = array('classes' => array(
-  'wrapper' => 'ph4 pb4 tc',
-  'thumbnail' => 'w-'.$width_avatar.' h-auto br-100'
-));
+$partial_args = array(
+    'classes' => array(
+    'wrapper' => 'ph4 pb4 tc',
+    'thumbnail' => 'w-'.$width_avatar.' h-auto br-100'
+  ));
 ?>

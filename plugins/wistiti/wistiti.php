@@ -190,8 +190,8 @@ class wistiti_settings
         if( isset( $input['service'] ) )
             $new_input['service'] = true ;
 
-        if( isset( $input['link'] ) )
-            $new_input['link'] = true ;
+        if( isset( $input['news'] ) )
+            $new_input['news'] = true ;
 
         if( isset( $input['team'] ) )
             $new_input['team'] = true ;
@@ -225,7 +225,7 @@ class wistiti_settings
         	"options" => array( "jumbotron"=>"Jumbotron",
                               "block"=>"Block",
                               "service"=>"Services",
-                              "link"=>"Links",
+                              "news"=>"News",
                               "team"=>"Team",
                               "faq"=>"FAQs",
                               "contactform"=>"Contact Form")
@@ -252,17 +252,26 @@ class wistiti_settings
 if( is_admin() )
     $wistiti_settings_page = new wistiti_settings();
 
+//General scripts
+add_action('wp_enqueue_scripts','wistiti_enqueue_scripts');
+function wistiti_enqueue_scripts() {
+    wp_enqueue_script( 'wistiti-utils', plugins_url( '/js/utils.js', __FILE__ ), array());
+    wp_enqueue_script( 'wistiti-grid', plugins_url( '/js/grid.js', __FILE__ ), array());
+    wp_enqueue_script( 'wistiti-button', plugins_url( '/js/button.js', __FILE__ ), array());
+}
+
 $options = get_option('wistiti_option_name');
 if ($options['block']) require_once(__ROOT__.'/types/block.php');
 if ($options['jumbotron']) require_once(__ROOT__.'/types/jumbotron.php');
 if ($options['service']) require_once(__ROOT__.'/types/service.php');
-if ($options['link']) require_once(__ROOT__.'/types/link.php');
+if ($options['news']) require_once(__ROOT__.'/types/news.php');
 if ($options['team']) require_once(__ROOT__.'/types/team.php');
 if ($options['faq']) {
 
-	add_action('wp_enqueue_scripts','wistiti_enqueue_scripts');
-	function wistiti_enqueue_scripts() {
-	    wp_enqueue_script( 'wistiti-collapsible', plugins_url( '/js/collapsible.js', __FILE__ ), array());
+	add_action('wp_enqueue_scripts','wistiti_faq_enqueue_scripts');
+	function wistiti_faq_enqueue_scripts() {
+	    //wp_enqueue_script( 'wistiti-collapsible', plugins_url( '/js/collapsible.js', __FILE__ ), array());
+      wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
 	}
 
 	require_once(__ROOT__.'/types/faq.php');

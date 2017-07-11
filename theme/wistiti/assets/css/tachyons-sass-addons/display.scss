@@ -4,6 +4,16 @@
   }
 }
 
+@media #{$breakpoint-not-large} {
+
+   .dn-js-nl {
+     .js & {
+       display:none;
+      }
+    }
+
+}
+
 .db-js {
   .js & {
     display:block;

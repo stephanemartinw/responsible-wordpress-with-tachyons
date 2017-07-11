@@ -26,7 +26,7 @@ switch ($wcounter) {
 //Arguments
 global $footer_args;
 $footer_args = array(
-  'attributes' => array(
+  'options' => array(
     'col' => $wcounter,
     'width' => $wwidth,
     'logo_width' => $wlogo,

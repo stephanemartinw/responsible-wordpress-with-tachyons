@@ -9,7 +9,7 @@ $partial_args =array(
         'excerpt' => "f3",
         'content' => "",
         'hr' => '',
-        'action' => "dib bg-".get_theme_mod( 'smew_colors_brand', 'blue' )." white pa3 mv3 link"
+        'action' => "dib bg-".get_theme_mod( 'smew_colors_brand', 'blue' )." white pa3 mv3 link shadow-hover"
       )
 );
 

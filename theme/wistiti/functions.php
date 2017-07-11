@@ -279,19 +279,19 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 			//ul
 			//level 1
 			if ($depth==0) {
-				$classes_list = "dn relative absolute-l top-100 left-0"; //position and display
+				$classes_list = "dn-js relative absolute-l top-100 left-0 mt2"; //position and display
 				$classes_list .= " ph3 pv2"; //spacings
 				$classes_list .= " bg-white-l"; //background
-				$classes_list .= " bw0 bw1-l b--solid b--light-gray"; //borders
+				$classes_list .= " bw0 bw1-l b--solid b--black"; //borders
 			} else if ($depth==1) {
 				//To do !
 				//level 2
-				$classes_list  = "dn relative absolute-l top-0 right-0"; //position and position
+				$classes_list  = "dn-js relative absolute-l top-0 right-0"; //position and position
 				$classes_list .= " bg-white"; //background
 				$classes_list .= " pa0"; //spacings
 			}
 
-			$output .= "<ul class='".$classes_list."'>";
+			$output .= "<ul class='".$classes_list."' role='menu' tabindex='-1'>";
 		}
 
 		public function end_lvl( &$output, $depth = 0, $args = array() ) {
@@ -306,7 +306,7 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 
 				//li
 				$classes_item = "relative db dib-l"; //position and display
-				$classes_item .= " pa3 ph0-l ph3-l pv1-l"; //spacings
+				$classes_item .= " pa3 pa0-l pr4-l"; //spacings
 
 				//a
 				$classes_link = 'dib link black f5-l f4 underline-hover';
@@ -330,14 +330,20 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 			  //$classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
 				$classes_link .= " underline";
 
-			$output .= sprintf( "<li class='".$classes_item."'><a class='".$classes_link."' href='%s'>%s</a>",
+			$caret='';
+			if ($args->walker->has_children)
+				$caret = "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
+
+			$tabindex = $item->menu_order==1?0:-1;
+
+			$output .= sprintf( "<li class='".$classes_item."' role='none'><a class='".$classes_link."' href='%s' role='menuitem' tabindex='".$tabindex."'>%s %s</a>",
 					$item->url,
-					$item->title
+					$item->title,
+					$caret
 			);
 
 			//Add a caret here
-			if ($args->walker->has_children) $output .= "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
-
+			//if ($args->walker->has_children) $output .= "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
 		}
 
 		public function end_el( &$output, $item, $depth = 0, $args = array() ) {
@@ -355,11 +361,16 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 */
 if (!class_exists('Wistiti_Walker_Comment')) {
 	class Wistiti_Walker_Comment extends Walker_Comment {
+
+			var $wargs = array();
+
 			var $tree_type = 'comment';
 			var $db_fields = array( 'parent' => 'comment_parent', 'id' => 'comment_ID' );
 
 			// constructor – wrapper for the comments list
-			function __construct($args) {?>
+			function __construct($args) {
+				$this->wargs = $args;
+				?>
 
 				<section>
 

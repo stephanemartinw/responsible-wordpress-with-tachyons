@@ -8,10 +8,19 @@ $partial_args =array(
     'thumbnail' => 'aspect-ratio--object',
     'title' => 'f2 lh-title',
     'excerpt' => 'fw6',
+    'content' => 'mb2',
     'label' => 'db',
     'label_link' => 'link underline '.get_theme_mod( 'smew_colors_brand', 'blue' ),
     'source' => '',
-    'source_link' => 'link underline '.get_theme_mod( 'smew_colors_brand', 'blue' )
+    'source_link' => 'link underline '.get_theme_mod( 'smew_colors_brand', 'blue' ),
+    'footer' => array(
+      'taxonomies' => array(
+        'news-tag' => array(
+          'wrapper' => 'db',
+          'link' => 'link pa1 white bg-'.get_theme_mod( 'smew_colors_brand', 'blue' )
+        )
+      )
+    )
   )
 );
 ?>

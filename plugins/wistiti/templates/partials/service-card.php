@@ -23,11 +23,11 @@
     ?>
       <!-- For now, override this template and add here : display the icon according to the SVGs inlined in your wistiti child theme -->
       <!-- Forx example : http://geomicons.com/. Embed only used icons.-->
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="<?php echo $partial_args['classes']['icon_color']; ?> w<?php echo $partial_args['classes']['icon_size'];?> h<?php echo $partial_args['classes']['icon_size']; ?>">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="<?php echo $partial_args['classes']['icon_color']; ?> w-<?php echo $partial_args['classes']['icon_size'];?>">
         <use xlink:href="#<?php echo $iconname;?>"></use>
       </svg>
   <?php endif; endif; ?>
   <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php the_title();?></h<?php echo $firstheadinghierarchy;?>>
-  <h<?php echo $secondheadinghierarchy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>>
-  <?php echo $thecontent;?>
+  <?php if (!empty($theexcerpt)):?><h<?php echo $secondheadinghierarchy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierarchy;?>><?php endif;?>
+  <?php if (!empty($thecontent)):?><div class="<?php echo $partial_args['classes']['content'];?>"><p><?php echo $thecontent;?></p></div><?php endif;?>
 </div>

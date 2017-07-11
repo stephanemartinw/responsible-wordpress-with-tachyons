@@ -29,8 +29,11 @@ get_header(); ?>
 			//Layout
 			//To do : add theme options !
 			//For now, override index template.
-			$layout = "grid";
-			get_template_part( 'components/post/content', $layout );
+			//$layout = "grid";
+			//get_template_part( 'components/post/content', $layout );
+
+			//Use Wistiti plugin for layout!
+			echo do_shortcode('[wistiti type="post" mode="view" display="media" orderby="post_date" order="ASC"]');
 
 			// To customize !
 			//wisiti_posts_navigation();

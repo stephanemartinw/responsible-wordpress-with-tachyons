@@ -15,7 +15,9 @@ get_header(); ?>
 		<?php
 		while ( have_posts() ) : the_post();
 
-			get_template_part( 'components/post/content', get_post_format() );
+			//get_template_part( 'components/post/content', get_post_format() );
+			//Use Wistiti plugin for layout!
+			echo do_shortcode('[wistiti type="post" layout="element" id="'.get_the_ID().'"]');
 
 			//To do : override with tachyons ! Disabled for now....
 			//wistiti_post_navigation();
