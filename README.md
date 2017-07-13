@@ -5,7 +5,7 @@ An experiment for lightweight WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for creating lightweight, fast and accessible websites with WordPress.
+This experimental Wistiti project wants to explore a way for creating simple, lightweight, fast and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
@@ -63,7 +63,8 @@ The plugin proposes so far following elements :
 * Jumbotron (inspired from Bootstrap)
 * Block
 * Services
-* Links
+* News
+* Team
 * FAQ
 
 ### Modules
