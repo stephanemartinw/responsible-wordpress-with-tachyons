@@ -31,12 +31,13 @@ For that it proposes :
 * a plugin that proposes very simple and fully overridable elements,
 
 so that Tachyons atomic classes can be used everywhere.
+If Tachyons classes are used here, it's worth to mention that any other atomic css set could be easily used with Wistiti, as any custom css of your choice (from a framework or self developed).
 
 Moreover, as far as possible :
 
 * the most possible, content should be managed Custom Post Types administration interfaces.
 
-* avoid to use other plugins. For many small sites, all necessary features can be managed without them.
+* avoid to use of other plugins. For many small sites, all necessary features can be managed without them.
 
 
 ## The starter theme
@@ -60,12 +61,15 @@ The plugin proposes so far following elements :
 
 ### Post types
 
-* Jumbotron (inspired from Bootstrap)
-* Block
+* Free block
 * Services
 * News
 * Team
-* FAQ
+
+These custom post types (so the content management is easy within WP's administration), propose overridable templates using layout and display variations that you can easily and fully customize with tachyons classes.
+For now : 
+Available layouts are : element, grid.
+Available displays are : jumbotron, calltoaction, disclosure, card, media.
 
 ### Modules
 
@@ -75,10 +79,13 @@ The plugin proposes so far following elements :
 
 * WYSIWYGET text widget
 
+### Tools
 
-These elements use custom post types (so the content management is easy within WP's administration), with overridable templates using layout and display variations that you can easily and fully customize with tachyons classes.
+* Google Analytics
+* SEO (custom title and meta description management)
+* Sitemap (XML)
 
-They also propose each a shortcode to be used in pages and templates.
+These elements propose each a shortcode to be used in pages and templates.
 
 New elements are currently developed and will be added as soon as possible :
 * Portfolio
