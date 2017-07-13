@@ -15,20 +15,30 @@ get_template_part( 'components/header/site-branding', 'customizer' );
 		</div>
 	<?php endif;?>
 
-	<div>
-		<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
-			<h1 class="f7 f6-m f5-ns ma0 cmzr-site-title"><a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></h1>
-		<?php else : ?>
-			<p class="f7 f6-m f5-ns fw7 ma0 cmzr-site-title"><a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a></p>
-		<?php endif;
+		<div>
+			<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
+				<h1 class="f7 f6-m f5-ns ma0 cmzr-site-title">
+					<a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+			<?php else : ?>
+				<p class="f7 f6-m f5-ns fw7 ma0 cmzr-site-title">
+					<a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+			<?php endif;
 
-		//Brandig description
-		if ($branding_args['options']['activate']) :
-			$description = get_bloginfo( 'description', 'display' );
-				if ( $description || is_customize_preview() ) : ?>
-					<p class="f7 f6-m f5-ns ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-				<?php endif; ?>
-		<?php endif; ?>
-	</div>
+			//Add Brandig description below ?
+			if ($branding_args['options']['activate']) :
+				$description = get_bloginfo( 'description', 'display' );
+					if ( $description || is_customize_preview() ) : ?>
+						<p class="f7 f6-m f5-ns fw1 ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
+					<?php endif; ?>
+			<?php endif; ?>
+
+			<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
+				</h1>
+			<?php else : ?>
+				</p>
+			<?php endif; ?>
+
+		</div>
+
   </div>
 </div>

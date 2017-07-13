@@ -7,7 +7,7 @@
 /*function my_wistiti_mce_before_init_insert_formats( $init_array ) {
 
 	$style_formats = array(
-	
+
 	// Each array child is a format with it's own settings
 	// Notice that each array has title, block, classes, and wrapper arguments
  	// Title is the label which will be visible in Formats menu

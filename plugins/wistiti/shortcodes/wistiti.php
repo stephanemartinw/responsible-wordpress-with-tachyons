@@ -3,6 +3,7 @@
 /* A generic shortcode to view a wistiti element (generic)
 
 Attibutes :
+mode =  query or view
 title = title of the view
 type = post type
 id = post id (meta)
@@ -25,7 +26,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     if (!isset($atts['type']) || empty($atts['type'])) return false;
 
     //Default values according to type
-    $default_mode = "query"; //Or view
+    $default_mode = "query";
     $default_order = "DESC";
     $default_orderby = "menu_order";
     $default_title = "";
@@ -37,20 +38,14 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
     switch ($atts['type']) {
 
-      case 'jumbotron':
-      $default_layout = 'element';
-      $default_display = 'classic';
-      $default_firstheadinghierarchy = 1;
-      break;
-
       case 'block':
-      $default_layout = 'element';
+        $default_layout = 'element';
       break;
 
-      case 'faq':
+      /*case 'faq':
         $default_layout = 'disclosure';
         $default_display = 'disclosure';
-      break;
+      break;*/
 
       default:
       break;
@@ -79,7 +74,6 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
 		//Query
     if ($atts['mode']=='query') {
-      //Post ID
 
       //Post meta
       $meta_key = '';

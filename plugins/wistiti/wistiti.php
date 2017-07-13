@@ -124,15 +124,13 @@ class wistiti_settings
      */
     public function create_admin_page()
     {
-        // Set class property
-        $this->options = get_option( 'wistiti_option_name' );
         ?>
         <div class="wrap">
-            <h1>Custom Post Types Settings</h1>
+            <h1>Wititi Settings</h1>
             <form method="post" action="options.php">
             <?php
                 // This prints out all hidden setting fields
-                settings_fields( 'wistiti_option_group' );
+                settings_fields( 'wistiti_settings_group' );
                 do_settings_sections( 'wistiti-setting-admin' );
                 submit_button();
             ?>
@@ -146,27 +144,33 @@ class wistiti_settings
      */
     public function page_init()
     {
-        register_setting(
-            'wistiti_option_group', // Option group
-            'wistiti_option_name', // Option name
-            array( $this, 'sanitize' ) // Sanitize
-        );
+        register_setting('wistiti_settings_group','wistiti_include_name', array( $this, 'sanitize' ));
+        register_setting('wistiti_settings_group','wistiti_tool', array( $this, 'sanitize' ));
 
         add_settings_section(
-            'setting_section_id', // ID
-            'Custom Post Types Settings', // Title
+            'wistiti_section_general', // ID
+            'Wistiti Settings', // Title
             array( $this, 'print_section_info' ), // Callback
             'wistiti-setting-admin' // Page
         );
 
+        //Includes management
         add_settings_field(
             'includes', // ID
-            'Include', // Title
+            'Includes', // Title
             array( $this, 'includes_callback' ), // Callback
             'wistiti-setting-admin', // Page
-            'setting_section_id' // Section
+            'wistiti_section_general' // Section
         );
 
+        //Tools management
+        add_settings_field(
+            'tools', // ID
+            'Tools', // Title
+            array( $this, 'tools_callback' ), // Callback
+            'wistiti-setting-admin', // Page
+            'wistiti_section_general' // Section
+        );
     }
 
     /**
@@ -178,12 +182,7 @@ class wistiti_settings
     {
         $new_input = array();
 
-        if( isset( $input['jumbotron'] ) )
-            $new_input['jumbotron'] = true;
-
-        if( isset( $input['card'] ) )
-            $new_input['card'] = true;
-
+        //Includes
         if( isset( $input['block'] ) )
             $new_input['block'] = true;
 
@@ -196,11 +195,24 @@ class wistiti_settings
         if( isset( $input['team'] ) )
             $new_input['team'] = true ;
 
-        if( isset( $input['faq'] ) )
-            $new_input['faq'] = true ;
+        /*if( isset( $input['faq'] ) )
+            $new_input['faq'] = true ;*/
 
         if( isset( $input['contactform'] ) )
             $new_input['contactform'] = true ;
+
+        //Tools
+        if( isset( $input['ga'] ) )
+            $new_input['ga'] = true ;
+
+        if( isset( $input['seo'] ) )
+            $new_input['seo'] = true ;
+
+        if( isset( $input['sitemap'] ) )
+            $new_input['sitemap'] = true ;
+
+        if( isset( $input['ga_code'] ) )
+            $new_input['ga_code'] = sanitize_text_field($input['ga_code']) ;
 
         return $new_input;
     }
@@ -218,33 +230,64 @@ class wistiti_settings
      */
     public function includes_callback()
     {
-        $options = get_option( 'wistiti_option_name' );
+        $includes = get_option( 'wistiti_include_name' );
 
         $value = array("name" => "Post Types to include",
         	"desc" => "Select the pages you want to include. All pages are excluded by default",
-        	"options" => array( "jumbotron"=>"Jumbotron",
-                              "block"=>"Block",
+        	"includes" => array( "block"=>"Block",
                               "service"=>"Services",
                               "news"=>"News",
                               "team"=>"Team",
-                              "faq"=>"FAQs",
+                              //"faq"=>"FAQs",
                               "contactform"=>"Contact Form")
         );
 
         $markup='<ul>'."\n";
-        foreach ($value['options'] as $option_value => $option) {
+        foreach ($value['includes'] as $include_value => $include) {
           $checked = " ";
-          if ($option_value) {
-            $checked = checked( 1, $options[$option_value], false );
+          if ($include_value) {
+            $checked = checked( 1, $includes[$include_value], false );
           }
           $markup.="<li>\n";
-          $markup.='<input type="checkbox" name="wistiti_option_name['.$option_value.']" value="true" '.$checked.' />'.$option."\n";
+          $markup.='<input type="checkbox" name="wistiti_include_name['.$include_value.']" value="true" '.$checked.' />'.$include."\n";
           $markup.="</li>\n";
         }
         $markup.= "</ul>\n";
 
         echo $markup;
 
+    }
+
+    /**
+     * Get the settings option array and print one of its values
+     */
+    public function tools_callback()
+    {
+      $tools = get_option( 'wistiti_tool' );
+
+      $value = array("name" => "Tools to activate",
+        "desc" => "Select the tools you want to include. All tools are excluded by default",
+        "tools" => array( "ga"=>"Google Analytics",
+                          "seo"=>"SEO",
+                          "sitemap"=>"Sitemap")
+      );
+
+      $markup='<ul>'."\n";
+      foreach ($value['tools'] as $tool_value => $tool) {
+        $checked = " ";
+        if ($tool_value) {
+          $checked = checked( 1, $tools[$tool_value], false );
+        }
+        $markup.="<li>\n";
+        $markup.='<input type="checkbox" name="wistiti_tool['.$tool_value.']" value="true" '.$checked.' />'.$tool."\n";
+        $markup.="</li>\n";
+      }
+      $markup.= "</ul>\n";
+
+      $markup .= '<label>'.__('GA code: ', 'wistiti').'</label>';
+      $markup .= '<input type="text" name="wistiti_tool[ga_code]" value="'.$tools['ga_code'].'"></input>';
+
+      echo $markup;
     }
 
 }
@@ -260,23 +303,34 @@ function wistiti_enqueue_scripts() {
     wp_enqueue_script( 'wistiti-button', plugins_url( '/js/button.js', __FILE__ ), array());
 }
 
-$options = get_option('wistiti_option_name');
-if ($options['block']) require_once(__ROOT__.'/types/block.php');
-if ($options['jumbotron']) require_once(__ROOT__.'/types/jumbotron.php');
-if ($options['service']) require_once(__ROOT__.'/types/service.php');
-if ($options['news']) require_once(__ROOT__.'/types/news.php');
-if ($options['team']) require_once(__ROOT__.'/types/team.php');
-if ($options['faq']) {
+//General requirements
+$tools = get_option('wistiti_tool');
+if ($tools['seo']) require_once(__ROOT__.'/tools/seo.php');
+if ($tools['sitemap']) require_once(__ROOT__.'/tools/sitemap.php');
+if ($tools['ga'])require_once(__ROOT__.'/tools/ga.php');
+
+//Optional requirements
+$includes = get_option('wistiti_include_name');
+if ($includes['block']) {
+  add_action('wp_enqueue_scripts','wistiti_disclosure_enqueue_scripts');
+	function wistiti_disclosure_enqueue_scripts() {
+      wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
+	}
+  require_once(__ROOT__.'/types/block.php');
+}
+if ($includes['service']) require_once(__ROOT__.'/types/service.php');
+if ($includes['news']) require_once(__ROOT__.'/types/news.php');
+if ($includes['team']) require_once(__ROOT__.'/types/team.php');
+/*if ($includes['faq']) {
 
 	add_action('wp_enqueue_scripts','wistiti_faq_enqueue_scripts');
 	function wistiti_faq_enqueue_scripts() {
-	    //wp_enqueue_script( 'wistiti-collapsible', plugins_url( '/js/collapsible.js', __FILE__ ), array());
       wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
 	}
 
 	require_once(__ROOT__.'/types/faq.php');
 
-}
+}*/
 if ($options['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 
 require_once(__ROOT__.'/shortcodes/wistiti.php');

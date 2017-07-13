@@ -24,7 +24,7 @@ get_header(); ?>
 			<?php
 
 			//Use Wistiti plugin for layout!
-			echo do_shortcode('[wistiti type="post" mode="view" display="media"]');
+			echo do_shortcode('[wistiti type="post" mode="view"]');
 
 			/* Start the Loop */
 			//while ( have_posts() ) : the_post();

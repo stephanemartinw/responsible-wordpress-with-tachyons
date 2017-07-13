@@ -29,11 +29,11 @@ $partial_args =array(
           'link' => "link underline " . get_theme_mod( 'smew_colors_brand', 'blue' )
         ),
         'post_tag' => array(
-          'wrapper' => 'db',
+          'wrapper' => 'db mt3',
           'link' => 'link pa1 white bg-'.get_theme_mod( 'smew_colors_brand', 'blue' )
         )
       ),
-      'comments_popup' => 'db',
+      'comments_popup' => 'db mt3',
       'comments_popup_link' =>  "link underline " . get_theme_mod( 'smew_colors_brand', 'blue' )
     )
   ));

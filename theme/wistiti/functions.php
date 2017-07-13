@@ -75,31 +75,6 @@ add_action( 'after_setup_theme', 'wistiti_theme_setup' );
 
 
 /*
-* Add scripts to wp_head()
-*/
-function wistiti_theme_head_script() {
-	global $post;
-	//We do not want to use a SEO plugin
-?>
-	<meta name="description" content="<?php echo get_post_meta($post->ID, 'description', true);?>">
-<?php }
-add_action( 'wp_head', 'wistiti_theme_head_script' );
-
-
-/**
- * Return early if Custom Logos are not available.
- *
- * @todo Remove after WP 4.7
- */
-function wistiti_theme_the_custom_logo() {
-	if ( ! function_exists( 'the_custom_logo' ) ) {
-		return;
-	} else {
-		the_custom_logo();
-	}
-}
-
-/*
  * Return custom logo src
  */
 function wistiti_theme_the_custom_logo_src() {

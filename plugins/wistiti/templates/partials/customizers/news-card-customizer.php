@@ -16,7 +16,7 @@ $partial_args =array(
     'footer' => array(
       'taxonomies' => array(
         'news-tag' => array(
-          'wrapper' => 'db',
+          'wrapper' => 'db mt3',
           'link' => 'link pa1 white bg-'.get_theme_mod( 'smew_colors_brand', 'blue' )
         )
       )
