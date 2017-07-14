@@ -29,7 +29,7 @@ function news_setup() {
 		'has_archive' => true,
     'map_meta_cap' => true,
     'menu_icon' => 'dashicons-sticky',
-		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail','page-attributes' ),
+		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
     'taxonomies' => array( 'news-group' ),
 		)
 	);

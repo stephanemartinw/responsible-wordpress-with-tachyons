@@ -41,6 +41,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
       case 'block':
         $default_layout = 'element';
+        $default_display = 'default';
       break;
 
       default:

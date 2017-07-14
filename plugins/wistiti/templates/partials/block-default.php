@@ -23,10 +23,8 @@
 
     <h<?php echo $firstheadinghierarchy;?> class="<?php echo $partial_args['classes']['title'];?>"><?php echo get_the_title();?></h<?php echo $firstheadinghierarchy;?>>
 
-    <?php if (!empty($theexcerpt)):?><h<?php echo $secondheadinghierachy;?> class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></h<?php echo $secondheadinghierachy;?>><?php endif; ?>
-
-    <?php if (!empty($thecontent)):?><hr class="<?php echo $partial_args['classes']['hr'];?>"><?php endif;?>
-    <?php if (!empty($thecontent)):?><div class="<?php echo $partial_args['classes']['content'];?>"><?php echo $thecontent;?></div><?php endif;?>
+    <?php if (!empty($theexcerpt)):?><p class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></p><?php endif; ?>
+    <?php if (!empty($thecontent)):?><p class="<?php echo $partial_args['classes']['content'];?>"><?php echo $thecontent;?></p><?php endif;?>
     <?php if (!empty($theaction)):?><a class="<?php echo $partial_args['classes']['action'];?>" href="<?php echo get_post_meta( get_the_ID(), '_block_action_url', true );?>" target="_blank" role="button" tabindex="0"><?php echo get_post_meta( get_the_ID(), '_jumbotron_action_label', true );?></a><?php endif;?>
 
 </div>

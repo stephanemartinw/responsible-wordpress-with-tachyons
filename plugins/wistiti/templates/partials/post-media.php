@@ -8,7 +8,7 @@
   //Content
   $theexcerpt = '';
   if(has_excerpt()) $theexcerpt = get_the_excerpt();
-  $thecontent = get_the_content();
+  $thecontent = wpautop(get_the_content());
 
   //Customize
   //Do not add tachyons classes here ! User appropriate customizer !

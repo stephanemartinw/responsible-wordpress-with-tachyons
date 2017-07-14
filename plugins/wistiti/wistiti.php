@@ -331,7 +331,7 @@ if ($includes['team']) require_once(__ROOT__.'/types/team.php');
 	require_once(__ROOT__.'/types/faq.php');
 
 }*/
-if ($options['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
+if ($includes['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 
 require_once(__ROOT__.'/shortcodes/wistiti.php');
 require_once(__ROOT__.'/widgets/text.php');

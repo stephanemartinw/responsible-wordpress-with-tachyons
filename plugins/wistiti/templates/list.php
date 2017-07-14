@@ -2,7 +2,7 @@
 
     $list_type = 'u'; //unordered list by default
     if (isset($atts['list']['type']) && !empty($atts['list']['type']) )
-    $list_type = $atts['list']['type'];
+      $list_type = $atts['list']['type'];
 
     $list_query = $atts['query'];
 
@@ -31,7 +31,7 @@
         //3  = partials/type-classic.php (default display)
         if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'.php', $atts)) {
           if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['display'].'.php', $atts))
-            wistiti_get_template('/partials/'.$atts['type'].'-classic.php', $atts);
+            wistiti_get_template('/partials/'.$atts['type'].'-media.php', $atts);
         }
 
   $index++; endwhile; endif;

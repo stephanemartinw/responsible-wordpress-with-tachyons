@@ -7,7 +7,7 @@
   //Content
   $theexcerpt = '';
   if(has_excerpt()) $theexcerpt = get_the_excerpt();
-  $thecontent = get_the_content();
+  $thecontent = wpautop(get_the_content());
 
   $iconname = get_post_meta( get_the_ID(), '_service_iconname', true );
 

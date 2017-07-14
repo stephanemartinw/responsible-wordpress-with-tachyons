@@ -12,7 +12,7 @@
   //Content
   $theexcerpt = '';
   if(has_excerpt()) $theexcerpt = get_the_excerpt();
-  $thecontent = get_the_content();
+  $thecontent = wpautop(get_the_content());
   $theaction = get_post_meta( get_the_ID(), '_block_action_url', true );
 
   //Default skin

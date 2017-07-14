@@ -5,7 +5,7 @@
   $secondheadinghierachy = $firstheadinghierarchy+1;
 
   //Content
-  $thecontent = get_the_content();
+  $thecontent = wpautop(get_the_content());
 
   //Default skin
   //Do not add tachyons classes here ! User appropriate customizer !

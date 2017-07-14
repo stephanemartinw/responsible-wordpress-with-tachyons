@@ -22,7 +22,7 @@
     //3  = partials/type-classic.php (default display)
     if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'.php', $atts)) {
       if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['display'].'.php', $atts))
-        wistiti_get_template('/partials/'.$atts['type'].'-classic.php', $atts);
+        wistiti_get_template('/partials/'.$atts['type'].'-default.php', $atts);
     }
 
 endwhile; endif; wp_reset_query(); ?>

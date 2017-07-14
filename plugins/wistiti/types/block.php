@@ -26,7 +26,7 @@ function block_setup()	{
     'map_meta_cap' => true,
 		'labels' => $labels,
     'menu_icon' => 'dashicons-id-alt',
-		'supports' => array('title', 'excerpt', 'editor')
+		'supports' => array('title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' )
 	);
 
   register_post_type( 'block', $args );
@@ -43,7 +43,7 @@ function block_register_taxonomies(){
 	$labels = array(
 		'name' => __( 'Type', 'wistiti' ),
 		'label' => __( 'Type', 'wistiti' ),
-		'add_new_item' => __( 'Add New Card Type', 'wistiti' ),
+		'add_new_item' => __( 'Add New Block Type', 'wistiti' ),
 	);
 
 	$args = array(
@@ -56,9 +56,9 @@ function block_register_taxonomies(){
 }
 add_action( 'init', 'block_register_taxonomies' );
 
-//Custom post fields for Card
+//Custom post fields for Block
 function block_add_meta_boxes( $post ){
-	add_meta_box( 'block_meta_box', __( 'Card', 'wistiti' ), 'block_build_meta_box', 'block', 'normal', 'low' );
+	add_meta_box( 'block_meta_box', __( 'Block', 'wistiti' ), 'block_build_meta_box', 'block', 'normal', 'low' );
 }
 add_action( 'add_meta_boxes_block', 'block_add_meta_boxes' );
 

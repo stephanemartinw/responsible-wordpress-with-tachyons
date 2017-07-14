@@ -3,9 +3,10 @@
 global $partial_args;
 $partial_args =array(
       'classes' => array(
-        'wrapper_button' => 'white tc',
+        'wrapper_button' => 'pv2 white tc',
         'button' => "db w-100 bg-".get_theme_mod( 'smew_colors_brand', 'blue' )." white f4 ma0 pa4 bn pointer",
         'wrapper_definition' => 'ma0',
+        'excerpt' => '',
         'definition' => 'dn-js'
       )
 );?>
