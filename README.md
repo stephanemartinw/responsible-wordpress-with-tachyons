@@ -71,7 +71,6 @@ These custom post types (so the content management is easy within WP's administr
 For now : 
 
 Available layouts are : element, list, grid.
-
 Available displays are : jumbotron, calltoaction, disclosure, card, media.
 
 ### Modules
