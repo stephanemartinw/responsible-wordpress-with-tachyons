@@ -36,16 +36,22 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     $default_firstheadinghierarchy = 3;
     $default_background = '';
 
+    //Automatic default atts / type
     switch ($atts['type']) {
 
       case 'block':
         $default_layout = 'element';
       break;
 
-      /*case 'faq':
-        $default_layout = 'disclosure';
-        $default_display = 'disclosure';
-      break;*/
+      default:
+      break;
+    }
+
+    //Automatic default atts / display
+    switch ($atts['display']) {
+      case 'disclosure':
+        $default_layout = 'dlist';
+      break;
 
       default:
       break;

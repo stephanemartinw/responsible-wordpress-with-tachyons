@@ -1,18 +1,24 @@
 <?php //List
+
+    $list_type = 'u'; //unordered list by default
+    if (isset($atts['list']['type']) && !empty($atts['list']['type']) )
+    $list_type = $atts['list']['type'];
+
     $list_query = $atts['query'];
 
     //Default skin
     //Do not add tachyons classes here ! User appropriate customizer !
     global $template_args;
-    if (!wistiti_get_template('/customizers/'.$atts['type'].'-disclosure-customizer.php', $atts))
-      wistiti_get_template('/customizers/disclosure-customizer.php', $atts);
+    if (!wistiti_get_template('/customizers/'.$atts['type'].'-list-customizer.php', $atts))
+      wistiti_get_template('/customizers/list-customizer.php', $atts);
 
     global $partial_args;
     if (!wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
       wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 ?>
 
-<dl class="<?php echo $template_args['classes']['wrapper'];?>">
+
+<<?php echo $list_type;?>l class="<?php echo $template_args['classes']['wrapper'];?>">
 
   <?php $index=0; if ( $list_query->have_posts() ) : while ( $list_query->have_posts() ) : $list_query->the_post();
 
@@ -34,8 +40,6 @@
 
   unset($template_args);
   unset($partial_args);
-
-
   ?>
 
-</dl>
+</<?php echo $list_type;?>l>
