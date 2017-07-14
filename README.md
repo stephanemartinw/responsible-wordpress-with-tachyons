@@ -67,8 +67,10 @@ The plugin proposes so far following elements :
 * Team
 
 These custom post types (so the content management is easy within WP's administration), propose overridable templates using layout and display variations that you can easily and fully customize with tachyons classes.
+
 For now : 
-Available layouts are : element, grid.
+
+Available layouts are : element, list, grid.
 Available displays are : jumbotron, calltoaction, disclosure, card, media.
 
 ### Modules
