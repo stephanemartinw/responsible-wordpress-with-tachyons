@@ -145,6 +145,7 @@ class wistiti_settings
     public function page_init()
     {
         register_setting('wistiti_settings_group','wistiti_include_name', array( $this, 'sanitize' ));
+        register_setting('wistiti_settings_group','wistiti_include_onpage', array( $this, 'sanitize' ));
         register_setting('wistiti_settings_group','wistiti_tool', array( $this, 'sanitize' ));
 
         add_settings_section(
@@ -185,21 +186,29 @@ class wistiti_settings
         //Includes
         if( isset( $input['block'] ) )
             $new_input['block'] = true;
+        if( isset( $input['block_onpage'] ) )
+            $new_input['block_onpage'] = sanitize_text_field($input['block_onpage']) ;
 
         if( isset( $input['service'] ) )
             $new_input['service'] = true ;
+        if( isset( $input['service_onpage'] ) )
+            $new_input['service_onpage'] = sanitize_text_field($input['service_onpage']) ;
 
         if( isset( $input['news'] ) )
             $new_input['news'] = true ;
+        if( isset( $input['news_onpage'] ) )
+            $new_input['news_onpage'] = sanitize_text_field($input['news_onpage']) ;
 
         if( isset( $input['team'] ) )
             $new_input['team'] = true ;
-
-        /*if( isset( $input['faq'] ) )
-            $new_input['faq'] = true ;*/
+        if( isset( $input['team_onpage'] ) )
+            $new_input['team_onpage'] = sanitize_text_field($input['team_onpage']) ;
 
         if( isset( $input['contactform'] ) )
             $new_input['contactform'] = true ;
+        if( isset( $input['contactform_onpage'] ) )
+            $new_input['contactform_onpage'] = sanitize_text_field($input['contactform_onpage']) ;
+
 
         //Tools
         if( isset( $input['ga'] ) )
@@ -231,6 +240,7 @@ class wistiti_settings
     public function includes_callback()
     {
         $includes = get_option( 'wistiti_include_name' );
+        $onpages = get_option( 'wistiti_include_onpage' );
 
         $value = array("name" => "Post Types to include",
         	"desc" => "Select the pages you want to include. All pages are excluded by default",
@@ -238,7 +248,6 @@ class wistiti_settings
                               "service"=>"Services",
                               "news"=>"News",
                               "team"=>"Team",
-                              //"faq"=>"FAQs",
                               "contactform"=>"Contact Form")
         );
 
@@ -250,12 +259,15 @@ class wistiti_settings
           }
           $markup.="<li>\n";
           $markup.='<input type="checkbox" name="wistiti_include_name['.$include_value.']" value="true" '.$checked.' />'.$include."\n";
+
+          $markup .= '<label>'.__('on page(s): ', 'wistiti').'</label>';
+          $markup .= '<input type="text" name="wistiti_include_onpage['.$include_value.'_onpage]" value="'.$onpages[$include_value.'_onpage'].'"></input>';
+
           $markup.="</li>\n";
         }
         $markup.= "</ul>\n";
 
         echo $markup;
-
     }
 
     /**
@@ -298,9 +310,51 @@ if( is_admin() )
 //General scripts
 add_action('wp_enqueue_scripts','wistiti_enqueue_scripts');
 function wistiti_enqueue_scripts() {
-    wp_enqueue_script( 'wistiti-utils', plugins_url( '/js/utils.js', __FILE__ ), array());
-    wp_enqueue_script( 'wistiti-grid', plugins_url( '/js/grid.js', __FILE__ ), array());
-    wp_enqueue_script( 'wistiti-button', plugins_url( '/js/button.js', __FILE__ ), array());
+
+  //Set scripts configuration before...
+  $scriptsperelement=array (
+    'block' => 'disclosure button',
+    'service' => 'utils grid',
+    'news' => 'utils grid',
+    'team' => 'utils grid',
+    'contactform' => 'button'
+  );
+  $scripts=array(
+    'utils' => false,
+    'grid' => false,
+    'button' => false,
+    'disclosure' => false
+  );
+  $onpages = get_option('wistiti_include_onpage');
+
+  foreach ($scriptsperelement as $element => $jss_list) {
+    $pages_list = $onpages[$element.'_onpage'];
+    $pages_list = preg_replace('/\s+/', '', $pages_list);
+    if (!empty($pages_list)) {
+      $pages = explode(',', $pages_list);
+
+      //Convert ids to int if necessary
+      /*foreach ($pages as $index => $page) {
+        if((string)(int)$page == $page) {
+          $pages[$index] = intval($page);
+        }
+      }*/
+
+      if (is_page($pages) || (is_front_page() && in_array('front', $pages)) ) {
+        if (!empty($jss_list)) {
+          $jss = explode(' ', $jss_list);
+          foreach ($jss as $js) {
+             $scripts[$js]= true;
+          }
+        }
+      }
+    }
+  }
+
+  if ($cripts['utils']) wp_enqueue_script( 'wistiti-utils', plugins_url( '/js/utils.js', __FILE__ ), array());
+  if ($scripts['grid']) wp_enqueue_script( 'wistiti-grid', plugins_url( '/js/grid.js', __FILE__ ), array('wistiti-utils'));
+  if ($scripts['button']) wp_enqueue_script( 'wistiti-button', plugins_url( '/js/button.js', __FILE__ ), array());
+  if ($scripts['disclosure']) wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
 }
 
 //General requirements
@@ -311,27 +365,18 @@ if ($tools['ga'])require_once(__ROOT__.'/tools/ga.php');
 
 //Optional requirements
 $includes = get_option('wistiti_include_name');
-if ($includes['block']) {
-  add_action('wp_enqueue_scripts','wistiti_disclosure_enqueue_scripts');
-	function wistiti_disclosure_enqueue_scripts() {
-      wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
-	}
-  require_once(__ROOT__.'/types/block.php');
-}
+if ($includes['block']) require_once(__ROOT__.'/types/block.php');
 if ($includes['service']) require_once(__ROOT__.'/types/service.php');
 if ($includes['news']) require_once(__ROOT__.'/types/news.php');
 if ($includes['team']) require_once(__ROOT__.'/types/team.php');
-/*if ($includes['faq']) {
 
-	add_action('wp_enqueue_scripts','wistiti_faq_enqueue_scripts');
-	function wistiti_faq_enqueue_scripts() {
-      wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
-	}
-
-	require_once(__ROOT__.'/types/faq.php');
-
-}*/
 if ($includes['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 
 require_once(__ROOT__.'/shortcodes/wistiti.php');
 require_once(__ROOT__.'/widgets/text.php');
+
+unset($onpages);
+unset($scriptsperelement);
+unset($jss);
+unset($tools);
+unset($includes);

@@ -15,6 +15,12 @@
     global $partial_args;
     if (!wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
       wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
+
+    //Alternate media or card mode ?
+    $atts['alternate'] = 'no';
+    if  (isset($template_args['options']['alternate'])) {
+      $atts['alternate'] = ($template_args['options']['alternate']=='yes')?true:false;
+    }
 ?>
 
 

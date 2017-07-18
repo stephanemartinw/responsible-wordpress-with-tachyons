@@ -5,14 +5,6 @@
       //Query
       $grid_query = $atts['query'];
 
-      //Layout
-      $col = $atts['col'];
-      if ( $grid_query->post_count<$col) $col=$grid_query->post_count;
-      if ($col>0)
-        $width = floor(100 / $col);
-      else
-        $width='100';
-
       //Default skin
       //Do not add tachyons classes here ! User appropriate customizer !
       global $template_args;
@@ -22,6 +14,28 @@
       global $partial_args;
       if (!wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
         wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
+
+      //Columns
+      if ((isset($template_args['options']['cols']) && !empty($template_args['options']['cols'])))
+        $cols = $template_args['options']['cols'];
+        if (!isset ($col['ns']) || empty($col['ns'])) $col['ns']=3;
+        if (!isset ($col['m']) || empty($col['m'])) $col['m']=2;
+        //if (!isset ($col['l']) || empty($col['l'])) $col['l']=$col['ns'];
+      else
+        $cols = array('ns' => 3, 'm' => 2); //default
+
+      $widths = 'w-100 w-'.floor(100/$col['ns']).'-ns w-'.floor(100/$col['m']).'-m';
+      if (!isset ($col['l']) && !empty($col['l'])) $widths .= ' w-'.floor(100/$col['l']).'-l';
+
+      $datas = 'data-cols-ns='.$col['ns'];
+      $datas .= ' data-cols-m='.$col['m'];
+      if (!isset ($col['l']) && !empty($col['l']))  $datas .= ' data-cols-l='.$col['l'];
+
+      //Alternate media or card mode ?
+      $atts['alternate'] = 'no';
+      if  (isset($template_args['options']['alternate'])) {
+        $atts['alternate'] = ($template_args['options']['alternate']=='yes')?true:false;
+      }
 ?>
 
 <?php
@@ -42,33 +56,20 @@ endif; ?>
 
 <div class="<?php echo $template_args['classes']['wrapper'];?>" role="grid" aria-label="<?php echo $aria_label;?>" aria-labelledby="<?php echo $aria_labelledby;?>">
 
+  <div class="cf <?php echo $template_args['classes']['row'];?>" role="row" aria-rowindex="<?php echo $row;?>">
+
   <?php $index=0; $row=0; if ( $grid_query->have_posts() ) : while ( $grid_query->have_posts() ) : $grid_query->the_post();
 
-      if ($index % $col == 0) :
-        $row+=1;
-        if ($index>0) : ?></div><?php endif; ?>
-        <div class="cf <?php if ($index>0): echo $template_args['classes']['row']; endif;?>" role="row" aria-rowindex="<?php echo $row;?>">
-      <?php endif; ?>
-
-      <?php $tabindex=($index==0)?'0':'-1';
+        $tabindex=($index==0)?'0':'-1';
         if ($atts['layout']=='grid') $role = "gridcell";
         else $role='';?>
 
-      <div class="fl w-100 w-<?php echo $width; ?>-ns" role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
+      <div class="<?php $template_args['classes']['cell'];?> <?php echo $widths; ?>" <?php echo $datas;?> role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
 
         <?php
 
         //Element index
         $atts['index']=$index;
-
-        //Alternate media or card thumb position ?
-        $atts["media"]=$template_args['options']['media'];
-        $atts["card"]=$template_args['options']['card'];
-
-        if (($index % 2 !== 0) && ($template_args['options']['alternate'])) {
-          if ($atts['media']=='left') $atts['media']="right"; else $atts['media']="left";
-          if ($atts['card']=='top') $atts['card']="bottom"; else $atts['card']="top";
-        }
 
         //Partial template search
         //1  = partials/type-taxonomy-display.php
@@ -89,5 +90,7 @@ endif; ?>
     unset($partial_args);
 
     ?>
+
+  </div>
 
 </div>

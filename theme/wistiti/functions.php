@@ -420,7 +420,6 @@ if (!class_exists('Wistiti_Walker_Comment')) {
 	}
 }
 
-
 /**
  * Custom template tags for this theme.
  */

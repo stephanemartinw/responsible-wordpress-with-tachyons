@@ -4,7 +4,7 @@
 global $partial_args;
 $partial_args =array(
   'options' => array(
-    'alternate' => true
+    'mode' => 'normal' //or inverted ?
   ),
   'classes' => array(
     'wrapper' => 'ph4 pb4',

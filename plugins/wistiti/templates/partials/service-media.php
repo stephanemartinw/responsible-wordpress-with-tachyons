@@ -3,23 +3,41 @@
   //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
-  $direction=$atts['media'];
 
   //Content
   $theexcerpt = '';
   if(has_excerpt()) $theexcerpt = get_the_excerpt();
   $thecontent = wpautop(get_the_content());
 
+  $iconname = get_post_meta( get_the_ID(), '_service_iconname', true );
+
   //Customize
   //Do not add tachyons classes here ! User appropriate customizer !
   global $partial_args;
+  if (isset($partial_args['options']['mode']) && (!empty($partial_args['options']['mode'])))
+    $mode = $partial_args['options']['mode'];
+  else $mode='normal';
+
+  //Alternate media or card thumb position ?
+  if (($atts['index'] % 2 !== 0) && ($atts['alternate'])) {
+    if ($mode=='normal') $mode="inverted"; else $mode="normal";
+  }
+
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">
 
-  <?php if ($direction=="left"): ?>
+  <?php if ($mode=="normal"): ?>
     <div class="<?php echo $partial_args['classes']['media_image'];?>">
-      <?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' => $partial_args['classes']['thumbnail']] ); ?>
+      <?php  if (has_post_thumbnail()) : the_post_thumbnail( 'medium_large', ['alt' => '', 'class' => $partial_args['classes']['thumbnail']] ); else :
+        if (!empty($iconname)) :
+        ?>
+          <!-- For now, override this template and add here : display the icon according to the SVGs inlined in your wistiti child theme -->
+          <!-- Forx example : http://geomicons.com/. Embed only used icons.-->
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" class="<?php echo $partial_args['classes']['icon_color']; ?> w-<?php echo $partial_args['classes']['icon_size'];?>">
+            <use xlink:href="#<?php echo $iconname;?>"></use>
+          </svg>
+      <?php endif; endif; ?>
     </div>
   <?php endif;?>
 
@@ -29,7 +47,7 @@
     <?php if (!empty($thecontent)):?><p class="<?php echo $partial_args['classes']['content'];?>"><?php echo $thecontent; ?></p><?php endif; ?>
   </div>
 
-  <?php if ($direction=="right"): ?>
+  <?php if ($mode=="inverted"): ?>
     <div class="<?php echo $partial_args['classes']['media_image'];?>">
       <?php the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']]); ?>
     </div>

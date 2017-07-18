@@ -2,15 +2,18 @@
 global $template_args;
 $template_args = array(
   'options' => array(
+    'cols' => array(
+      'ns' => 3,
+      'm' => 2
+    ),
     'display_title' => false,
-    'media' => 'left',
-    'card' => 'top',
     'alternate' => true
   ),
   'classes' => array(
     'title' => '',
-    'wrapper' => 'cf',
-    'row' => 'pt4'
+    'wrapper' => '',
+    'row' => 'flex flex-wrap',
+    'cell' => ''
   )
 );
 ?>

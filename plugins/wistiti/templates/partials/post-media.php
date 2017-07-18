@@ -3,7 +3,6 @@
   //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
-  $direction=$atts['media'];
 
   //Content
   $theexcerpt = '';
@@ -13,11 +12,14 @@
   //Customize
   //Do not add tachyons classes here ! User appropriate customizer !
   global $partial_args;
+  if (isset($partial_args['options']['mode']) && (!empty($partial_args['options']['mode'])))
+    $mode = $partial_args['options']['mode'];
+  else $mode='normal';
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">
 
-  <?php if ($direction=="left"): ?>
+  <?php if ($mode=="normal"): ?>
     <div class="<?php echo $partial_args['classes']['media_image'];?>">
       <?php the_post_thumbnail( 'medium_large', ['alt' => '', 'class' => $partial_args['classes']['thumbnail']] ); ?>
     </div>
@@ -35,7 +37,7 @@
     <?php wistiti_entry_footer($partial_args['classes']['footer']); ?>
   </div>
 
-<?php if ($direction=="right"): ?>
+<?php if ($mode=="inverted"): ?>
     <div class="<?php echo $partial_args['classes']['media_image'];?>">
       <?php the_post_thumbnail( 'medium_large', ['class' => $partial_args['classes']['thumbnail']]); ?>
     </div>

@@ -14,7 +14,6 @@ tax_value = taxonomy value
 order = order direction (ASC, DESC)
 orderby = order by
 layout = list or grid
-col : number of cols for grid layout
 display : media, card or collapsible
 background : a background url
 firstheadinghierarchy : Hx starting level
@@ -27,12 +26,11 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
     //Default values according to type
     $default_mode = "query";
-    $default_order = "DESC";
+    $default_order = "ASC";
     $default_orderby = "menu_order";
     $default_title = "";
     $default_layout = 'grid';
     $default_display = 'card';
-    $default_col = 3;
     $default_firstheadinghierarchy = 3;
     $default_background = '';
 
@@ -72,7 +70,6 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
       'order' => $default_order,
       'orderby' => $default_orderby,
 			'layout' => $default_layout,
-			'col' => $default_col,
 			'display' => $default_display,
       'background' => $default_background,
  			'firstheadinghierarchy' => $default_firstheadinghierarchy
@@ -120,6 +117,9 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
 		if (!empty($atts['query']))
       wistiti_get_template($atts['layout'].'.php', $atts);
+
+    global $context;
+    $context ='shortcode';
 
 		return ob_get_clean();
 }
