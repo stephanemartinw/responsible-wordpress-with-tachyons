@@ -1,19 +1,4 @@
-.dn-js {
-  .js & {
-    display:none;
-  }
-}
-
-@media #{$breakpoint-not-large} {
-
-   .dn-js-nl {
-     .js & {
-       display:none;
-      }
-    }
-
-}
-
+//As noscript inverse...
 .db-js {
   .js & {
     display:block;

@@ -1,0 +1,57 @@
+//used from https://getflywheel.com/layout/how-to-use-flexbox-to-create-a-modern-card-design-layout/
+.flex-100 {
+  flex:0 1 100%;
+}
+
+//4 cols, spacing 4
+.flex-25-4 {
+  flex: 0 1 calc( 25% - ( #{$spacing-large} * ( 3 / 4 ) ) ); //ratio : #cols-1/#cols !
+}
+
+//3 cols, spacing 4
+.flex-33-4 {
+  flex: 0 1 calc( 33% - ( #{$spacing-large} ) );
+}
+
+//2 cols, spacing 4
+.flex-50-4 {
+  flex: 0 1 calc( 50% - ( #{$spacing-large} ) );
+}
+
+//ns
+.flex-25-4-ns {
+  @media #{$breakpoint-not-small} {
+    flex: 0 1 calc( 25% - ( #{$spacing-large} ) );
+  }
+}
+
+.flex-33-4-ns {
+  @media #{$breakpoint-not-small} {
+    flex: 0 1 calc( 33% - ( #{$spacing-large} ) );
+  }
+}
+
+.flex-50-4-ns {
+  @media #{$breakpoint-not-small} {
+    flex: 0 1 calc( 50% - ( #{$spacing-large} ) );
+  }
+}
+
+//m
+.flex-25-4-m {
+  @media #{$breakpoint-medium} {
+    flex: 0 1 calc( 25% - ( #{$spacing-large} ) );
+  }
+}
+
+.flex-33-4-m {
+  @media #{$breakpoint-medium} {
+    flex: 0 1 calc( 33% - ( #{$spacing-large} ) );
+  }
+}
+
+.flex-50-4-m {
+  @media #{$breakpoint-medium} {
+    flex: 0 1 calc( 50% - ( #{$spacing-large} ) );
+  }
+}

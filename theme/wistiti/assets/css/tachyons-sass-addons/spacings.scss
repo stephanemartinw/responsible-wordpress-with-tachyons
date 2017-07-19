@@ -1,0 +1,18 @@
+//Used for grids
+.m4-half {
+  margin : $spacing-large / 2;
+}
+
+//ns
+.m4-half-ns {
+  @media #{$breakpoint-not-small} {
+    margin : $spacing-large / 2;
+  }
+}
+
+//m
+.m4-half-m {
+  @media #{$breakpoint-medium} {
+    margin : $spacing-large / 2;
+  }
+}
