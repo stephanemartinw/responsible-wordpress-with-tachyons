@@ -40,9 +40,16 @@
             wistiti_get_template('/partials/'.$atts['type'].'-media.php', $atts);
         }
 
-  $index++; endwhile; endif;
+  $index++; endwhile;?>
 
-  wp_reset_query();
+  <?php if ($atts['pagination']) : ?>
+    <nav class="<?php echo $template_args['classes']['pagination'];?>">
+      <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
+      <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
+    </nav>
+  <?php endif;?>
+
+  <?php endif; wp_reset_query();
 
   unset($template_args);
   unset($partial_args);
