@@ -6,6 +6,10 @@ $template_args = array(
       'ns' => 3,
       'm' => 2
     ),
+    'spacings' => array(
+      'ns' => 4,
+      'm' => 4
+    ),
     'display_title' => false,
     'alternate' => true
   ),
@@ -13,7 +17,10 @@ $template_args = array(
     'title' => '',
     'wrapper' => '',
     'row' => 'flex flex-wrap',
-    'cell' => ''
+    'cell' => '', //do not set cell margins here, use spacings above !
+    'pagination' => 'center tc',
+    'pagination_prev_link' => 'link underline',
+    'pagination_next_link' => 'link underline'
   )
 );
 ?>

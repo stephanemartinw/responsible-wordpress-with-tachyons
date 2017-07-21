@@ -6,7 +6,7 @@
       'firstheadinghierarchy' => '2'
     ),
     'classes' => array(
-      'wrapper' => 'ph4 pb4',
+      'wrapper' => '',
       'title_single' => 'f1 mv2 ' .get_theme_mod( 'smew_colors_brand', 'blue' ),
       'title' => 'f2 mv3',
       'title_link' => 'link ' . get_theme_mod( 'smew_colors_brand', 'blue' ),

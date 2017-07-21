@@ -29,6 +29,7 @@ function news_setup() {
 		'has_archive' => true,
     'map_meta_cap' => true,
     'menu_icon' => 'dashicons-sticky',
+		'has_archive' => true,
 		'supports' => array( 'title', 'editor', 'excerpt', 'thumbnail', 'page-attributes' ),
     'taxonomies' => array( 'news-group' ),
 		)

@@ -28,11 +28,13 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     $default_mode = "query";
     $default_order = "ASC";
     $default_orderby = "menu_order";
+    $default_limit = 10;
     $default_title = "";
     $default_layout = 'grid';
     $default_display = 'card';
     $default_firstheadinghierarchy = 3;
     $default_background = '';
+    $default_pagination = true;
 
     //Automatic default atts / type
     switch ($atts['type']) {
@@ -69,10 +71,12 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 			'tax_value' => '',
       'order' => $default_order,
       'orderby' => $default_orderby,
+      'limit' => $default_limit,
 			'layout' => $default_layout,
 			'display' => $default_display,
       'background' => $default_background,
- 			'firstheadinghierarchy' => $default_firstheadinghierarchy
+ 			'firstheadinghierarchy' => $default_firstheadinghierarchy,
+      'pagination' => $default_pagination
 		), $atts);
 		$atts = array_change_key_case((array)$atts, CASE_LOWER);
 
@@ -96,6 +100,11 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
   							'field' => 'slug',
   							'terms' => $atts['tax_value']
   			));
+
+
+      $paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
+      $limit = $atts['limit'];
+      $offset = ( $limit * $paged ) - $limit;
   		$args = array(
   	      'post_type' => $atts['type'],
           'p' => $atts['id'],
@@ -104,7 +113,9 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
   				'tax_query' => $tax_arg,
   	      'orderby'=> $atts['orderby'],
   	      'order' => $atts['order'],
-  	      'post_status' => 'publish'
+  	      'post_status' => 'publish',
+          'offset' => $offset,
+          'posts_per_page' => $limit
   	    );
 
   	  $atts['query'] = new WP_Query( $args );

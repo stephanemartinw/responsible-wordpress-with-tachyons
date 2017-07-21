@@ -350,11 +350,59 @@ function wistiti_enqueue_scripts() {
       }
     }
   }
-var_dump($scripts);
+
   if ($scripts['utils']) wp_enqueue_script( 'wistiti-utils', plugins_url( '/js/utils.js', __FILE__ ), array());
   if ($scripts['grid']) wp_enqueue_script( 'wistiti-grid', plugins_url( '/js/grid.js', __FILE__ ), array('wistiti-utils'));
   if ($scripts['button']) wp_enqueue_script( 'wistiti-button', plugins_url( '/js/button.js', __FILE__ ), array());
   if ($scripts['disclosure']) wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
+}
+
+//For pagination :
+//Solution 1: use a filter here
+add_filter('next_posts_link_attributes', 'posts_link_attributes');
+add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+
+function posts_link_attributes() {
+    return 'class="link underline"';
+}
+//Solution 2: override the function to pass arguments...
+function wistiti_get_previous_posts_link( $label = null, $args = null ) {
+    global $paged;
+
+    if ( null === $label )
+        $label = __( '&laquo; Previous Page' );
+
+    if ( !is_single() && $paged > 1 ) {
+        $attr = apply_filters( 'previous_posts_link_attributes', '' );
+
+        $classes='';
+        if (isset($args['classes'])) $classes = $args['classes'];
+        return '<a class="'.$classes.'" href="' . previous_posts( false ) . "\" $attr>". preg_replace( '/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label ) .'</a>';
+    }
+}
+
+function wistiti_get_next_posts_link( $label = null, $max_page = 0, $args = null ) {
+    global $paged, $wp_query;
+
+    if ( !$max_page )
+        $max_page = $wp_query->max_num_pages;
+
+    if ( !$paged )
+        $paged = 1;
+
+    $nextpage = intval($paged) + 1;
+
+    if ( null === $label )
+        $label = __( 'Next Page &raquo;' );
+
+    if ( !is_single() && ( $nextpage <= $max_page ) ) {
+        $attr = apply_filters( 'next_posts_link_attributes', '' );
+
+        $classes='';
+        if (isset($args['classes'])) $classes = $args['classes'];
+
+        return '<a class="'.$classes.'" href="' . next_posts( $max_page, false ) . "\" $attr>" . preg_replace('/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label) . '</a>';
+    }
 }
 
 //General requirements

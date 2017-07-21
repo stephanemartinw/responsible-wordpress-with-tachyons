@@ -18,18 +18,29 @@
       //Columns
       if ((isset($template_args['options']['cols']) && !empty($template_args['options']['cols'])))
         $cols = $template_args['options']['cols'];
-        if (!isset ($col['ns']) || empty($col['ns'])) $col['ns']=3;
-        if (!isset ($col['m']) || empty($col['m'])) $col['m']=2;
-        //if (!isset ($col['l']) || empty($col['l'])) $col['l']=$col['ns'];
+        if (!isset ($cols['ns']) || empty($cols['ns'])) $cols['ns']=3;
+        if (!isset ($cols['m']) || empty($cols['m'])) $cols['m']=2;
       else
         $cols = array('ns' => 3, 'm' => 2); //default
 
-      $widths = 'w-100 w-'.floor(100/$col['ns']).'-ns w-'.floor(100/$col['m']).'-m';
-      if (!isset ($col['l']) && !empty($col['l'])) $widths .= ' w-'.floor(100/$col['l']).'-l';
+        if ((isset($template_args['options']['spacings']) && !empty($template_args['options']['spacings'])))
+          $spacings = $template_args['options']['spacings'];
+          if (!isset ($spacings['ns']) || empty($spacings['ns'])) $spacings['ns']=4;
+          if (!isset ($spacings['m']) || empty($spacings['m'])) $spacings['m']=4;
+        else
+          $spacings = array('ns' => 4, 'm' => 4); //default for now (test)
 
-      $datas = 'data-cols-ns='.$col['ns'];
-      $datas .= ' data-cols-m='.$col['m'];
-      if (!isset ($col['l']) && !empty($col['l']))  $datas .= ' data-cols-l='.$col['l'];
+      $widths = 'w-100';
+      $widths .= ' w-'.floor(100/$cols['ns']).'-ns';
+      $widths .= ' w-'.floor(100/$cols['m']).'-m';
+
+      $vertical_spacing = 'pa'.$template_args['options']['spacings']['s'].'-half';
+      $vertical_spacing .= ' pa'.$template_args['options']['spacings']['ns'].'-half-ns';
+      $vertical_spacing .= ' pa'.$template_args['options']['spacings']['m'].'-half-m';
+      $template_args['classes']['cell'] .= ' '.$vertical_spacing;
+
+      $datas = 'data-cols-ns='.$cols['ns'];
+      $datas .= ' data-cols-m='.$cols['m'];
 
       //Alternate media or card mode ?
       $atts['alternate'] = 'no';
@@ -54,9 +65,9 @@
   $aria_label = $atts['title'];
 endif; ?>
 
-<div class="<?php echo $template_args['classes']['wrapper'];?>" role="grid" aria-label="<?php echo $aria_label;?>" aria-labelledby="<?php echo $aria_labelledby;?>">
+<div class="<?php echo $template_args['classes']['wrapper'];?>" role="grid" <?php echo $datas;?> aria-label="<?php echo $aria_label;?>" aria-labelledby="<?php echo $aria_labelledby;?>">
 
-  <div class="cf <?php echo $template_args['classes']['row'];?>" role="row" aria-rowindex="<?php echo $row;?>">
+  <div class="<?php echo $template_args['classes']['row'];?>" role="row" aria-rowindex="<?php echo $row;?>">
 
   <?php $index=0; $row=0; if ( $grid_query->have_posts() ) : while ( $grid_query->have_posts() ) : $grid_query->the_post();
 
@@ -64,7 +75,7 @@ endif; ?>
         if ($atts['layout']=='grid') $role = "gridcell";
         else $role='';?>
 
-      <div class="<?php $template_args['classes']['cell'];?> <?php echo $widths; ?>" <?php echo $datas;?> role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
+      <div class="overflow-hidden <?php echo $template_args['classes']['cell'];?> <?php echo $widths; ?>"  role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
 
         <?php
 
@@ -82,15 +93,23 @@ endif; ?>
 
       </div>
 
-    <?php $index++; endwhile; endif;
-
-    wp_reset_query();
-
-    unset($template_args);
-    unset($partial_args);
-
-    ?>
+    <?php $index++; endwhile;?>
 
   </div>
+
+  <?php if ($atts['pagination']) : ?>
+    <nav class="<?php echo $template_args['classes']['pagination'];?>">
+      <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
+      <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
+    </nav>
+  <?php endif;?>
+
+  <?php endif; wp_reset_query();
+
+  unset($template_args);
+  unset($partial_args);
+  unset($atts);
+
+  ?>
 
 </div>

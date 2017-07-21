@@ -3,7 +3,7 @@
 global $partial_args;
 $partial_args =array(
   'classes' => array(
-    'wrapper' => 'ph4 pb4',
+    'wrapper' => '',
     'thumbnail_wrapper' => 'ma0 aspect-ratio aspect-ratio--16x9',
     'thumbnail' => 'aspect-ratio--object',
     'title' => 'f2 lh-title',

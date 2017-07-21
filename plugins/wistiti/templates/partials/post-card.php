@@ -41,10 +41,10 @@
 		  //Note: the read more link text is overriden in functions.php
 			the_excerpt();
 
-			wp_link_pages( array(
+			/*wp_link_pages( array(
 				'before' => '<div>' . esc_html__( 'Pages:', 'wistiti' ),
 				'after'  => '</div>',
-			) );
+			) );*/
 		?>
 	</div>
 

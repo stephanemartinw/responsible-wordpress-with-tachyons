@@ -5,7 +5,7 @@ global $partial_args;
 $partial_args =array(
     'classes' => array(
       'wrapper' => '',
-      'title' => 'f2 f1-m f-subheadline-ns ma0',
+      'title' => 'f1 f1-m f-subheadline-ns ma0',
       'excerpt' => 'f3 f2-m f1-ns',
       'content' => 'f4 f3-m f2-ns',
       'hr' => '',
