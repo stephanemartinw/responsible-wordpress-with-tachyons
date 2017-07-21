@@ -1,11 +1,11 @@
 # Wistiti
 
-An experiment for lightweight WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
+An experiment for responsible WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
 
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for creating simple, lightweight, fast and accessible websites with WordPress.
+This experimental Wistiti project wants to explore a way for building simple, lightweight, performant and accessible responsible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
 
@@ -14,7 +14,7 @@ It also proposes to regain the pleasure of creating a website by refocusing on t
 * it's so exciting and enriching to fully master the code of the site that is being built.
 * it's also gives the possibility to understand and integrate disliked features like accessibility !
 * time becomes available to work on essentials : content and user experience
-* green sustainable and responsible websites should become the norm and this approach seems to be a good compromise for building clean websites that consume less energy.
+* ecodesign and responsible websites should become the norm and this approach seems to be a good compromise for building lightweight websites that consume less energy.
 
 
 I will be very happy to get your opinion and feedback about this experiment.
@@ -47,10 +47,10 @@ Some modifications have been done :
 
 * No CSS but Tachyons only.
 * No jQuery loaded.
-* A fully customizable navigation menu.
+* A customizable navigation menu.
 * A three widgets footer.
 * Some options (to be extended) via the theme customizer.
-* The meta Description tag is added automatically to pages via the 'description' custom field.
+* Page title is customizable and the meta Description tag is added automatically to pages via the 'description' custom field.
 
 A child theme model (mywistiti) is available. Start from it to create your own Wistiti.
 
@@ -123,6 +123,7 @@ Send your wistiti website url and we will add it here.
 * Improving support of blogs, post/page comments
 * Support of WordPress standard widgets
 * New elements for the Wistiti plugin.
+* A child plugin structure to allow easy custom extensions of custom post types and fields.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
 * Developing and testing Wistiti in the real world, using it on new adequate projects.
