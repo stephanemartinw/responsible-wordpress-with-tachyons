@@ -1,44 +1,59 @@
 <?php
-global $branding_args;
-get_template_part( 'components/header/site-branding', 'customizer' );
+global $header_args;
+//get_template_part( 'components/header/site-header', 'customizer' );
+get_customizer('components/header/site-header');
 
-//To do : use args in this template !
+global $branding_args;
+//get_template_part( 'components/header/site-branding', 'customizer' );
+get_customizer('components/header/site-branding');
+
+//inline
+$inline = false;
+if (isset($header_args['options']['inline']))
+{
+	$inline = $header_args['options']['inline'];
+	if ($inline) {
+		if (!isset($header_args['options']['inline_breakpoint'])) $header_args['options']['inline_breakpoint']='ns';
+		$breakpoint_ext = ($header_args['options']['inline_breakpoint']!='s')?'-'.$header_args['options']['inline_breakpoint']:'';
+
+		//modify wrapper for inlineing branding and navigation on sigle row
+		$branding_args['classes']['wrapper'] .= 'flex-auto'.$breakpoint_ext.' flex'.$breakpoint_ext;
+	}
+}
 ?>
 
-
-<div class="flex-auto">
-	<div class="flex items-center ">
-
+<div class="<?php echo $branding_args['classes']['wrapper']; ?>">
 	<?php if (!empty(get_theme_mod( 'smew_siteidentity_minilogo', '' ))) : ?>
-		<div class="cmzr-site-minilogo">
-			<img class="w2 w3-l mr2" src="<?php echo get_theme_mod( 'smew_siteidentity_minilogo', '' );?>" alt="<?php bloginfo( 'name' ); ?>">
+		<div class="<?php echo $branding_args['classes']['minilogo_wrapper'];?> cmzr-site-minilogo">
+			<img class="<?php echo $branding_args['classes']['minilogo'];?>" src="<?php echo get_theme_mod( 'smew_siteidentity_minilogo', '' );?>" alt="<?php bloginfo( 'name' ); ?>">
 		</div>
 	<?php endif;?>
 
-		<div>
-			<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
-				<h1 class="f7 f6-m f5-ns ma0 cmzr-site-title">
-					<a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-			<?php else : ?>
-				<p class="f7 f6-m f5-ns fw7 ma0 cmzr-site-title">
-					<a class="link black" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
-			<?php endif;
+	<div>
+	<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
+		<h1 class="<?php echo $branding_args['classes']['title'];?> cmzr-site-title">
+			<a class="<?php echo $branding_args['classes']['title_link'];?>" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+	<?php else : ?>
+		<p class="<?php echo $branding_args['classes']['title'];?> cmzr-site-title">
+			<a class="<?php echo $branding_args['classes']['title_link'];?>" href="<?php echo esc_url( home_url( '/' ) ); ?>" rel="home"><?php bloginfo( 'name' ); ?></a>
+	<?php endif;
 
-			//Add Brandig description below ?
-			if ($branding_args['options']['activate']) :
-				$description = get_bloginfo( 'description', 'display' );
-					if ( $description || is_customize_preview() ) : ?>
-						<p class="f7 f6-m f5-ns fw1 ma0 cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
-					<?php endif; ?>
+	//Add Brandig description below ?
+	if ($branding_args['options']['activate']) :
+		$description = get_bloginfo( 'description', 'display' );
+			if ( $description || is_customize_preview() ) : ?>
+				<p class="<?php echo $branding_args['classes']['description'];?> cmzr-site-description"><?php echo $description; /* WPCS: xss ok. */ ?></p>
 			<?php endif; ?>
+	<?php endif; ?>
 
-			<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
-				</h1>
-			<?php else : ?>
-				</p>
-			<?php endif; ?>
+	<?php if ( is_front_page() /*&& is_home()*/ ) : ?>
+		</h1>
+	<?php else : ?>
+		</p>
+	<?php endif; ?>
 
-		</div>
-
-  </div>
 </div>
+
+</div>
+
+<?php unset($header_args); unset($branding_args);?>

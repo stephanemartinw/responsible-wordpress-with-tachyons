@@ -4,3 +4,9 @@
     display:block;
   }
 }
+
+.dn-js {
+  .js & {
+    display:none;
+  }
+}

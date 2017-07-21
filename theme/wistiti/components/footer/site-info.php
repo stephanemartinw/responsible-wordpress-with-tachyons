@@ -1,6 +1,7 @@
 <?php
 	global $footer_args;
-	get_template_part( 'components/footer/site-info', 'customizer' );
+	//get_template_part( 'components/footer/site-info', 'customizer' );
+	get_customizer('components/footer/site-info');
 
 	if ($footer_args['options']['col']==0) return;
 

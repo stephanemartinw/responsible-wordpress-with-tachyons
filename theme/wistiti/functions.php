@@ -213,19 +213,41 @@ add_filter('mce_buttons_2', 'wistiti_theme_mce_buttons_2');
 add_filter( 'tiny_mce_before_init', 'wistiti_child_mce_before_init_insert_formats' );
 */
 
-
 /*
-* Posts : Modify The Read More Link Text
+* To do : Customizers finder
+* Returns all customizers found (wistiti parent base and child override).
+* This finder avoids the dev to overide the whole customizer but only necessary array fields.
+*
 */
-function wistiti_modify_read_more_link() {
+function locate_customizer($customizer_name, $customizer_path = '', $default_path = '') {
 
-    return '<a class="link underline" href="' . get_permalink() . '">'.sprintf(
-			/* translators: %s: Name of current post. */
-		  __( 'Continue reading %s', 'wistiti'),
-			the_title( '<span class="clip screen-reader-text">"', '"</span>', false )
-		).'</a>';
+	$customizer=array();
+
+	// Set default template path.
+	if ( ! $default_path ) :
+		$default_path = get_template_directory();
+	endif;
+	$customizer[] = $default_path . '/'.  $customizer_name.'-customizer.php';
+
+	if ( ! $customizer_path ) :
+		$customizer_path = get_stylesheet_directory();
+	endif;
+	$customizer[] = $customizer_path . '/'. $customizer_name.'-customizer.php';
+
+	return apply_filters( 'wistiti_locate_customizer', $customizer, $customizer_name, $customizer_path, $default_path );
 }
-add_filter( 'the_content_more_link', 'wistiti_modify_read_more_link' );
+
+function get_customizer($customizer_name, $customizer_path = '', $default_path = '') {
+	$customizer_files = locate_customizer($customizer_name, $customizer_path = '', $default_path = '');
+	if (!empty($customizer_files)) {
+		foreach ($customizer_files as $customizer_file) {
+			if ( file_exists( $customizer_file ) )
+			{
+				include $customizer_file;
+			}
+		}
+	}
+}
 
 /*
 * WP Override navigation menu
@@ -250,20 +272,28 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 
 		//Menu levels (from level 1, level 0 is not managed here)
 		public function start_lvl( &$output, $depth = 0, $args = array() ) {
-
 			//ul
 			//level 1
+			//Is this level to be expanded ?
+			$expand = true;
+			if (isset($this->wargs['options']['expand'])) $expand = $this->wargs['options']['expand'];
+			$breakpoint_ext = '-ns';
+			if (isset($this->wargs['options']['expand_breakpoint_ext'])) $breakpoint_ext = $this->wargs['options']['expand_breakpoint_ext'];
+
 			if ($depth==0) {
-				$classes_list = "dn-js relative absolute-l top-100 left-0 mt2"; //position and display
-				$classes_list .= " ph3 pv2"; //spacings
-				$classes_list .= " bg-white-l"; //background
-				$classes_list .= " bw0 bw1-l b--solid b--black"; //borders
+				$classes_list = 'dn-js ';
+				$classes_list .= $this->wargs['classes']['items']['level'][$depth+1]['list'];
+				//$classes_list .= ' bw0 bw1'.$breakpoint_ext.' b--solid b--black'; //borders
+
+				if ($expand) {
+					if (!empty($breakpoint_ext)) $classes_list .= ' relative absolute'.$breakpoint_ext.' top-100 left-0';
+					else  $classes_list .= ' absolute top-100 left-0';
+				}
+				else $classes_list .= ' absolute top-100 left-0';
+
 			} else if ($depth==1) {
 				//To do !
 				//level 2
-				$classes_list  = "dn-js relative absolute-l top-0 right-0"; //position and position
-				$classes_list .= " bg-white"; //background
-				$classes_list .= " pa0"; //spacings
 			}
 
 			$output .= "<ul class='".$classes_list."' role='menu' tabindex='-1'>";
@@ -279,22 +309,31 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 			//Root items
 			if ($item->menu_item_parent=='0') {
 
+				//Is this level to be expanded ?
+				$expand = true;
+				if (isset($this->wargs['options']['expand'])) $expand = $this->wargs['options']['expand'];
+				$breakpoint_ext = '-ns';
+				if (isset($this->wargs['options']['expand_breakpoint_ext'])) $breakpoint_ext = $this->wargs['options']['expand_breakpoint_ext'];
+
 				//li
-				$classes_item = "relative db dib-l"; //position and display
-				$classes_item .= " pa3 pa0-l pr4-l"; //spacings
+				$classes_item = 'relative';
+				$classes_item .= ' '.$this->wargs['classes']['items']['level'][0]['element'];
+
+				if ($expand) $classes_item .= ' db dib'.$breakpoint_ext;
+				else $classes_item .= ' dib';
 
 				//a
-				$classes_link = 'dib link black f5-l f4 underline-hover';
+				$classes_link =  $this->wargs['classes']['items']['level'][0]['element_link'];
 			}
 			//Sub items
 			else {
 
 				//li
-				$classes_item = "db"; //display and position
-				$classes_item .= " pa3 ph0-l pv2-l"; //spacings
+				$classes_item = "db";
+				$classes_item .= ' '.$this->wargs['classes']['items']['level'][1]['element'];
 
 				//a
-				$classes_link = 'dib link black f5-l f4 underline-hover';
+				$classes_link = $this->wargs['classes']['items']['level'][1]['element_link'];
 			}
 
 			//Item has children
@@ -302,12 +341,11 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 
 			//Current item
 			if ( $item->current )
-			  //$classes_item .= ' bb-l bw1 b--'.get_theme_mod( 'smew_colors_brand', 'blue' );
-				$classes_link .= " underline";
+				$classes_link .= ' '. $this->wargs['classes']['items']["current"];
 
 			$caret='';
 			if ($args->walker->has_children)
-				$caret = "<b class='dib ml1 v-mid w-0 h-0 bw2 bb-0 b--solid bt--black bl--transparent br--transparent'></b>";
+				$caret = '<b class="'.$this->wargs['classes']['items']['caret'].'"></b>';
 
 			$tabindex = $item->menu_order==1?0:-1;
 
@@ -419,6 +457,21 @@ if (!class_exists('Wistiti_Walker_Comment')) {
 
 	}
 }
+
+
+/*
+* Posts : Modify The Read More Link Text
+*/
+function wistiti_modify_read_more_link() {
+
+    return '<a class="link underline" href="' . get_permalink() . '">'.sprintf(
+			/* translators: %s: Name of current post. */
+		  __( 'Continue reading %s', 'wistiti'),
+			the_title( '<span class="clip screen-reader-text">"', '"</span>', false )
+		).'</a>';
+}
+add_filter( 'the_content_more_link', 'wistiti_modify_read_more_link' );
+
 
 /**
  * Custom template tags for this theme.

@@ -10,7 +10,9 @@
  */
 
 global $wistiti_args;
-get_template_part( 'wistiti', 'customizer' );
+//get_template_part( 'wistiti', 'customizer' );
+get_customizer('wistiti');
+
 
  ?><!DOCTYPE html>
  <html class="<?php echo $wistiti_args['classes']['progressive'];?> <?php echo $wistiti_args['classes']['html'];?>" <?php language_attributes(); ?>>

@@ -7934,52 +7934,19 @@ code, .code {
 .js .db-js {
   display: block; }
 
-.m4-half {
-  margin: 1rem; }
+.js .dn-js {
+  display: none; }
+
+.pa4-half {
+  padding: 1rem; }
 
 @media screen and (min-width: 30em) {
-  .m4-half-ns {
-    margin: 1rem; } }
+  .pa4-half-ns {
+    padding: 1rem; } }
 
 @media screen and (min-width: 30em) and (max-width: 60em) {
-  .m4-half-m {
-    margin: 1rem; } }
-
-.flex-100 {
-  flex: 0 1 100%; }
-
-.flex-25-4 {
-  flex: 0 1 calc( 25% - ( 2rem * ( 3 / 4 ) ) ); }
-
-.flex-33-4 {
-  flex: 0 1 calc( 33% - ( 2rem ) ); }
-
-.flex-50-4 {
-  flex: 0 1 calc( 50% - ( 2rem ) ); }
-
-@media screen and (min-width: 30em) {
-  .flex-25-4-ns {
-    flex: 0 1 calc( 25% - ( 2rem ) ); } }
-
-@media screen and (min-width: 30em) {
-  .flex-33-4-ns {
-    flex: 0 1 calc( 33% - ( 2rem ) ); } }
-
-@media screen and (min-width: 30em) {
-  .flex-50-4-ns {
-    flex: 0 1 calc( 50% - ( 2rem ) ); } }
-
-@media screen and (min-width: 30em) and (max-width: 60em) {
-  .flex-25-4-m {
-    flex: 0 1 calc( 25% - ( 2rem ) ); } }
-
-@media screen and (min-width: 30em) and (max-width: 60em) {
-  .flex-33-4-m {
-    flex: 0 1 calc( 33% - ( 2rem ) ); } }
-
-@media screen and (min-width: 30em) and (max-width: 60em) {
-  .flex-50-4-m {
-    flex: 0 1 calc( 50% - ( 2rem ) ); } }
+  .pa4-half-m {
+    padding: 1rem; } }
 
 .bt--transparent {
   border-left-color: transparent; }

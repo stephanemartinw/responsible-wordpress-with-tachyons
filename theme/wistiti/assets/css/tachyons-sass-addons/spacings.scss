@@ -1,18 +1,19 @@
 //Used for grids
-.m4-half {
-  margin : $spacing-large / 2;
+//TO DO ! Add the other paddng sizes (0 to 7) !
+.pa4-half {
+  padding : $spacing-large / 2;
 }
 
 //ns
-.m4-half-ns {
+.pa4-half-ns {
   @media #{$breakpoint-not-small} {
-    margin : $spacing-large / 2;
+    padding : $spacing-large / 2;
   }
 }
 
 //m
-.m4-half-m {
+.pa4-half-m {
   @media #{$breakpoint-medium} {
-    margin : $spacing-large / 2;
+    padding : $spacing-large / 2;
   }
 }
