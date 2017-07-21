@@ -25,4 +25,10 @@
         wistiti_get_template('/partials/'.$atts['type'].'-default.php', $atts);
     }
 
-endwhile; endif; wp_reset_query(); ?>
+endwhile; ?>
+
+<?php
+echo wistiti_post_navigation($template_args);
+?>
+
+<?php endif; wp_reset_query(); ?>

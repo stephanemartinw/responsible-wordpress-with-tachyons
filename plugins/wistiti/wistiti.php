@@ -357,14 +357,91 @@ function wistiti_enqueue_scripts() {
   if ($scripts['disclosure']) wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
 }
 
+/*
+* Elements : Modify Post Navigation
+*/
+function wistiti_post_navigation($template_args) {
+	//$args= array();
+	//return get_the_post_navigation($args);
+
+  $post_navigation_args = array();
+  if (isset($template_args['post_navigation']['prev_text'])) $post_navigation_args['prev_text'] = $template_args['post_navigation']['prev_text'];
+  if (isset($template_args['post_navigation']['next_text'])) $post_navigation_args['next_text'] = $template_args['post_navigation']['next_text'];
+  if (isset($template_args['post_navigation']['in_same_term'])) {
+    $post_navigation_args['post_navigation']['in_same_term'] = $template_args['post_navigation']['in_same_term'];
+    if ($template_args['post_navigation']['in_same_term']==true && isset($template_args['post_navigation']['tax_value']) && (!empty($template_args['post_navigation']['tax_value'])))
+    $post_navigation_args['post_navigation']['taxonomy'] = $template_args['post_navigation']['tax_value'];
+  }
+  if (isset($template_args['post_navigation']['screen_reader_text'])) $post_navigation_args['screen_reader_text'] = $template_args['post_navigation']['screen_reader_text'];
+
+	//or from original https://developer.wordpress.org/reference/functions/get_the_post_navigation/
+	$args = wp_parse_args( $post_navigation_args, array(
+        'prev_text'          => '%title',
+        'next_text'          => '%title',
+        'in_same_term'       => false,
+        'excluded_terms'     => '',
+        'taxonomy'           => 'category',
+        'screen_reader_text' => __( 'Post navigation' ),
+    ) );
+
+    $navigation = '';
+
+    //calls get_adjacent_post_link: this function should be overrided to allow <a> class customization
+    $previous = get_previous_post_link(
+        '<div class="'.$template_args['post_navigation']['wrapper_previous'].'">%link</div>',
+        $args['prev_text'],
+        $args['in_same_term'],
+        $args['excluded_terms'],
+        $args['taxonomy']
+    );
+
+    //calls get_adjacent_post_link: this function should be overrided to allow <a> class customization
+    $next = get_next_post_link(
+        '<div class="'.$template_args['post_navigation']['wrapper_next'].'">%link</div>',
+        $args['next_text'],
+        $args['in_same_term'],
+        $args['excluded_terms'],
+        $args['taxonomy']
+    );
+
+    // Only add markup if there's somewhere to navigate to.
+    if ( $previous || $next ) {
+
+        if (isset($template_args['post_navigation']['wrapper'])) $classes='wrapper='.$template_args['post_navigation']['wrapper'];
+        if (isset($template_args['post_navigation']['links'])) $classes.='&links='.$template_args['post_navigation']['links'];
+        $navigation = _navigation_markup( $previous . $next, /*$template_args['post_navigation']['wrapper']*/$classes, $args['screen_reader_text'] );
+    }
+
+    return $navigation;
+}
+
+// define the navigation_markup_template callback
+function wistiti_filter_navigation_markup_template( $template, $classes ) {
+
+  $classes_array = array();
+  parse_str($classes,$classes_array);
+
+	//modify original template with classes
+	$template = '
+    <nav class="'.$classes_array['wrapper'].'" role="navigation">
+        <h2 class="clip screen-reader-text">%2$s</h2>
+        <div class="'.$classes_array['links'].'">%3$s</div>
+    </nav>';
+
+		return $template;
+};
+add_filter( 'navigation_markup_template', 'wistiti_filter_navigation_markup_template', 10, 2 );
+
+
 //For pagination :
 //Solution 1: use a filter here
-add_filter('next_posts_link_attributes', 'posts_link_attributes');
-add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+//add_filter('next_posts_link_attributes', 'posts_link_attributes');
+//add_filter('previous_posts_link_attributes', 'posts_link_attributes');
 
-function posts_link_attributes() {
+/*function posts_link_attributes() {
     return 'class="link underline"';
-}
+}*/
+
 //Solution 2: override the function to pass arguments...
 function wistiti_get_previous_posts_link( $label = null, $args = null ) {
     global $paged;
