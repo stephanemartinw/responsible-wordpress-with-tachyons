@@ -5,9 +5,9 @@ An experiment for responsible WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for building simple, lightweight, performant and accessible responsible websites with WordPress.
+This experimental Wistiti project wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
 
-It also proposes to regain the pleasure of creating a website by refocusing on the essential and simplifying the technologies used :
+It also proposes to regain the pleasure of creating a responsible website by refocusing on the essential and simplifying the technologies used :
 
 * fighting against enormous and over-sized WordPress themes is not fun.
 * for many 'small' websites in any case, building and maintaining OOCSS libraries is painful and time-consuming.
