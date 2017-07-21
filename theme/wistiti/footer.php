@@ -21,3 +21,5 @@
 
 </body>
 </html>
+
+<?php unset($wistiti_args);?>

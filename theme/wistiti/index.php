@@ -33,7 +33,7 @@ get_header(); ?>
 			//get_template_part( 'components/post/content', $layout );
 
 			//Use Wistiti plugin for layout!
-			echo do_shortcode('[wistiti type="post" mode="view" display="media" orderby="post_date" order="ASC"]');
+			echo do_shortcode('[wistiti type="post" mode="view" display="media" orderby="post_date" order="ASC" pagination=true]');
 
 			// To customize !
 			//wisiti_posts_navigation();

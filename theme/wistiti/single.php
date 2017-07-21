@@ -7,6 +7,10 @@
  * @package Wistiti
  */
 
+ global $wistiti_args;
+ //get_template_part( 'wistiti', 'customizer' );
+ get_customizer('wistiti');
+
 get_header(); ?>
 
 	<div id="primary" class="content-area">
@@ -19,13 +23,14 @@ get_header(); ?>
 			//Use Wistiti plugin for layout!
 			echo do_shortcode('[wistiti type="post" layout="element" id="'.get_the_ID().'"]');
 
-			//To do : override with tachyons ! Disabled for now....
-			//wistiti_post_navigation();
+			//Deported to plugin/elememnts
+			//echo wistiti_post_navigation($wistiti_args);
 
+			//Deported to plugin/element ???
 			// If comments are open or we have at least one comment, load up the comment template.
-			if ( comments_open() || get_comments_number() ) :
+			/*if ( comments_open() || get_comments_number() ) :
 				comments_template();
-			endif;
+			endif;*/
 
 		endwhile; // End of the loop.
 		?>

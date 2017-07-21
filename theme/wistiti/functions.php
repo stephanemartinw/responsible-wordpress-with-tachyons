@@ -366,7 +366,6 @@ if (!class_exists('Wistiti_Walker_Main_Menu')) {
 	}
 }
 
-
 /*
 * WP Override comments list
 * Let child themes override it again.
@@ -457,7 +456,6 @@ if (!class_exists('Wistiti_Walker_Comment')) {
 
 	}
 }
-
 
 /*
 * Posts : Modify The Read More Link Text

@@ -15,7 +15,7 @@ get_customizer('wistiti');
 
 
  ?><!DOCTYPE html>
- <html class="<?php echo $wistiti_args['classes']['progressive'];?> <?php echo $wistiti_args['classes']['html'];?>" <?php language_attributes(); ?>>
+ <html class="<?php echo $wistiti_args['header']['classes']['progressive'];?> <?php echo $wistiti_args['header']['classes']['html'];?>" <?php language_attributes(); ?>>
  <head>
 	 <meta charset="<?php bloginfo( 'charset' ); ?>">
 	 <meta name="viewport" content="width=device-width, initial-scale=1">
