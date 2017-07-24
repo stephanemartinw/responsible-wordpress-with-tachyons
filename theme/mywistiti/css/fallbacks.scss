@@ -1,0 +1,23 @@
+//If no js, child theme as to define css classes for unfiltrable wp markup
+//Define here you custom fallback class : I suggest to extend (@extend) tachyons classes.
+
+.no-js  {
+
+  //Single Post navigation
+  .post-navigation {
+    .nav-previous,
+    .nav-next {
+
+      a {}
+
+    }
+  }
+
+  //Single post navigation
+  .js-posts-navigation {
+    &-previous,
+    &-next {
+    }
+  }
+
+}

@@ -25,3 +25,9 @@ Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 
 //And child theme custom addons
 @import  "tachyons-sass-addons/tachyons-addons.scss";
+
+//And child theme custom
+@import "custom.scss";
+
+//And child theme fallbacks
+@import "fallbacks.scss";

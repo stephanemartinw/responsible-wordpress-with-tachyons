@@ -20,7 +20,6 @@
     $atts['alternate'] = $template_args['options']['alternate'];
 ?>
 
-
 <<?php echo $list_type;?>l class="<?php echo $template_args['classes']['wrapper'];?>">
 
   <?php $index=0; if ( $list_query->have_posts() ) : while ( $list_query->have_posts() ) : $list_query->the_post();
@@ -40,17 +39,17 @@
   $index++; endwhile;?>
 
   <?php if ($atts['pagination']) : ?>
-    <nav class="js-post-navigation <?php echo $template_args['post_navigation']['wrapper'];?>">
+    <nav class="js-posts-navigation <?php echo $template_args['post_navigation']['wrapper'];?>">
       <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
       <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
     </nav>
     <?php echo "<script>
-    var navwrapper= document.querySelector('.js-post-navigation');
+    var navwrapper= document.querySelector('.js-posts-navigation');
     if (navwrapper!=null) {
       navwrapper.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper']).");
-      var prev_link = navwrapper.querySelector('.js-post-navigation-previous');
+      var prev_link = navwrapper.querySelector('.js-posts-navigation-previous');
       if (prev_link!=null) prev_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['previous_link']).");
-      var next_link = navwrapper.querySelector('.js-post-navigation-next');
+      var next_link = navwrapper.querySelector('.js-posts-navigation-next');
       if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
     }
     </script>";

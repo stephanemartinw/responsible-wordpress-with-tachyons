@@ -469,10 +469,10 @@ function wiwtiti_get_next_posts_link($label) {
 add_filter('next_posts_link_attributes', 'wistiti_posts_link_next_attributes');
 add_filter('previous_posts_link_attributes', 'wistiti_posts_link_previous_attributes');
 function wistiti_posts_link_previous_attributes() {
-    return 'class="js-post-navigation-previous"';
+    return 'class="js-posts-navigation-previous"';
 }
 function wistiti_posts_link_next_attributes() {
-    return 'class="js-post-navigation-next"';
+    return 'class="js-posts-navigation-next"';
 }
 
 //Solution 2: override the function to pass arguments...
