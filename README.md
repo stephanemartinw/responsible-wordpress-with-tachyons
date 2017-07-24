@@ -14,7 +14,7 @@ It also proposes to regain the pleasure of creating a responsible website by ref
 * it's so exciting and enriching to fully master the code of the site that is being built.
 * it's also gives the possibility to understand and integrate disliked features like accessibility !
 * time becomes available to work on essentials : content and user experience
-* ecodesign and responsible websites should become the norm and this approach seems to be a good compromise for building lightweight websites that consume less energy.
+* ecodesign and responsible websites should become the norm and this approach seems to be a good compromise for building responsible websites that consume less energy.
 
 
 I will be very happy to get your opinion and feedback about this experiment.
@@ -133,7 +133,7 @@ Send your wistiti website url and we will add it here.
 * Adding a child plugin structure to allow easy add new custom elements and customize predefined custom post types and fields.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
-* Developing and testing Wistiti in the real world, using it on new adequate projects.
+* Developing and testing Wistiti in the real world, using it on new adequate and responsible web projects.
 
 Web developers, all suggestions are welcome ! Feel free to contribute here to Wistiti !
 
