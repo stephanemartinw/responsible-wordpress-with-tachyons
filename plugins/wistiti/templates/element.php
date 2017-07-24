@@ -29,6 +29,29 @@ endwhile; ?>
 
 <?php
 echo wistiti_post_navigation($template_args);
+
+echo "<script>
+  var navwrapper= document.querySelector('.post-navigation');
+  if (navwrapper!=null) {
+    navwrapper.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper']).");
+  }
+  var navlinks= document.querySelector('.post-navigation .js-nav-links');
+  if (navlinks!=null) {
+    navlinks.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['links']).");
+  }
+  var navprevious = document.querySelector('.post-navigation .nav-previous');
+  if (navprevious!=null) {
+    navprevious.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper_previous']).");
+    var prev_link = navprevious.querySelector('a');
+    if (prev_link!=null) prev_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['previous_link']).");
+  }
+  var navnext = document.querySelector('.post-navigation .nav-next');
+  if (navnext!=null) {
+    navnext.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper_next']).");
+    var next_link = navnext.querySelector('a');
+    if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
+  }
+</script>";
 ?>
 
 <?php endif; wp_reset_query(); ?>

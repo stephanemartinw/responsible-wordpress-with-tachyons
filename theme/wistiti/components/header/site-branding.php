@@ -8,18 +8,14 @@ global $branding_args;
 get_customizer('components/header/site-branding');
 
 //inline
-$inline = false;
-if (isset($header_args['options']['inline']))
-{
-	$inline = $header_args['options']['inline'];
-	if ($inline) {
-		if (!isset($header_args['options']['inline_breakpoint'])) $header_args['options']['inline_breakpoint']='ns';
-		$breakpoint_ext = ($header_args['options']['inline_breakpoint']!='s')?'-'.$header_args['options']['inline_breakpoint']:'';
+$inline = $header_args['options']['inline'];
+if ($inline) {
+	$breakpoint_ext = ($header_args['options']['inline_breakpoint']!='s')?'-'.$header_args['options']['inline_breakpoint']:'';
 
-		//modify wrapper for inlineing branding and navigation on sigle row
-		$branding_args['classes']['wrapper'] .= 'flex-auto'.$breakpoint_ext.' flex'.$breakpoint_ext;
-	}
+	//modify wrapper for inlineing branding and navigation on sigle row
+	$branding_args['classes']['wrapper'] .= 'flex-auto'.$breakpoint_ext.' flex'.$breakpoint_ext;
 }
+
 ?>
 
 <div class="<?php echo $branding_args['classes']['wrapper']; ?>">

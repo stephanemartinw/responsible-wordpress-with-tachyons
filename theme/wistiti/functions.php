@@ -7,6 +7,17 @@
  * @package Wistiti_Theme
  */
 
+ /**
+  * JavaScript Detection.
+  *
+  * Adds a `js` class to the root `<html>` element when JavaScript is detected.
+  */
+ function wistiti_javascript_detection() {
+ 	echo "<script>(function(html){html.className = html.className.replace(/\bno-js\b/,'js')})(document.documentElement);</script>\n";
+ }
+ add_action( 'wp_head', 'wistiti_javascript_detection', 0 );
+
+
 if ( ! function_exists( 'wistiti_theme_setup' ) ) :
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -151,7 +162,7 @@ function wistiti_theme_scripts() {
 
 	wp_enqueue_script( 'wistiti_theme-navigation', get_template_directory_uri() . '/assets/js/navigation.js', array(), '20151215', true );
 	wp_enqueue_script( 'wistiti_theme-skip-link-focus-fix', get_template_directory_uri() . '/assets/js/skip-link-focus-fix.js', array(), '20151215', true );
-	wp_enqueue_script( 'wistiti_theme-base', get_template_directory_uri() . '/assets/js/wistiti.js', array(), '20151215', true );
+	//wp_enqueue_script( 'wistiti_theme-base', get_template_directory_uri() . '/assets/js/wistiti.js', array(), '20151215', true );
 
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

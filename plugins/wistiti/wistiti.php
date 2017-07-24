@@ -17,6 +17,23 @@ function wistiti_init() {
 
 /**
  * Locate template.
+ * From wp's shortcode_atts function!
+ */
+function wistiti_atts( $pairs, $atts) {
+    $atts = (array)$atts;
+    $out = array();
+    foreach ($pairs as $name => $default) {
+        if ( array_key_exists($name, $atts) )
+            $out[$name] = $atts[$name];
+        else
+            $out[$name] = $default;
+    }
+
+    return $out;
+}
+
+/**
+ * Locate template.
  *
  * Locate the called template.
  * Search Order:
@@ -361,8 +378,6 @@ function wistiti_enqueue_scripts() {
 * Elements : Modify Post Navigation
 */
 function wistiti_post_navigation($template_args) {
-	//$args= array();
-	//return get_the_post_navigation($args);
 
   $post_navigation_args = array();
   if (isset($template_args['post_navigation']['prev_text'])) $post_navigation_args['prev_text'] = $template_args['post_navigation']['prev_text'];
@@ -374,8 +389,10 @@ function wistiti_post_navigation($template_args) {
   }
   if (isset($template_args['post_navigation']['screen_reader_text'])) $post_navigation_args['screen_reader_text'] = $template_args['post_navigation']['screen_reader_text'];
 
+  return get_the_post_navigation($post_navigation_args);
+
 	//or from original https://developer.wordpress.org/reference/functions/get_the_post_navigation/
-	$args = wp_parse_args( $post_navigation_args, array(
+	/*$args = wp_parse_args( $post_navigation_args, array(
         'prev_text'          => '%title',
         'next_text'          => '%title',
         'in_same_term'       => false,
@@ -409,10 +426,10 @@ function wistiti_post_navigation($template_args) {
 
         if (isset($template_args['post_navigation']['wrapper'])) $classes='wrapper='.$template_args['post_navigation']['wrapper'];
         if (isset($template_args['post_navigation']['links'])) $classes.='&links='.$template_args['post_navigation']['links'];
-        $navigation = _navigation_markup( $previous . $next, /*$template_args['post_navigation']['wrapper']*/$classes, $args['screen_reader_text'] );
+        $navigation = _navigation_markup( $previous . $next, $classes, $args['screen_reader_text'] );
     }
 
-    return $navigation;
+    return $navigation;*/
 }
 
 // define the navigation_markup_template callback
@@ -422,11 +439,17 @@ function wistiti_filter_navigation_markup_template( $template, $classes ) {
   parse_str($classes,$classes_array);
 
 	//modify original template with classes
-	$template = '
+  $template = '
+   <nav class="%1$s" role="navigation">
+       <h2 class="clip screen-reader-text">%2$s</h2>
+       <div class="js-nav-links">%3$s</div>
+   </nav>';
+
+	/*$template = '
     <nav class="'.$classes_array['wrapper'].'" role="navigation">
         <h2 class="clip screen-reader-text">%2$s</h2>
         <div class="'.$classes_array['links'].'">%3$s</div>
-    </nav>';
+    </nav>';*/
 
 		return $template;
 };
@@ -435,15 +458,25 @@ add_filter( 'navigation_markup_template', 'wistiti_filter_navigation_markup_temp
 
 //For pagination :
 //Solution 1: use a filter here
-//add_filter('next_posts_link_attributes', 'posts_link_attributes');
-//add_filter('previous_posts_link_attributes', 'posts_link_attributes');
+function wiwtiti_get_previous_posts_link($label) {
+  //array('classes' => $template_args['classes']['pagination_prev_link'])
+  return get_previous_posts_link($label);
+}
+function wiwtiti_get_next_posts_link($label) {
+  return get_next_posts_link($label);
+}
 
-/*function posts_link_attributes() {
-    return 'class="link underline"';
-}*/
+add_filter('next_posts_link_attributes', 'wistiti_posts_link_next_attributes');
+add_filter('previous_posts_link_attributes', 'wistiti_posts_link_previous_attributes');
+function wistiti_posts_link_previous_attributes() {
+    return 'class="js-post-navigation-previous"';
+}
+function wistiti_posts_link_next_attributes() {
+    return 'class="js-post-navigation-next"';
+}
 
 //Solution 2: override the function to pass arguments...
-function wistiti_get_previous_posts_link( $label = null, $args = null ) {
+/*function wistiti_get_previous_posts_link( $label = null, $args = null ) {
     global $paged;
 
     if ( null === $label )
@@ -480,6 +513,27 @@ function wistiti_get_next_posts_link( $label = null, $max_page = 0, $args = null
 
         return '<a class="'.$classes.'" href="' . next_posts( $max_page, false ) . "\" $attr>" . preg_replace('/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label) . '</a>';
     }
+}*/
+
+//Tools
+function wistiti_split_string_inarray($string) {
+  return preg_split('/\s+/', $string);
+}
+
+function wistiti_split_string_instrings($classes) {
+  $classes_array = wistiti_split_string_inarray($classes);
+
+  $list='';
+  $index=1;
+  foreach ($classes_array as $class) {
+
+    $list.='"'.$class.'"';
+    if ($index<count($classes_array)) $list.=' , ';
+
+    $index++;
+  }
+
+  return $list;
 }
 
 //General requirements

@@ -16,37 +16,23 @@
         wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
       //Columns
-      if ((isset($template_args['options']['cols']) && !empty($template_args['options']['cols'])))
-        $cols = $template_args['options']['cols'];
-        if (!isset ($cols['ns']) || empty($cols['ns'])) $cols['ns']=3;
-        if (!isset ($cols['m']) || empty($cols['m'])) $cols['m']=2;
-      else
-        $cols = array('ns' => 3, 'm' => 2); //default
-
-        if ((isset($template_args['options']['spacings']) && !empty($template_args['options']['spacings'])))
-          $spacings = $template_args['options']['spacings'];
-          if (!isset ($spacings['ns']) || empty($spacings['ns'])) $spacings['ns']=4;
-          if (!isset ($spacings['m']) || empty($spacings['m'])) $spacings['m']=4;
-        else
-          $spacings = array('ns' => 4, 'm' => 4); //default for now (test)
-
+      $cols = $template_args['options']['cols'];
       $widths = 'w-100';
       $widths .= ' w-'.floor(100/$cols['ns']).'-ns';
       $widths .= ' w-'.floor(100/$cols['m']).'-m';
+      //For future use (js)
+      $datas = 'data-cols-ns='.$cols['ns'];
+      $datas .= ' data-cols-m='.$cols['m'];
 
+      //Spacings
+      $spacings = $template_args['options']['spacings'];
       $vertical_spacing = 'pa'.$template_args['options']['spacings']['s'].'-half';
       $vertical_spacing .= ' pa'.$template_args['options']['spacings']['ns'].'-half-ns';
       $vertical_spacing .= ' pa'.$template_args['options']['spacings']['m'].'-half-m';
       $template_args['classes']['cell'] .= ' '.$vertical_spacing;
 
-      $datas = 'data-cols-ns='.$cols['ns'];
-      $datas .= ' data-cols-m='.$cols['m'];
-
       //Alternate media or card mode ?
-      $atts['alternate'] = 'no';
-      if  (isset($template_args['options']['alternate'])) {
-        $atts['alternate'] = ($template_args['options']['alternate']=='yes')?true:false;
-      }
+      $atts['alternate'] = $template_args['options']['alternate'];
 ?>
 
 <?php
@@ -98,10 +84,21 @@ endif; ?>
   </div>
 
   <?php if ($atts['pagination']) : ?>
-    <nav class="<?php echo $template_args['classes']['pagination'];?>">
-      <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
-      <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
+    <nav class="js-post-navigation <?php echo $template_args['post_navigation']['wrapper'];?>">
+      <?php echo get_previous_posts_link(__('Previous')); ?>
+      <?php echo get_next_posts_link(__('Next')); ?>
     </nav>
+    <?php echo "<script>
+    var navwrapper= document.querySelector('.js-post-navigation');
+    if (navwrapper!=null) {
+      navwrapper.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper']).");
+      var prev_link = navwrapper.querySelector('.js-post-navigation-previous');
+      if (prev_link!=null) prev_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['previous_link']).");
+      var next_link = navwrapper.querySelector('.js-post-navigation-next');
+      if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
+    }
+    </script>";
+    ?>
   <?php endif;?>
 
   <?php endif; wp_reset_query();

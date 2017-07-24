@@ -18,9 +18,11 @@ $template_args = array(
     'wrapper' => '',
     'row' => 'flex flex-wrap',
     'cell' => '', //do not set cell margins here, use spacings above !
-    'pagination' => 'center tc',
-    'pagination_prev_link' => 'link underline',
-    'pagination_next_link' => 'link underline'
+  ),
+  'post_navigation' =>  array(
+    'wrapper' => 'center tc',
+    'previous_link' => 'link underline',
+    'next_link' => 'link underline'
   )
 );
 ?>

@@ -10,11 +10,13 @@
   $thecontent = wpautop(get_the_content());
 
   //Customize
-  //Do not add tachyons classes here ! User appropriate customizer !
   global $partial_args;
-  if (isset($partial_args['options']['mode']) && (!empty($partial_args['options']['mode'])))
-    $mode = $partial_args['options']['mode'];
-  else $mode='normal';
+
+  //Alternate media or card thumb position ?
+  $mode = $partial_args['options']['mode'];
+  if (($atts['index'] % 2 !== 0) && ($atts['alternate'])) {
+    if ($mode=='normal') $mode="inverted"; else $mode="normal";
+  }
 ?>
 
 <div class="<?php echo $partial_args['classes']['wrapper'];?>">

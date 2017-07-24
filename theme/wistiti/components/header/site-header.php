@@ -4,17 +4,13 @@ global $header_args;
 get_customizer('components/header/site-header');
 
 //inline
-$inline = false;
-if (isset($header_args['options']['inline']))
-{
-  $inline = $header_args['options']['inline'];
-  if ($inline) {
-    if (!isset($header_args['options']['inline_breakpoint'])) $header_args['options']['inline_breakpoint']='ns';
-    $breakpoint_ext = ($header_args['options']['inline_breakpoint']!='s')?'-'.$header_args['options']['inline_breakpoint']:'';
+$inline = $header_args['options']['inline'];
+if ($inline) {
+  $breakpoint_ext = ($header_args['options']['inline_breakpoint']!='s')?'-'.$header_args['options']['inline_breakpoint']:'';
 
-    $header_args['classes']['wrapper'] .= ' flex'.$breakpoint_ext.' items-center'.$breakpoint_ext;
-  }
+  $header_args['classes']['wrapper'] .= ' flex'.$breakpoint_ext.' items-center'.$breakpoint_ext;
 }
+
 ?>
 
 <?php if ($header_args['options']['activate']) :?>

@@ -25,12 +25,13 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     if (!isset($atts['type']) || empty($atts['type'])) return false;
 
     //Default values according to type
-    $default_mode = "query";
-    $default_order = "ASC";
-    $default_orderby = "menu_order";
+    $default_mode = 'query';
+    $default_order = 'ASC';
+    $default_orderby = 'menu_order';
     $default_limit = -1;
-    $default_title = "";
+    $default_title = '';
     $default_layout = 'grid';
+    $default_layout_variant = '';
     $default_display = 'card';
     $default_firstheadinghierarchy = 3;
     $default_background = '';
@@ -49,14 +50,14 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     }
 
     //Automatic default atts / display
-    switch ($atts['display']) {
+    /*switch ($atts['display']) {
       case 'disclosure':
         $default_layout = 'dlist';
       break;
 
       default:
       break;
-    }
+    }*/
 
     //Taxonomy
 		$atts = shortcode_atts(
@@ -73,6 +74,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
       'orderby' => $default_orderby,
       'limit' => $default_limit,
 			'layout' => $default_layout,
+      'layout_variant' => $default_layout_variant,
 			'display' => $default_display,
       'background' => $default_background,
  			'firstheadinghierarchy' => $default_firstheadinghierarchy,

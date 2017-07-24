@@ -1,8 +1,8 @@
 <?php //List
 
     $list_type = 'u'; //unordered list by default
-    if (isset($atts['list']['type']) && !empty($atts['list']['type']) )
-      $list_type = $atts['list']['type'];
+    if (!empty($atts['layout_variant']) )
+      $list_type = $atts['layout_variant'];
 
     $list_query = $atts['query'];
 
@@ -17,10 +17,7 @@
       wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
     //Alternate media or card mode ?
-    $atts['alternate'] = 'no';
-    if  (isset($template_args['options']['alternate'])) {
-      $atts['alternate'] = ($template_args['options']['alternate']=='yes')?true:false;
-    }
+    $atts['alternate'] = $template_args['options']['alternate'];
 ?>
 
 
@@ -43,10 +40,21 @@
   $index++; endwhile;?>
 
   <?php if ($atts['pagination']) : ?>
-    <nav class="<?php echo $template_args['classes']['pagination'];?>">
+    <nav class="js-post-navigation <?php echo $template_args['post_navigation']['wrapper'];?>">
       <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
       <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
     </nav>
+    <?php echo "<script>
+    var navwrapper= document.querySelector('.js-post-navigation');
+    if (navwrapper!=null) {
+      navwrapper.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper']).");
+      var prev_link = navwrapper.querySelector('.js-post-navigation-previous');
+      if (prev_link!=null) prev_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['previous_link']).");
+      var next_link = navwrapper.querySelector('.js-post-navigation-next');
+      if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
+    }
+    </script>";
+    ?>
   <?php endif;?>
 
   <?php endif; wp_reset_query();
