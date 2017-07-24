@@ -27,7 +27,7 @@
 
 endwhile; ?>
 
-<?php
+<?php if ($atts['pagination']) :
 echo wistiti_post_navigation($template_args);
 
 echo "<script>
@@ -52,6 +52,6 @@ echo "<script>
     if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
   }
 </script>";
-?>
+endif; ?>
 
 <?php endif; wp_reset_query(); ?>
