@@ -5,7 +5,7 @@ An experiment for responsible WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
+Wistiti is an experimental WordPress framework project that wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a responsible website by refocusing on the essential and simplifying the technologies used :
 
@@ -14,7 +14,7 @@ It also proposes to regain the pleasure of creating a responsible website by ref
 * it's so exciting and enriching to fully master the code of the site that is being built.
 * it's also gives the possibility to understand and integrate disliked features like accessibility !
 * time becomes available to work on essentials : content and user experience
-* ecodesign and responsible websites should become the norm and this approach seems to be a good compromise for building lightweight websites that consume less energy.
+* ecodesign and responsible websites should become the norm and this approach seems to be a good compromise for building responsible websites that consume less energy.
 
 
 I will be very happy to get your opinion and feedback about this experiment.
@@ -24,14 +24,20 @@ Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemarti
 
 ## Principles
 
-This prototype wants to be useful to create simple but very lightweight WP websites.
+This framework prototype wants to be useful to create simple but very lightweight WP websites.
 For that it proposes :
 
 * a minimal starter theme,
 * a plugin that proposes very simple and fully overridable elements,
 
 so that Tachyons atomic classes can be used everywhere.
-If Tachyons classes are used here, it's worth to mention that any other atomic css set could be easily used with Wistiti, as any custom css of your choice (from a framework or self developed).
+
+Wistiti implements for this templates associated to customizer files. So HTML markup and CSS classes are separated, allowing the theme developer to only override the necessary CSS classes without overriding the whole template.
+
+For WordPress unfiltrable markups, Javascript is used to dynamically add the classes defined in customizer file. A CSS fallback can be provided by the child theme to support javascript absence.
+
+Important: if Tachyons classes are used here, it's worth to mention that any other atomic css set could be easily used with Wistiti, as any custom css of your choice (from a framework or self developed).
+
 
 Moreover, as far as possible :
 
@@ -66,12 +72,12 @@ The plugin proposes so far following elements :
 * News
 * Team
 
-These custom post types (so the content management is easy within WP's administration), propose overridable templates using layout and display variations that you can easily and fully customize with tachyons classes.
+These custom post types (so the content management is easy within WP's administration) propose overridable templates using layout and display variations that you can easily and fully customize their views with tachyons classes.
 
 For now : 
 
 Available layouts are : element, list, grid.
-Available displays are : jumbotron, calltoaction, disclosure, card, media.
+Available displays are : default, jumbotron, calltoaction, disclosure, card, media.
 
 ### Modules
 
@@ -105,7 +111,8 @@ Start from the Wistiti child theme (mywistiti) and start building your theme by 
 * building your custom templates or pages. For that, use Wistiti's elements shortcodes, widgets and tachyons.io classes.
 * overriding Wistiti's elements templates to fit your specific needs (layout and skin), via the customizer files.
 * adding content via the generated custom post types interfaces.
-* if necessary, extend the Wistiti plugin to add your own custom post types, shortcodes and templates. And share them and contribute here to allow other wistitis to use your new great features !
+* if necessary, extend the Wistiti plugin to add your own custom post types, shortcodes and templates. A child skelettn plugin will soon be available.
+* share your customizations and add-ons and contribute here to allow other wistitis to use your new great features !
 
 For more information and detailled documenation, a [wistiti Wiki](https://github.com/stephanemartinw/wistiti/wiki) is under construction.
 
@@ -123,10 +130,10 @@ Send your wistiti website url and we will add it here.
 * Improving support of blogs, post/page comments
 * Support of WordPress standard widgets
 * New elements for the Wistiti plugin.
-* A child plugin structure to allow easy custom extensions of custom post types and fields.
+* Adding a child plugin structure to allow easy add new custom elements and customize predefined custom post types and fields.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
-* Developing and testing Wistiti in the real world, using it on new adequate projects.
+* Developing and testing Wistiti framework in the real world, using it on new adequate and responsible web projects.
 
 Web developers, all suggestions are welcome ! Feel free to contribute here to Wistiti !
 
