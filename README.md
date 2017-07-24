@@ -5,7 +5,7 @@ An experiment for responsible WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-This experimental Wistiti project wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
+Wistiti is an experimental WordPress framework project that wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a responsible website by refocusing on the essential and simplifying the technologies used :
 
@@ -24,7 +24,7 @@ Please, feel free to say hello at contact@stephanemartinw.com or [@stephanemarti
 
 ## Principles
 
-This prototype wants to be useful to create simple but very lightweight WP websites.
+This framework prototype wants to be useful to create simple but very lightweight WP websites.
 For that it proposes :
 
 * a minimal starter theme,
@@ -133,7 +133,7 @@ Send your wistiti website url and we will add it here.
 * Adding a child plugin structure to allow easy add new custom elements and customize predefined custom post types and fields.
 * Managing CSS and Javscript optimizations. For now, [autoptimize](https://wordpress.org/plugins/autoptimize/) is still used on my website.
 * Improving SEO features.
-* Developing and testing Wistiti in the real world, using it on new adequate and responsible web projects.
+* Developing and testing Wistiti framework in the real world, using it on new adequate and responsible web projects.
 
 Web developers, all suggestions are welcome ! Feel free to contribute here to Wistiti !
 
