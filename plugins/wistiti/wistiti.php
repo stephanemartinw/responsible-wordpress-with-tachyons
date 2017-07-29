@@ -395,7 +395,7 @@ function wistiti_enqueue_scripts() {
 
   //Set scripts configuration before...
   $scriptsperelement=array (
-    'element' => 'disclosure button',
+    'element' => 'utils disclosure grid button',
     //'news' => 'utils grid',
     //'team' => 'utils grid',
     'contactform' => 'button'
