@@ -9,7 +9,7 @@
 
  global $wistiti_args;
  //get_template_part( 'wistiti', 'customizer' );
- get_customizer('wistiti');
+ wistiti_get_theme_customizer('wistiti');
 
 get_header(); ?>
 
@@ -17,11 +17,21 @@ get_header(); ?>
 		<main id="main" role="main">
 
 		<?php
-		while ( have_posts() ) : the_post();
+		if ( have_posts() ) :
 
 			//get_template_part( 'components/post/content', get_post_format() );
 			//Use Wistiti plugin for layout!
-			echo do_shortcode('[wistiti type="post" layout="element" id="'.get_the_ID().'"]');
+
+      //Get the post
+      $post_type = get_post_type();
+      $post_id = get_the_ID();
+
+      //Get the post taxonomy terms
+      $key = wistiti_get_template_post_key('single', $post_type, $post_id);
+
+      //Run shortcode
+      $options = wistiti_get_template_options('single', $post_type, $key);
+      echo do_shortcode('[wistiti type="'.$post_type.'" layout="'.$options['layout'].'" display="'.$options['display'].'" mode="view" pagination=true]');
 
 			//Deported to plugin/elememnts
 			//echo wistiti_post_navigation($wistiti_args);
@@ -32,7 +42,7 @@ get_header(); ?>
 				comments_template();
 			endif;*/
 
-		endwhile; // End of the loop.
+		endif;
 		?>
 
 		</main>

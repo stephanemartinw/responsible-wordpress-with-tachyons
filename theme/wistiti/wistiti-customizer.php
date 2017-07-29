@@ -6,6 +6,48 @@ $wistiti_args = array(
       'progressive' => 'no-js',
       'html' => 'lh-copy sans-serif'
     )
+  ),
+  'index' => array (
+    'post' => array(
+      'options' => array(
+        'layout' => 'list',
+        'display' => 'media'
+      )
+    ),
+    'element' => array(
+      'options' => array(
+        'layout' => 'list',
+        'display' => 'media'
+      )
+    )
+  ),
+  'single' => array (
+    'post' => array(
+      'options' => array(
+        'layout' => 'block',
+        'display' => 'unique'
+      )
+    ),
+    'element' => array(
+      'options' => array(
+        'layout' => 'block',
+        'display' => 'unique'
+      )
+    )
+  ),
+  'archive' => array (
+    'post' => array(
+      'options' => array(
+        'layout' => 'list',
+        'display' => 'media'
+      )
+    ),
+    'element' => array(
+      'options' => array(
+        'layout' => 'list',
+        'display' => 'media'
+      )
+    )
   )
 );
 ?>

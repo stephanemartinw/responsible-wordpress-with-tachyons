@@ -1,7 +1,7 @@
 <?php
 	global $navigation_args;
 	//get_template_part( 'components/navigation/navigation-main', 'customizer' );
-	get_customizer('components/navigation/navigation-main');
+	wistiti_get_theme_customizer('components/navigation/navigation-main');
 
 	//Manage expanding
 	$expand = $navigation_args['options']['expand'];

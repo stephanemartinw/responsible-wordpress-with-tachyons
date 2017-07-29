@@ -9,12 +9,14 @@
     //Default skin
     //Do not add tachyons classes here ! User appropriate customizer !
     global $template_args;
-    if (!wistiti_get_template('/customizers/'.$atts['type'].'-list-customizer.php', $atts))
-      wistiti_get_template('/customizers/list-customizer.php', $atts);
+    wistiti_get_customizer($atts);
+    //if (!wistiti_get_template('customizers/'.$atts['type'].'-list-customizer.php', $atts))
+    //  wistiti_get_template('customizers/list-customizer.php', $atts);
 
     global $partial_args;
-    if (!wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
-      wistiti_get_template('/partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
+    wistiti_get_customizer($atts, true);
+    //if (!wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
+    //  wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
     //Alternate media or card mode ?
     $atts['alternate'] = $template_args['options']['alternate'];
@@ -27,33 +29,16 @@
       //Set atts for template
       $atts['index']=$index;
 
-        //Partial template search
-        //1  = partials/type-taxonomy-display.php
-        //2  = partials/type-display.php
-        //3  = partials/type-classic.php (default display)
-        if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'.php', $atts)) {
-          if (!wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['display'].'.php', $atts))
-            wistiti_get_template('/partials/'.$atts['type'].'-media.php', $atts);
-        }
+      //Partial template search
+      wistiti_get_partial($atts);
 
   $index++; endwhile;?>
 
   <?php if ($atts['pagination']) : ?>
-    <nav class="js-posts-navigation <?php echo $template_args['post_navigation']['wrapper'];?>">
-      <?php echo wistiti_get_previous_posts_link(__('Previous'), array('classes' => $template_args['classes']['pagination_prev_link'])); ?>
-      <?php echo wistiti_get_next_posts_link(__('Next'), $grid_query->max_num_pages, array('classes' => $template_args['classes']['pagination_next_link'])); ?>
+    <nav class="<?php echo $template_args['post_navigation']['wrapper'];?>">
+      <?php echo wistiti_previous_posts_link(__('Previous'), $template_args); ?>
+      <?php echo wistiti_next_posts_link(__('Next'), $template_args/*, $grid_query->max_num_pages*/); ?>
     </nav>
-    <?php echo "<script>
-    var navwrapper= document.querySelector('.js-posts-navigation');
-    if (navwrapper!=null) {
-      navwrapper.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['wrapper']).");
-      var prev_link = navwrapper.querySelector('.js-posts-navigation-previous');
-      if (prev_link!=null) prev_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['previous_link']).");
-      var next_link = navwrapper.querySelector('.js-posts-navigation-next');
-      if (next_link!=null) next_link.classList.add(".wistiti_split_string_instrings($template_args['post_navigation']['next_link']).");
-    }
-    </script>";
-    ?>
   <?php endif;?>
 
   <?php endif; wp_reset_query();

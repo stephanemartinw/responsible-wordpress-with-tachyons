@@ -1,11 +1,11 @@
 <?php
 global $header_args;
 //get_template_part( 'components/header/site-header', 'customizer' );
-get_customizer('components/header/site-header');
+wistiti_get_theme_customizer('components/header/site-header');
 
 global $branding_args;
 //get_template_part( 'components/header/site-branding', 'customizer' );
-get_customizer('components/header/site-branding');
+wistiti_get_theme_customizer('components/header/site-branding');
 
 //inline
 $inline = $header_args['options']['inline'];

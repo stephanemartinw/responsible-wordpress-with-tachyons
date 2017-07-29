@@ -29,11 +29,13 @@ $footer_args = array(
   'options' => array(
     'col' => $wcounter,
     'width' => $wwidth,
-    'logo_width' => $wlogo,
-    'logo_src' => wistiti_theme_the_custom_logo_src()
+    'logo_show' => true,
+    'logo_width' => $wlogo
   ),
   'classes' => array(
-    'wrapper' => 'cf pv4'
+    'wrapper' => 'cf pv4',
+    'logo_link' => 'link',
+    'logo' => 'w-100-ns w-33 h-auto'
   )
 );
 ?>

@@ -21,24 +21,22 @@ firstheadinghierarchy : Hx starting level
 
 function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
-    //Type
-    if (!isset($atts['type']) || empty($atts['type'])) return false;
-
     //Default values according to type
+    $default_type= 'element';
     $default_mode = 'query';
     $default_order = 'ASC';
     $default_orderby = 'menu_order';
     $default_limit = -1;
     $default_title = '';
-    $default_layout = 'grid';
+    $default_layout = 'block';
     $default_layout_variant = '';
-    $default_display = 'card';
+    $default_display = 'default';
     $default_firstheadinghierarchy = 3;
     $default_background = '';
     $default_pagination = false;
 
     //Automatic default atts / type
-    switch ($atts['type']) {
+    /*switch ($atts['type']) {
 
       case 'block':
         $default_layout = 'element';
@@ -47,7 +45,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
       default:
       break;
-    }
+    }*/
 
     //Automatic default atts / display
     /*switch ($atts['display']) {
@@ -64,7 +62,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 		array(
       'mode' => $default_mode,
       'title' => $default_title,
-			'type' => '',
+      'type' => $default_type,
       'id' => '',
       'meta_key' => '',
       'meta_value' => '',

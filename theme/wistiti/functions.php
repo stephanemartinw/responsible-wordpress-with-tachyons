@@ -86,16 +86,18 @@ add_action( 'after_setup_theme', 'wistiti_theme_setup' );
 
 
 /*
- * Return custom logo src
+ * Return the custom logo
  */
-function wistiti_theme_the_custom_logo_src() {
-    if (has_custom_logo()) {
-      $custom_logo_id = get_theme_mod( 'custom_logo' );
-      $image = wp_get_attachment_image_src( $custom_logo_id , 'full' );
-      return $image[0];
-    }
-  }
+function wistiti_theme_get_custom_logo($args) {
+  if (has_custom_logo()) {
+    $markup = get_custom_logo();
+    //Replace wp native classes
+    $markup = str_replace('custom-logo-link', $args['classes']['logo_link'], $markup);
+    $markup = str_replace('custom-logo', $args['classes']['logo'], $markup);
 
+    return $markup;
+  }
+}
 /**
  * Register widget area.
  *
@@ -225,12 +227,12 @@ add_filter( 'tiny_mce_before_init', 'wistiti_child_mce_before_init_insert_format
 */
 
 /*
-* To do : Customizers finder
+* Customizers finder
 * Returns all customizers found (wistiti parent base and child override).
 * This finder avoids the dev to overide the whole customizer but only necessary array fields.
 *
 */
-function locate_customizer($customizer_name, $customizer_path = '', $default_path = '') {
+function wistiti_locate_theme_customizer($customizer_name, $customizer_path = '', $default_path = '') {
 
 	$customizer=array();
 
@@ -248,8 +250,8 @@ function locate_customizer($customizer_name, $customizer_path = '', $default_pat
 	return apply_filters( 'wistiti_locate_customizer', $customizer, $customizer_name, $customizer_path, $default_path );
 }
 
-function get_customizer($customizer_name, $customizer_path = '', $default_path = '') {
-	$customizer_files = locate_customizer($customizer_name, $customizer_path = '', $default_path = '');
+function wistiti_get_theme_customizer($customizer_name, $customizer_path = '', $default_path = '') {
+	$customizer_files = wistiti_locate_theme_customizer($customizer_name, $customizer_path = '', $default_path = '');
 	if (!empty($customizer_files)) {
 		foreach ($customizer_files as $customizer_file) {
 			if ( file_exists( $customizer_file ) )
@@ -258,6 +260,63 @@ function get_customizer($customizer_name, $customizer_path = '', $default_path =
 			}
 		}
 	}
+}
+
+/*
+* Get the post taxonomy terms
+*/
+function wistiti_get_template_post_key($template, $post_type, $post_id) {
+
+  $key = '';
+
+  $taxonomies = get_object_taxonomies($post_type);
+  foreach ($taxonomies as $taxonomy) {
+    $terms = wp_get_post_terms( $post_id,  $taxonomy);
+    foreach ($terms as $term) {
+
+      if (isset($wistiti_args['single'][$term->slug]) && !empty($wistiti_args['single'][$term->slug])) {
+        $key = $term->slug;
+        break;
+      }
+      $ancestors = get_ancestors($term->term_id, $taxonomy, 'taxonomy');
+      if (!empty($ancestors)) {
+        foreach ($ancestors as $ancestor) {
+          $aterm= get_term($ancestor, $taxonomy);
+
+          if (isset($wistiti_args['single'][$aterm->slug]) && !empty($wistiti_args['single'][$aterm->slug])) {
+            $key = $aterm->slug;
+            break;
+          }
+        }
+      }
+    }
+  }
+
+  return $key;
+}
+
+/*
+* Get template option in wistiti customizer
+*/
+function wistiti_get_template_options($template, $post_type, $key = '') {
+
+  global $wistiti_args;
+
+  $options = array();
+	if (!empty($key)) {
+    $options = $wistiti_args[$template][$post_type][$key]['options'];
+  } else {
+    $options = $wistiti_args[$template][$post_type]['options'];
+  }
+  //default values
+  if (!isset($options['layout']) || empty($options['layout']))
+    $options['layout']='block';
+
+  if (!isset($options['display']) || empty($options['display']))
+      $options['display']='default';
+
+  return $options;
+
 }
 
 /*
@@ -468,24 +527,11 @@ if (!class_exists('Wistiti_Walker_Comment')) {
 	}
 }
 
-/*
-* Posts : Modify The Read More Link Text
-*/
-function wistiti_modify_read_more_link() {
-
-    return '<a class="link underline" href="' . get_permalink() . '">'.sprintf(
-			/* translators: %s: Name of current post. */
-		  __( 'Continue reading %s', 'wistiti'),
-			the_title( '<span class="clip screen-reader-text">"', '"</span>', false )
-		).'</a>';
-}
-add_filter( 'the_content_more_link', 'wistiti_modify_read_more_link' );
-
-
 /**
  * Custom template tags for this theme.
  */
-require get_template_directory() . '/inc/template-tags.php';
+// Moved to wistiti plugin ?
+//require get_template_directory() . '/inc/template-tags.php';
 
 /**
  * Custom functions that act independently of the theme templates.

@@ -1,6 +1,6 @@
 <?php
     global $contactform_args;
-    wistiti_get_template('/customizers/contact-form-customizer.php', $atts);
+    wistiti_get_template('customizers/contact-form-customizer.php', $atts);
 ?>
 
 <form action="<?php esc_url( $_SERVER['REQUEST_URI'] ); ?>" method="post">

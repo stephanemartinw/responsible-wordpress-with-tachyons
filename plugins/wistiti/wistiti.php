@@ -9,6 +9,8 @@ License: GPLv2
 */
 
 define('__ROOT__', dirname(__FILE__));
+define('__WISTITI__', 'wistiti');
+define('__MY_WISTITI__', 'my-wistiti');
 
 add_action('plugins_loaded', 'wistiti_init');
 function wistiti_init() {
@@ -37,8 +39,8 @@ function wistiti_atts( $pairs, $atts) {
  *
  * Locate the called template.
  * Search Order:
- * 1. /themes/theme/plugins/$template_name
- * 2. /themes/theme/$template_name
+ * 1. /themes/theme/$template_name/wistiti
+ * 2. /plugins/my-wistiti/templates/$template_name.
  * 3. /plugins/wistiti/templates/$template_name.
  *
  * @since 1.0.0
@@ -48,14 +50,18 @@ function wistiti_atts( $pairs, $atts) {
  * @param 	string	$default_path			Default path to template files.
  * @return 	string 							Path to the template file.
  */
-function wistiti_locate_template( $template_name, $template_path = '', $default_path = '' ) {
+function wistiti_locate_template( $template_name, $template_path = '', $default_path = '', $default_child_path = '' ) {
 
 	// Set variable to search in plugins template folder of theme.
 	if ( ! $template_path ) :
-		$template_path = 'plugins/wistiti/';
+		$template_path = __WISTITI__ . '/';
 	endif;
 
-	// Set default plugin templates path.
+	// Set default plugin templates pathes.
+  if ( ! $default_child_path ) :
+    $default_child_path = plugin_dir_path( __DIR__ ) . __MY_WISTITI__. '/templates/';
+  endif;
+
 	if ( ! $default_path ) :
 		$default_path = plugin_dir_path( __FILE__ ) . 'templates/';
 	endif;
@@ -68,7 +74,10 @@ function wistiti_locate_template( $template_name, $template_path = '', $default_
 
 	// Get plugins template file.
 	if ( ! $template ) :
-		$template = $default_path . $template_name;
+    //Check child plugin named 'mywistiti' (mandatory)
+    if (!file_exists($default_child_path . $template_name)) $template = $default_path . $template_name;
+    else $template =  $default_child_path . $template_name;
+
 	endif;
 
 	return apply_filters( 'wistiti_locate_template', $template, $template_name, $template_path, $default_path );
@@ -88,12 +97,12 @@ function wistiti_locate_template( $template_name, $template_path = '', $default_
  * @param string 	$string $template_path	Path to templates.
  * @param string	$default_path			Default path to template files.
  */
-function wistiti_get_template( $template_name, $atts = array(), $tempate_path = '', $default_path = '' ) {
+function wistiti_get_template( $template_name, $atts = array(), $tempate_path = '', $default_path = '',  $default_child_path = '' ) {
 	if ( is_array( $atts ) && isset( $atts ) ) :
 		extract( $atts );
 	endif;
 
-	$template_file = wistiti_locate_template( $template_name, $tempate_path, $default_path );
+	$template_file = wistiti_locate_template( $template_name, $tempate_path, $default_path,$default_child_path );
 	if ( ! file_exists( $template_file ) ) :
 		_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template_file ), '1.0.0' );
 		return false;
@@ -102,6 +111,67 @@ function wistiti_get_template( $template_name, $atts = array(), $tempate_path = 
 	include $template_file;
 
 	return true;
+}
+
+/*
+* Get Partial template
+* 1  = partials/type-taxonomy_value-display.php (includes parents values)
+* 2  = partials/type-display.php
+* 3  = partials/type-classic.php (default display)
+*/
+function wistiti_get_partial($atts) {
+  $foundit = false;
+  if (!empty($atts['tax_key']) && !empty($atts['tax_value'])) {
+
+      $foundit = wistiti_get_template('/partials/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'.php', $atts);
+      if (!$foundit) {
+        //Search for ancestors partials
+        $taxonomy = $atts['type'].'-'.$atts['tax_key'];
+        $child = get_term_by('slug', $atts['tax_value'], $taxonomy);
+        $ancestors = get_ancestors($child->term_id, $taxonomy, 'taxonomy');
+        if (!empty($ancestors)) {
+          foreach ($ancestors as $ancestor) {
+            $term= get_term($ancestor, $taxonomy);
+              if (wistiti_get_template('/partials/'.$atts['type'].'-'.$term->slug.'-'.$atts['display'].'.php', $atts)) {
+                $foundit = true;
+                break;
+              }
+          }
+        }
+      }
+  }
+
+  if (!$foundit) $foundit = wistiti_get_template('partials/'.$atts['type'].'-'.$atts['display'].'.php', $atts);
+  if (!$foundit) $foundit = wistiti_get_template('partials/'.$atts['type'].'-media.php', $atts);
+
+  return $foundit;
+}
+
+function wistiti_get_customizer($atts, $is_partial = false, $default_customizer_path = '') {
+
+  $foundit=false;
+
+  // Set default plugin templates pathes.
+  if ( ! $default_customizer_path ) {
+    if (!$is_partial) $default_customizer_path = 'customizers/';
+    else $default_customizer_path = 'partials/customizers/';
+  }
+
+  if (!$is_partial) {
+    $default_path = $default_customizer_path.$atts['layout'].'-customizer.php';
+    $path = $default_customizer_path . $atts['type'].'-'.$atts['layout'].'-customizer.php';
+  }
+  else {
+    $default_path = $default_customizer_path . $atts['type'].'-'.$atts['display'].'-customizer.php';
+    if (!empty($atts['tax_value']))
+      $path = $default_customizer_path . $atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php';
+    else $path = $default_path;
+  }
+
+  if (!$foundit) $foundit = wistiti_get_template($path);
+  if (!$foundit) $foundit = wistiti_get_template($default_path);
+
+  return $foundit;
 }
 
 class wistiti_settings
@@ -201,17 +271,12 @@ class wistiti_settings
         $new_input = array();
 
         //Includes
-        if( isset( $input['block'] ) )
-            $new_input['block'] = true;
-        if( isset( $input['block_onpage'] ) )
-            $new_input['block_onpage'] = sanitize_text_field($input['block_onpage']) ;
+        if( isset( $input['element'] ) )
+            $new_input['element'] = true;
+        if( isset( $input['element_onpage'] ) )
+            $new_input['element_onpage'] = sanitize_text_field($input['element_onpage']) ;
 
-        if( isset( $input['service'] ) )
-            $new_input['service'] = true ;
-        if( isset( $input['service_onpage'] ) )
-            $new_input['service_onpage'] = sanitize_text_field($input['service_onpage']) ;
-
-        if( isset( $input['news'] ) )
+        /*if( isset( $input['news'] ) )
             $new_input['news'] = true ;
         if( isset( $input['news_onpage'] ) )
             $new_input['news_onpage'] = sanitize_text_field($input['news_onpage']) ;
@@ -220,6 +285,7 @@ class wistiti_settings
             $new_input['team'] = true ;
         if( isset( $input['team_onpage'] ) )
             $new_input['team_onpage'] = sanitize_text_field($input['team_onpage']) ;
+        */
 
         if( isset( $input['contactform'] ) )
             $new_input['contactform'] = true ;
@@ -261,10 +327,9 @@ class wistiti_settings
 
         $value = array("name" => "Post Types to include",
         	"desc" => "Select the pages you want to include. All pages are excluded by default",
-        	"includes" => array( "block"=>"Block",
-                              "service"=>"Services",
-                              "news"=>"News",
-                              "team"=>"Team",
+        	"includes" => array( "element"=>"Element",
+                              //"news"=>"News",
+                              //"team"=>"Team",
                               "contactform"=>"Contact Form")
         );
 
@@ -330,10 +395,9 @@ function wistiti_enqueue_scripts() {
 
   //Set scripts configuration before...
   $scriptsperelement=array (
-    'block' => 'disclosure button',
-    'service' => 'utils grid',
-    'news' => 'utils grid',
-    'team' => 'utils grid',
+    'element' => 'disclosure button',
+    //'news' => 'utils grid',
+    //'team' => 'utils grid',
     'contactform' => 'button'
   );
   $scripts=array(
@@ -374,146 +438,15 @@ function wistiti_enqueue_scripts() {
   if ($scripts['disclosure']) wp_enqueue_script( 'wistiti-disclosure', plugins_url( '/js/disclosure.js', __FILE__ ), array());
 }
 
-/*
-* Elements : Modify Post Navigation
-*/
-function wistiti_post_navigation($template_args) {
-
-  $post_navigation_args = array();
-  if (isset($template_args['post_navigation']['prev_text'])) $post_navigation_args['prev_text'] = $template_args['post_navigation']['prev_text'];
-  if (isset($template_args['post_navigation']['next_text'])) $post_navigation_args['next_text'] = $template_args['post_navigation']['next_text'];
-  if (isset($template_args['post_navigation']['in_same_term'])) {
-    $post_navigation_args['post_navigation']['in_same_term'] = $template_args['post_navigation']['in_same_term'];
-    if ($template_args['post_navigation']['in_same_term']==true && isset($template_args['post_navigation']['tax_value']) && (!empty($template_args['post_navigation']['tax_value'])))
-    $post_navigation_args['post_navigation']['taxonomy'] = $template_args['post_navigation']['tax_value'];
-  }
-  if (isset($template_args['post_navigation']['screen_reader_text'])) $post_navigation_args['screen_reader_text'] = $template_args['post_navigation']['screen_reader_text'];
-
-  return get_the_post_navigation($post_navigation_args);
-
-	//or from original https://developer.wordpress.org/reference/functions/get_the_post_navigation/
-	/*$args = wp_parse_args( $post_navigation_args, array(
-        'prev_text'          => '%title',
-        'next_text'          => '%title',
-        'in_same_term'       => false,
-        'excluded_terms'     => '',
-        'taxonomy'           => 'category',
-        'screen_reader_text' => __( 'Post navigation' ),
-    ) );
-
-    $navigation = '';
-
-    //calls get_adjacent_post_link: this function should be overrided to allow <a> class customization
-    $previous = get_previous_post_link(
-        '<div class="'.$template_args['post_navigation']['wrapper_previous'].'">%link</div>',
-        $args['prev_text'],
-        $args['in_same_term'],
-        $args['excluded_terms'],
-        $args['taxonomy']
-    );
-
-    //calls get_adjacent_post_link: this function should be overrided to allow <a> class customization
-    $next = get_next_post_link(
-        '<div class="'.$template_args['post_navigation']['wrapper_next'].'">%link</div>',
-        $args['next_text'],
-        $args['in_same_term'],
-        $args['excluded_terms'],
-        $args['taxonomy']
-    );
-
-    // Only add markup if there's somewhere to navigate to.
-    if ( $previous || $next ) {
-
-        if (isset($template_args['post_navigation']['wrapper'])) $classes='wrapper='.$template_args['post_navigation']['wrapper'];
-        if (isset($template_args['post_navigation']['links'])) $classes.='&links='.$template_args['post_navigation']['links'];
-        $navigation = _navigation_markup( $previous . $next, $classes, $args['screen_reader_text'] );
-    }
-
-    return $navigation;*/
-}
-
-// define the navigation_markup_template callback
-function wistiti_filter_navigation_markup_template( $template, $classes ) {
-
-  $classes_array = array();
-  parse_str($classes,$classes_array);
-
-	//modify original template with classes
-  $template = '
-   <nav class="%1$s" role="navigation">
-       <h2 class="clip screen-reader-text">%2$s</h2>
-       <div class="js-nav-links">%3$s</div>
-   </nav>';
-
-	/*$template = '
-    <nav class="'.$classes_array['wrapper'].'" role="navigation">
-        <h2 class="clip screen-reader-text">%2$s</h2>
-        <div class="'.$classes_array['links'].'">%3$s</div>
-    </nav>';*/
-
-		return $template;
-};
-add_filter( 'navigation_markup_template', 'wistiti_filter_navigation_markup_template', 10, 2 );
-
-
-//For pagination :
-//Solution 1: use a filter here
-function wiwtiti_get_previous_posts_link($label) {
-  //array('classes' => $template_args['classes']['pagination_prev_link'])
-  return get_previous_posts_link($label);
-}
-function wiwtiti_get_next_posts_link($label) {
-  return get_next_posts_link($label);
-}
-
+/* We add here php classes to be replaced before returning markup ! */
 add_filter('next_posts_link_attributes', 'wistiti_posts_link_next_attributes');
 add_filter('previous_posts_link_attributes', 'wistiti_posts_link_previous_attributes');
 function wistiti_posts_link_previous_attributes() {
-    return 'class="js-posts-navigation-previous"';
+    return 'class="php-posts-navigation-previous"';
 }
 function wistiti_posts_link_next_attributes() {
-    return 'class="js-posts-navigation-next"';
+    return 'class="php-posts-navigation-next"';
 }
-
-//Solution 2: override the function to pass arguments...
-/*function wistiti_get_previous_posts_link( $label = null, $args = null ) {
-    global $paged;
-
-    if ( null === $label )
-        $label = __( '&laquo; Previous Page' );
-
-    if ( !is_single() && $paged > 1 ) {
-        $attr = apply_filters( 'previous_posts_link_attributes', '' );
-
-        $classes='';
-        if (isset($args['classes'])) $classes = $args['classes'];
-        return '<a class="'.$classes.'" href="' . previous_posts( false ) . "\" $attr>". preg_replace( '/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label ) .'</a>';
-    }
-}
-
-function wistiti_get_next_posts_link( $label = null, $max_page = 0, $args = null ) {
-    global $paged, $wp_query;
-
-    if ( !$max_page )
-        $max_page = $wp_query->max_num_pages;
-
-    if ( !$paged )
-        $paged = 1;
-
-    $nextpage = intval($paged) + 1;
-
-    if ( null === $label )
-        $label = __( 'Next Page &raquo;' );
-
-    if ( !is_single() && ( $nextpage <= $max_page ) ) {
-        $attr = apply_filters( 'next_posts_link_attributes', '' );
-
-        $classes='';
-        if (isset($args['classes'])) $classes = $args['classes'];
-
-        return '<a class="'.$classes.'" href="' . next_posts( $max_page, false ) . "\" $attr>" . preg_replace('/&([^#])(?![a-z]{1,8};)/i', '&#038;$1', $label) . '</a>';
-    }
-}*/
 
 //Tools
 function wistiti_split_string_inarray($string) {
@@ -538,16 +471,18 @@ function wistiti_split_string_instrings($classes) {
 
 //General requirements
 $tools = get_option('wistiti_tool');
+
+require_once(__ROOT__.'/inc/template-tags.php');
+
 if ($tools['seo']) require_once(__ROOT__.'/tools/seo.php');
 if ($tools['sitemap']) require_once(__ROOT__.'/tools/sitemap.php');
 if ($tools['ga'])require_once(__ROOT__.'/tools/ga.php');
 
 //Optional requirements
 $includes = get_option('wistiti_include_name');
-if ($includes['block']) require_once(__ROOT__.'/types/block.php');
-if ($includes['service']) require_once(__ROOT__.'/types/service.php');
-if ($includes['news']) require_once(__ROOT__.'/types/news.php');
-if ($includes['team']) require_once(__ROOT__.'/types/team.php');
+if ($includes['element']) require_once(__ROOT__.'/types/element.php');
+//if ($includes['news']) require_once(__ROOT__.'/types/news.php');
+//if ($includes['team']) require_once(__ROOT__.'/types/team.php');
 
 if ($includes['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 

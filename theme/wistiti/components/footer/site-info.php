@@ -1,7 +1,7 @@
 <?php
 	global $footer_args;
 	//get_template_part( 'components/footer/site-info', 'customizer' );
-	get_customizer('components/footer/site-info');
+	wistiti_get_theme_customizer('components/footer/site-info');
 
 	if ($footer_args['options']['col']==0) return;
 
@@ -13,11 +13,10 @@
 		<?php if ( is_active_sidebar( 'footer-1' ) ) : ?>
 		  <div class="fl w-100 w-<?php echo $footer_args['options']['width'];?>-ns">
 				<div class="cf">
-
 						<?php
-							if (!empty($footer_args['options']['logo_src'])) :?>
+							if (!empty($footer_args['options']['logo_show'])) :?>
 							  <div class="fl w-100 w-<?php echo $footer_args['options']['logo_width'];?>-ns tc pa2">
-										<img class="w-100-ns w-33 h-auto" src="<?php echo $footer_args['options']['logo_src']; ?>" alt="<?php bloginfo( 'name' ); ?>"\>
+										<?php echo wistiti_theme_get_custom_logo($footer_args); ?>
 								</div>
 							<?php endif; ?>
 

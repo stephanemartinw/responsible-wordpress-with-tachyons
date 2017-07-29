@@ -12,7 +12,12 @@
  * @package Wistiti
  */
 
+global $wistiti_args;
+//get_template_part( 'wistiti', 'customizer' );
+wistiti_get_theme_customizer('wistiti');
+
 get_header(); ?>
+
 	<div id="primary" class="content-area">
 		<main id="main" class="site-main" role="main">
 
@@ -33,10 +38,16 @@ get_header(); ?>
 			//get_template_part( 'components/post/content', $layout );
 
 			//Use Wistiti plugin for layout!
-			echo do_shortcode('[wistiti type="post" mode="view" display="media" orderby="post_date" order="ASC" pagination=true]');
 
-			// To customize !
-			//wisiti_posts_navigation();
+			//Get the post
+			$post_type = get_post_type();
+			$post_id = get_the_ID();
+			//Get the post taxonomy terms
+			$key = ''; //wistiti_get_template_post_key('index', $post_type, $post_id);
+
+			//Run shortcode
+			$options = wistiti_get_template_options('index', $post_type, $key);
+			echo do_shortcode('[wistiti type="'.$post_type.'" layout="'.$options['layout'].'" display="'.$options['display'].'" mode="view" orderby="post_date" order="ASC" pagination=true]');
 
 		else :
 

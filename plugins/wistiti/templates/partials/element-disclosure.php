@@ -4,11 +4,6 @@
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
   $secondheadinghierachy = $firstheadinghierarchy+1;
 
-  //Content
-  $theexcerpt = '';
-  if(has_excerpt()) $theexcerpt = get_the_excerpt();
-  $thecontent = wpautop(get_the_content());
-
   //Customize
   global $partial_args;
 
@@ -25,7 +20,7 @@ use :https://www.w3.org/TR/wai-aria-practices/examples/disclosure/js/disclosureB
 </dt>
 <dd class="<?php echo $partial_args['classes']['wrapper_definition'];?>">
   <div id="faq<?php echo $index;?>" class="<?php echo $partial_args['classes']['definition'];?>">
-    <?php if (!empty($theexcerpt)):?><p class="<?php echo $partial_args['classes']['excerpt'];?>"><?php echo $theexcerpt;?></p><?php endif; ?>
-    <?php echo $thecontent;?>
+    <?php wistiti_post_excerpt($partial_args, $secondheadinghierarchy);?>
+    <?php wistiti_post_content($partial_args, $secondheadinghierarchy);?>
   </div>
 </dd>

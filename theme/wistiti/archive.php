@@ -7,6 +7,10 @@
  * @package Wistiti
  */
 
+global $wistiti_args;
+//get_template_part( 'wistiti', 'customizer' );
+wistiti_get_theme_customizer('wistiti');
+
 get_header(); ?>
 
 	<div id="primary" class="content-area">
@@ -24,7 +28,14 @@ get_header(); ?>
 			<?php
 
 			//Use Wistiti plugin for layout!
-			echo do_shortcode('[wistiti type="'.get_post_type().'" mode="view"]');
+			//Get the post
+			$post_type = get_post_type();
+			$post_id = get_the_ID();
+
+			//Get the post taxonomy terms
+			$key = wistiti_get_template_post_key('archive', $post_type, $post_id);
+			$options = wistiti_get_template_options('archive', $post_type, $key);
+			echo do_shortcode('[wistiti type="'.$post_type.'" layout="'.$options['layout'].'" display="'.$options['display'].'" mode="view"]');
 
 			/* Start the Loop */
 			//while ( have_posts() ) : the_post();

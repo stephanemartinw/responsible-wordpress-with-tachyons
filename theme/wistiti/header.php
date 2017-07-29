@@ -11,7 +11,7 @@
 
 global $wistiti_args;
 //get_template_part( 'wistiti', 'customizer' );
-get_customizer('wistiti');
+wistiti_get_theme_customizer('wistiti');
 
 
  ?><!DOCTYPE html>
