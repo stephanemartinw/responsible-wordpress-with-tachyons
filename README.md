@@ -5,7 +5,7 @@ An experiment for responsible WordPress websites with [tachyons.io](https://gith
 
 ## Presentation
 
-Wistiti is an experimental WordPress framework project that wants to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
+Wistiti is an experimental WordPress framework project for theme developers who want to explore a way for building effective, lightweight, performant and accessible websites with WordPress.
 
 It also proposes to regain the pleasure of creating a responsible website by refocusing on the essential and simplifying the technologies used :
 
