@@ -18,20 +18,28 @@
       //  wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
       //Columns
-      $cols = $template_args['options']['cols'];
-      $widths = 'w-100';
-      $widths .= ' w-'.floor(100/$cols['ns']).'-ns';
-      $widths .= ' w-'.floor(100/$cols['m']).'-m';
-      //For future use (js)
-      $datas = 'data-cols-ns='.$cols['ns'];
-      $datas .= ' data-cols-m='.$cols['m'];
+      if (isset($template_args['options']['cols']) && !empty($template_args['options']['cols'])) {
+        $cols = $template_args['options']['cols'];
+        $width = '';
+        $datas = '';
+        foreach ($cols as $key => $col) {
+          if ($key==='default') $key ='';
+          else $key = '-'.$key;
+          $widths .= ' w-'.floor(100/$col).$key;
+          $datas .= ' data-cols-ns='.$col.$key;
+        }
+      }
 
       //Spacings
-      $spacings = $template_args['options']['spacings'];
-      $vertical_spacing = 'pa'.$template_args['options']['spacings']['s'].'-half';
-      $vertical_spacing .= ' pa'.$template_args['options']['spacings']['ns'].'-half-ns';
-      $vertical_spacing .= ' pa'.$template_args['options']['spacings']['m'].'-half-m';
-      $template_args['classes']['cell'] .= ' '.$vertical_spacing;
+      if (isset($template_args['options']['spacings']) && !empty($template_args['options']['spacings'])) {
+        $spacings = $template_args['options']['spacings'];
+        foreach ($spacings as $key => $spacing) {
+          if ($key==='default') $key ='';
+          else $key = '-'.$key;
+          $vertical_spacing .= ' pa'.$spacing.'-half'.$key;
+        }
+        $template_args['classes']['cell'] .= ' '.$vertical_spacing;
+      }
 
       //Alternate media or card mode ?
       $atts['alternate'] = $template_args['options']['alternate'];

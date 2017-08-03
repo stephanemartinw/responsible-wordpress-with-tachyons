@@ -97,12 +97,12 @@ function wistiti_locate_template( $template_name, $template_path = '', $default_
  * @param string 	$string $template_path	Path to templates.
  * @param string	$default_path			Default path to template files.
  */
-function wistiti_get_template( $template_name, $atts = array(), $tempate_path = '', $default_path = '',  $default_child_path = '' ) {
+function wistiti_get_template( $template_name, $atts = array(), $template_path = '', $default_path = '',  $default_child_path = '' ) {
 	if ( is_array( $atts ) && isset( $atts ) ) :
 		extract( $atts );
 	endif;
 
-	$template_file = wistiti_locate_template( $template_name, $tempate_path, $default_path,$default_child_path );
+	$template_file = wistiti_locate_template( $template_name, $template_path, $default_path,$default_child_path );
 	if ( ! file_exists( $template_file ) ) :
 		_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template_file ), '1.0.0' );
 		return false;

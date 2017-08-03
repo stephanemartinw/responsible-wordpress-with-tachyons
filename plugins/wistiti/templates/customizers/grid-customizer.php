@@ -3,10 +3,12 @@ global $template_args;
 $template_args = array(
   'options' => array(
     'cols' => array(
+      'default' => 1,
       'ns' => 3,
       'm' => 2
     ),
     'spacings' => array(
+      'default' => 4,
       'ns' => 4,
       'm' => 4
     ),

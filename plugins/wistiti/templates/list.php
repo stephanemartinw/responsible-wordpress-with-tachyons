@@ -18,6 +18,17 @@
     //if (!wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
     //  wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
+    //Spacings
+    if (isset($template_args['options']['spacings']) && !empty($template_args['options']['spacings'])) {
+      $spacings = $template_args['options']['spacings'];
+      foreach ($spacings as $key => $spacing) {
+        if ($key==='default') $key ='';
+        else $key = '-'.$key;
+        $vertical_spacing .= ' pb'.$spacing.$key;
+      }
+      $template_args['classes']['item'] .= ' '.$vertical_spacing;
+    }
+
     //Alternate media or card mode ?
     $atts['alternate'] = $template_args['options']['alternate'];
 ?>
@@ -26,13 +37,24 @@
 
   <?php $index=0; if ( $list_query->have_posts() ) : while ( $list_query->have_posts() ) : $list_query->the_post();
 
-      //Set atts for template
-      $atts['index']=$index;
+      $tabindex=($index==0)?'0':'-1';
+      //to do ???
+      $role='';
+      ?>
 
-      //Partial template search
-      wistiti_get_partial($atts);
+      <div class="overflow-hidden <?php echo $template_args['classes']['item'];?>"  role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
 
-  $index++; endwhile;?>
+        <?php
+
+        //Set atts for template
+        $atts['index']=$index;
+
+        //Partial temp‡late search
+        wistiti_get_partial($atts);?>
+
+      </div>
+
+  <?php $index++; endwhile;?>
 
   <?php if ($atts['pagination']) : ?>
     <nav class="<?php echo $template_args['post_navigation']['wrapper'];?>">
