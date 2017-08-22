@@ -6,7 +6,7 @@
   if (isset($atts['background_image'])) {
     $style.="background-image:url('".$base_url . $atts['background_image']. "')  no-repeat center ; background-size:cover";
     if (isset($atts['background_fallback_color']))
-      $style.="background-color:".$atts[['background_fallback_color'];
+      $style.="background-color:".$atts['background_fallback_color'];
   }
 
   //Attributes

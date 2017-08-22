@@ -6,7 +6,7 @@
   if (isset($atts['background_image'])) {
     $style.="background-image:url('".$base_url . $atts['background_image']. "')  no-repeat center ; background-size:cover";
     if (isset($atts['background_fallback_color']))
-      $style.="background-color:".$atts[['background_fallback_color'];
+      $style.="background-color:".$atts['background_fallback_color'];
   }
 
   //Attributes
@@ -18,7 +18,7 @@
 ?>
 
 <div class="db-element-default <?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">
-
+    <?php wistiti_post_thumbnail($partial_args);?>
     <?php if ($partial_args['options']['show']['title']) wistiti_post_title($partial_args, $firstheadinghierarchy, false);?>
     <?php if ($partial_args['options']['show']['excerpt']) wistiti_post_excerpt($partial_args, $secondheadinghierarchy);?>
     <?php if ($partial_args['options']['show']['content']) wistiti_post_content($partial_args, $secondheadinghierarchy);?>

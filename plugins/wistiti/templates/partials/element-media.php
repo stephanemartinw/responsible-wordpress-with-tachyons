@@ -24,7 +24,7 @@
   <?php endif;?>
 
   <div class="<?php echo $partial_args['classes']['media_body'];?>">
-    <?php if ($partial_args['options']['show']['title']) wistiti_post_title($partial_args, $firstheadinghierarchy);?>
+    <?php if ($partial_args['options']['show']['title']) wistiti_post_title($partial_args, $firstheadinghierarchy, $partial_args['options']['has_link']);?>
 
     <?php if ($partial_args['options']['show']['excerpt']) wistiti_post_excerpt($partial_args, $secondheadinghierarchy);?>
     <?php if ($partial_args['options']['show']['content']) wistiti_post_content($partial_args, $secondheadinghierarchy);?>

@@ -143,9 +143,9 @@ if ( ! function_exists( 'wistiti_post_title' ) ) :
  */
 function wistiti_post_title($args, $headinghierarchy='1', $has_link = true) {
 	  echo '<h'.$headinghierarchy.' class="'.$args['classes']['title'].'">';
-		echo '<a class="'.$args['classes']['title_link'].'" href="'.get_the_permalink().'" rel="bookmark">';
-		the_title();
-		echo '</a>';
+    if ($has_link) echo '<a class="'.$args['classes']['title_link'].'" href="'.get_the_permalink().'" rel="bookmark">';
+    the_title();
+		if ($has_link) echo '</a>';
 		echo '</h'.$headinghierarchy.'>';
 }
 endif;
@@ -242,23 +242,27 @@ if ( ! function_exists( 'wistiti_post_social' ) ) :
 function wistiti_post_social($label, $args) {
 
 	$i=0;
-	$thelist = array();
 
-	echo '<div class="'.$args['classes']['social_wrapper'].'">'.$label;
-	while (!empty(get_post_meta( get_the_ID(), '_element_social_name_'.$i, true )) &&
-		  	 !empty(get_post_meta( get_the_ID(), '_element_social_url_'.$i, true )))
-	{
+  if (!empty(get_post_meta( get_the_ID(), '_element_social_name_'.$i, true )) &&
+	    !empty(get_post_meta( get_the_ID(), '_element_social_url_'.$i, true )))
+  {
+  	$thelist = array();
+  	echo '<div class="'.$args['classes']['social_wrapper'].'">'.$label;
+  	while (!empty(get_post_meta( get_the_ID(), '_element_social_name_'.$i, true )) &&
+  		  	 !empty(get_post_meta( get_the_ID(), '_element_social_url_'.$i, true )))
+  	{
 
-		$aspan = '<span class='.$args['classes']['social'].'><a class="'.$args['classes']['social_link'].'" href="'.get_post_meta( get_the_ID(), '_element_social_url_'.$i, true ).'">';
-		$aspan .= get_post_meta( get_the_ID(), '_element_social_name_'.$i, true );
-		$aspan .= '</a></span>';
-		$thelist[] = $aspan;
+  		$aspan = '<span class='.$args['classes']['social'].'><a class="'.$args['classes']['social_link'].'" href="'.get_post_meta( get_the_ID(), '_element_social_url_'.$i, true ).'">';
+  		$aspan .= get_post_meta( get_the_ID(), '_element_social_name_'.$i, true );
+  		$aspan .= '</a></span>';
+  		$thelist[] = $aspan;
 
-		$i++;
-	}
-	$links = apply_filters( "social_links-".$taxonomy, $thelist );
-	echo join( ',' , $links );
-	echo '</div>';
+  		$i++;
+  	}
+  	$links = apply_filters( "social_links-".$taxonomy, $thelist );
+  	echo join( ',' , $links );
+  	echo '</div>';
+  }
 
 }
 endif;
