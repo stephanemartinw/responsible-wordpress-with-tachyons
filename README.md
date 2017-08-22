@@ -1,7 +1,4 @@
-# Wistiti
-
-An experiment for responsible WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/).
-
+# Responsible WordPress websites with [tachyons.io](https://github.com/tachyons-css/tachyons/)
 
 ## Presentation
 
