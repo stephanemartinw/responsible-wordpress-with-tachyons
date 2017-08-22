@@ -150,6 +150,7 @@ function wistiti_get_partial($atts) {
 function wistiti_get_customizer($atts, $is_partial = false, $default_customizer_path = '') {
 
   $foundit=false;
+  $pathes = array();
 
   // Set default plugin templates pathes.
   if ( ! $default_customizer_path ) {
@@ -158,18 +159,19 @@ function wistiti_get_customizer($atts, $is_partial = false, $default_customizer_
   }
 
   if (!$is_partial) {
-    $default_path = $default_customizer_path.$atts['layout'].'-customizer.php';
-    $path = $default_customizer_path . $atts['type'].'-'.$atts['layout'].'-customizer.php';
+    $pathes[]=$default_customizer_path.$atts['layout'].'-customizer.php';
+    $pathes[] = $default_customizer_path . $atts['type'].'-'.$atts['layout'].'-customizer.php';
   }
   else {
-    $default_path = $default_customizer_path . $atts['type'].'-'.$atts['display'].'-customizer.php';
+    $pathes[]=$default_customizer_path . $atts['type'].'-'.$atts['display'].'-customizer.php';
+
     if (!empty($atts['tax_value']))
-      $path = $default_customizer_path . $atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php';
-    else $path = $default_path;
+      $pathes[] = $default_customizer_path . $atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php';
   }
 
-  if (!$foundit) $foundit = wistiti_get_template($path);
-  if (!$foundit) $foundit = wistiti_get_template($default_path);
+  foreach ($pathes as $path) {
+    if (wistiti_get_template($path)) $foundit=true;
+  }
 
   return $foundit;
 }
@@ -395,7 +397,7 @@ function wistiti_enqueue_scripts() {
 
   //Set scripts configuration before...
   $scriptsperelement=array (
-    'element' => 'utils disclosure grid button',
+    'element' => 'utils', // + disclosure grid button ?
     //'news' => 'utils grid',
     //'team' => 'utils grid',
     'contactform' => 'button'

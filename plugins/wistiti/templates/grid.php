@@ -2,6 +2,11 @@
 
       //https://www.w3.org/TR/wai-aria-practices/examples/grid/LayoutGrids.html
 
+      add_action('wp_enqueue_scripts','wistiti_grid_enqueue_scripts');
+      function wistiti_grid_enqueue_scripts() {
+         wp_enqueue_script( 'wistiti-grid', plugins_url( '/js/grid.js', __FILE__ ), array('wistiti-utils'));
+      }
+
       //Query
       $grid_query = $atts['query'];
 
@@ -41,8 +46,6 @@
         $template_args['classes']['cell'] .= ' '.$vertical_spacing;
       }
 
-      //Alternate media or card mode ?
-      $atts['alternate'] = $template_args['options']['alternate'];
 ?>
 
 <?php
@@ -61,7 +64,7 @@
   $aria_label = $atts['title'];
 endif; ?>
 
-<div class="<?php echo $template_args['classes']['wrapper'];?>" role="grid" <?php echo $datas;?> aria-label="<?php echo $aria_label;?>" aria-labelledby="<?php echo $aria_labelledby;?>">
+<div class="db-grid <?php echo $template_args['classes']['wrapper'];?>" role="grid" <?php echo $datas;?> aria-label="<?php echo $aria_label;?>" aria-labelledby="<?php echo $aria_labelledby;?>">
 
   <div class="<?php echo $template_args['classes']['row'];?>" role="row" aria-rowindex="<?php echo $row;?>">
 

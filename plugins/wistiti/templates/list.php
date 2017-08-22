@@ -29,11 +29,9 @@
       $template_args['classes']['item'] .= ' '.$vertical_spacing;
     }
 
-    //Alternate media or card mode ?
-    $atts['alternate'] = $template_args['options']['alternate'];
 ?>
 
-<<?php echo $list_type;?>l class="<?php echo $template_args['classes']['wrapper'];?>">
+<<?php echo $list_type;?>l class="db-list <?php echo $template_args['classes']['wrapper'];?>">
 
   <?php $index=0; if ( $list_query->have_posts() ) : while ( $list_query->have_posts() ) : $list_query->the_post();
 

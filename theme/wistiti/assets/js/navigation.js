@@ -688,13 +688,17 @@ MenubarItem.prototype.handleBlur = function (event) {
 };
 
 MenubarItem.prototype.handleMouseover = function (event) {
-  this.hasHover = true;
-  this.popupMenu.open();
+  if (this.popupMenu) {
+    this.hasHover = true;
+    this.popupMenu.open();
+  }
 };
 
 MenubarItem.prototype.handleMouseout = function (event) {
-  this.hasHover = false;
-  setTimeout(this.popupMenu.close.bind(this.popupMenu, false), 300);
+  if (this.popupMenu) {
+    this.hasHover = false;
+    setTimeout(this.popupMenu.close.bind(this.popupMenu, false), 300);
+  }
 };
 
 

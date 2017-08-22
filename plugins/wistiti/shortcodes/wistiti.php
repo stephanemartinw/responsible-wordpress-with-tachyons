@@ -14,8 +14,10 @@ tax_value = taxonomy value
 order = order direction (ASC, DESC)
 orderby = order by
 layout = list or grid
+layout_variant = variant of layout (alternate)
 display : media, card or collapsible
-background : a background url
+background_image : a background image url
+background_default_fallback_color : a background fallback color
 firstheadinghierarchy : Hx starting level
 */
 
@@ -32,7 +34,8 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     $default_layout_variant = '';
     $default_display = 'default';
     $default_firstheadinghierarchy = 3;
-    $default_background = '';
+    $default_background_image = '';
+    $default_background_fallback_color = 'white';
     $default_pagination = false;
 
     //Automatic default atts / type
@@ -74,7 +77,8 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 			'layout' => $default_layout,
       'layout_variant' => $default_layout_variant,
 			'display' => $default_display,
-      'background' => $default_background,
+      'background_image' => $default_background_image,
+      'background_fallback_color' => $default_background_fallback_color,
  			'firstheadinghierarchy' => $default_firstheadinghierarchy,
       'pagination' => $default_pagination
 		), $atts);

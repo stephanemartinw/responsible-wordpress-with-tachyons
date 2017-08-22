@@ -2,8 +2,12 @@
 
   //Inline styles
   $base_url = get_bloginfo('url');
-  if (isset($atts['background']))
-    $style="background:url('".$base_url . $atts['background']. "')  no-repeat center ; background-size:cover";
+  $style='';
+  if (isset($atts['background_image'])) {
+    $style.="background-image:url('".$base_url . $atts['background_image']. "')  no-repeat center ; background-size:cover";
+    if (isset($atts['background_fallback_color']))
+      $style.="background-color:".$atts[['background_fallback_color'];
+  }
 
   //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];

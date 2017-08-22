@@ -20,7 +20,6 @@ if ($inline) {
 
     <div class="<?php echo $header_args['classes']['wrapper'];?>">
       <?php get_template_part( 'components/header/site', 'branding' ); ?>
-      <div class='mt3'<?php echo $breakpoint_ext;?>></div>
       <?php get_template_part( 'components/navigation/navigation', 'main' ); ?>
     </div>
 
