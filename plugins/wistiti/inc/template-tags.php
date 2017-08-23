@@ -207,9 +207,11 @@ function wistiti_post_action($args) {
 
 	$theaction = get_post_meta( get_the_ID(), '_element_action_url', true );
   if (!empty($theaction)) {
+    echo '<div class="'.$args['classes']['action_wrapper'].'">';
 		echo '<a class="'.$args['classes']['action_link'].'" href="'.$theaction.'" target="_blank" role="button" tabindex="0">';
 		echo get_post_meta( get_the_ID(), '_element_action_label', true );
 		echo '</a>';
+    echo '</div>';
 	}
 }
 endif;
@@ -225,7 +227,7 @@ function wistiti_post_source($label, $args) {
 	if (!empty($name) && !empty($url)) {
 		echo '<div class="'.$args['classes']['source_wrapper'].'">';
 		echo '<span>'.$label.'</span>';
-		echo '<span><a class="'.$args['classes']['source_link'].'" href="'.$url.'">';
+		echo ' <span><a class="'.$args['classes']['source_link'].'" href="'.$url.'">';
 		echo $name;
 		echo '</a></span>';
 		echo '</div>';

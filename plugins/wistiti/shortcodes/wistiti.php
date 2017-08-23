@@ -24,7 +24,8 @@ firstheadinghierarchy : Hx starting level
 function wistiti_shortcode($atts = [], $content = null, $tag = '') {
 
     //Default values according to type
-    $default_type= 'element';
+    $default_id = '';
+    $default_type = 'element';
     $default_mode = 'query';
     $default_order = 'ASC';
     $default_orderby = 'menu_order';
@@ -38,39 +39,23 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     $default_background_fallback_color = 'white';
     $default_pagination = false;
 
-    //Automatic default atts / type
-    /*switch ($atts['type']) {
+    //Determine tax key and value from id if set...
+    $default_tax_key = '';
+    $default_tax_value = '';
+    if (isset($atts['id']) && !empty($atts['id'])) {
+        //to do : get the tax key and value
+    }
 
-      case 'block':
-        $default_layout = 'element';
-        $default_display = 'default';
-      break;
-
-      default:
-      break;
-    }*/
-
-    //Automatic default atts / display
-    /*switch ($atts['display']) {
-      case 'disclosure':
-        $default_layout = 'dlist';
-      break;
-
-      default:
-      break;
-    }*/
-
-    //Taxonomy
 		$atts = shortcode_atts(
 		array(
       'mode' => $default_mode,
       'title' => $default_title,
       'type' => $default_type,
-      'id' => '',
+      'id' => $default_id,
       'meta_key' => '',
       'meta_value' => '',
-      'tax_key' => '',
-			'tax_value' => '',
+      'tax_key' => $default_tax_key,
+			'tax_value' => $default_tax_value,
       'order' => $default_order,
       'orderby' => $default_orderby,
       'limit' => $default_limit,

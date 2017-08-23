@@ -13,7 +13,8 @@ $partial_args = array(
           'content' => true,
           'action' => true,
           'source' => true,
-          'taxonomies' => true,
+          'taxonomy' => true,
+          'tag' => true,
           'social' => true
         )
       ),
@@ -35,7 +36,7 @@ $partial_args = array(
         'social' => '',
         'social_link' => '',
         'taxonomies' => array(
-          'type' => array(
+          'element-type' => array(
             'wrapper' => 'db',
             'link' => "link underline " . get_theme_mod( 'smew_colors_brand', 'blue' )
           ),
