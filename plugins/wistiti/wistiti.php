@@ -138,7 +138,7 @@ function wistiti_get_partial($atts) {
         $ancestors = get_ancestors($child->term_id, $taxonomy, 'taxonomy');
         if (!empty($ancestors)) {
           foreach ($ancestors as $ancestor) {
-            $term= get_term($ancestor, $taxonomy);
+            $term = get_term($ancestor, $taxonomy);
               if (wistiti_get_template('/partials/'.$atts['type'].'-'.$term->slug.'-'.$atts['display'].'.php', $atts)) {
                 $foundit = true;
                 break;
@@ -168,6 +168,9 @@ function wistiti_get_customizer($atts, $is_partial = false, $default_customizer_
   if (!$is_partial) {
     $pathes[]=$default_customizer_path.$atts['layout'].'-customizer.php';
     $pathes[] = $default_customizer_path . $atts['type'].'-'.$atts['layout'].'-customizer.php';
+
+    if (!empty($atts['tax_value']))
+      $pathes[] = $default_customizer_path . $atts['type'].'-'.$atts['tax_value'].'-'.$atts['layout'].'-customizer.php';
   }
   else {
     $pathes[]=$default_customizer_path . $atts['type'].'-'.$atts['display'].'-customizer.php';
@@ -246,6 +249,7 @@ class wistiti_settings
         register_setting('wistiti_settings_group','wistiti_scripts_name', array( $this, 'sanitize' ));
         register_setting('wistiti_settings_group','wistiti_scripts_onpage', array( $this, 'sanitize' ));
         register_setting('wistiti_settings_group','wistiti_modules_name', array( $this, 'sanitize' ));
+        register_setting('wistiti_settings_group','wistiti_modules_onpage', array( $this, 'sanitize' ));
         register_setting('wistiti_settings_group','wistiti_tools', array( $this, 'sanitize' ));
 
         add_settings_section(
@@ -290,7 +294,6 @@ class wistiti_settings
      */
     public function sanitize( $input )
     {
-
         $new_input = array();
 
         //Scripts
@@ -385,10 +388,10 @@ class wistiti_settings
             $checked = checked( 1, $modules[$module_value], false );
           }
           $markup.="<li>\n";
-          $markup.='<input type="checkbox" name="wistiti_include_name['.$module_value.']" value="true" '.$checked.' />'.$module."\n";
+          $markup.='<input type="checkbox" name="wistiti_modules_name['.$module_value.']" value="true" '.$checked.' />'.$module."\n";
 
           $markup .= '<label>'.__('on page(s): ', 'wistiti').'</label>';
-          $markup .= '<input type="text" name="wistiti_include_onpage['.$module_value.'_onpage]" value="'.$onpages[$module_value.'_onpage'].'"></input>';
+          $markup .= '<input type="text" name="wistiti_modules_onpage['.$module_value.'_onpage]" value="'.$onpages[$module_value.'_onpage'].'"></input>';
 
           $markup.="</li>\n";
         }
@@ -539,7 +542,7 @@ if ($tools['ga'])require_once(__ROOT__.'/tools/ga.php');
 //if ($includes['team']) require_once(__ROOT__.'/types/team.php');
 
 //Optional modules
-$modules = get_option('wistiti_module_name');
+$modules = get_option('wistiti_modules_name');
 if ($modules['contactform']) require_once(__ROOT__.'/modules/contact-form.php');
 
 //unset($scripts);

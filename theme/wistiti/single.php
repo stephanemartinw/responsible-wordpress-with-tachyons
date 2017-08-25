@@ -26,12 +26,19 @@ get_header(); ?>
       $post_type = get_post_type();
       $post_id = get_the_ID();
 
-      //Get the post taxonomy terms
-      $key = wistiti_get_template_post_key('single', $post_type, $post_id);
+      //Get the type (for Elements)
+      $type_value = '';
+      $types = wp_get_post_terms( $post_id,  'element-type');
+      if (!empty($types)) $type_value=$types[0]->slug;
+
+      //Get the post taxonomy & term
+      //$key = wistiti_get_template_post_key('single', $post_type, $post_id);
+      //$term = get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) );
+      //var_dump($term);
 
       //Run shortcode
-      $options = wistiti_get_template_options('single', $post_type, $key);
-      echo do_shortcode('[wistiti type="'.$post_type.'" layout="'.$options['layout'].'" display="'.$options['display'].'" mode="view" pagination=true]');
+      $options = wistiti_get_template_options('single', $post_type);
+      echo do_shortcode('[wistiti layout="'.$options['layout'].'" display="'.$options['display'].'" tax_key="type" tax_value="'.$type_value.'" mode="view" pagination=true]');
 
 			//Deported to plugin/elememnts
 			//echo wistiti_post_navigation($wistiti_args);

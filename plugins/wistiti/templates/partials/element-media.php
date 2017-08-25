@@ -9,7 +9,7 @@
 
   //Alternate media or card thumb position ?
   $mode = $partial_args['options']['mode'];
-  if (($atts['index'] % 2 !== 0) && ($atts['layout_variant']=='alternate')) {
+  if (($atts['index'] % 2 !== 0) && ($atts['alternate']===true)) {
     if ($mode=='normal') $mode="inverted"; else $mode="normal";
   }
 

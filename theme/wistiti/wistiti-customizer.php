@@ -46,6 +46,18 @@ $wistiti_args = array(
       'options' => array(
         'layout' => 'list',
         'display' => 'media'
+      ),
+      'element-type' => array(
+        'options' => array(
+          'layout' => 'grid',
+          'display' => 'card'
+        )
+      ),
+      'element-tag' => array(
+        'options' => array(
+          'layout' => 'grid',
+          'display' => 'card'
+        )
       )
     )
   )

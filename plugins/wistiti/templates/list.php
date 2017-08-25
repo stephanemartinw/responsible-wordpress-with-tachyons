@@ -1,8 +1,19 @@
 <?php //List
 
     $list_type = 'u'; //unordered list by default
+    $list_item_tag='li'; //by default;
     if (!empty($atts['layout_variant']) )
       $list_type = $atts['layout_variant'];
+    //List item the_posts_navigation
+    switch ($list_type) {
+      case 'd':
+      $list_item_tag='';
+      break;
+
+      default:
+        $list_item_tag='li';
+        break;
+    }
 
     $list_query = $atts['query'];
 
@@ -18,6 +29,11 @@
     //if (!wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['tax_value'].'-'.$atts['display'].'-customizer.php', $atts))
     //  wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 
+    //Options
+    if (isset($template_args['options']['alternate']) && $template_args['options']['alternate']===true) {
+      $atts['alternate'] = true;
+    }
+
     //Spacings
     if (isset($template_args['options']['spacings']) && !empty($template_args['options']['spacings'])) {
       $spacings = $template_args['options']['spacings'];
@@ -28,7 +44,6 @@
       }
       $template_args['classes']['item'] .= ' '.$vertical_spacing;
     }
-
 ?>
 
 <<?php echo $list_type;?>l class="db-list <?php echo $template_args['classes']['wrapper'];?>">
@@ -40,17 +55,19 @@
       $role='';
       ?>
 
-      <div class="overflow-hidden <?php echo $template_args['classes']['item'];?>"  role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
-
-        <?php
+      <?php if (!empty($list_item_tag)):?>
+      <<?php echo $list_item_tag; ?> class="overflow-hidden <?php echo $template_args['classes']['item'];?>"  role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
+      <?php endif;
 
         //Set atts for template
         $atts['index']=$index;
 
         //Partial temp‡late search
-        wistiti_get_partial($atts);?>
+        wistiti_get_partial($atts);
 
-      </div>
+      if (!empty($list_item_tag)):?>
+      </<?php echo $list_item_tag; ?>>
+      <?php endif;?>
 
   <?php $index++; endwhile;?>
 

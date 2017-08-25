@@ -208,7 +208,7 @@ function wistiti_post_action($args) {
 	$theaction = get_post_meta( get_the_ID(), '_element_action_url', true );
   if (!empty($theaction)) {
     echo '<div class="'.$args['classes']['action_wrapper'].'">';
-		echo '<a class="'.$args['classes']['action_link'].'" href="'.$theaction.'" target="_blank" role="button" tabindex="0">';
+		echo '<a class="'.$args['classes']['action_link'].'" href="'.$theaction.'" target="_blank">';
 		echo get_post_meta( get_the_ID(), '_element_action_label', true );
 		echo '</a>';
     echo '</div>';

@@ -13,7 +13,7 @@
   global $partial_args;
 ?>
 
-<div class="db-element-default <?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">
+<div class="db-element-unique <?php echo $partial_args['classes']['wrapper'];?>" style="<?php echo $style;?>">
     <?php if ($partial_args['options']['show']['title']) wistiti_post_title($partial_args, $firstheadinghierarchy, false);?>
     <?php if ($partial_args['options']['show']['excerpt']) wistiti_post_excerpt($partial_args, $secondheadinghierarchy);?>
     <?php if ($partial_args['options']['show']['content']) wistiti_post_content($partial_args, $secondheadinghierarchy);?>

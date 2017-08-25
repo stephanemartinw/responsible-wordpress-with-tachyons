@@ -264,51 +264,65 @@ function wistiti_get_theme_customizer($customizer_name, $customizer_path = '', $
 
 /*
 * Get the post taxonomy terms
+* For future use ?
 */
-function wistiti_get_template_post_key($template, $post_type, $post_id) {
+/*function wistiti_get_template_post_key($template, $post_type, $post_id) {
 
+  global $wistiti_args;
   $key = '';
 
   $taxonomies = get_object_taxonomies($post_type);
   foreach ($taxonomies as $taxonomy) {
     $terms = wp_get_post_terms( $post_id,  $taxonomy);
+    //var_dump($terms);
     foreach ($terms as $term) {
 
-      if (isset($wistiti_args['single'][$term->slug]) && !empty($wistiti_args['single'][$term->slug])) {
-        $key = $term->slug;
-        break;
-      }
+      //Ancestors first
       $ancestors = get_ancestors($term->term_id, $taxonomy, 'taxonomy');
       if (!empty($ancestors)) {
         foreach ($ancestors as $ancestor) {
           $aterm= get_term($ancestor, $taxonomy);
-
-          if (isset($wistiti_args['single'][$aterm->slug]) && !empty($wistiti_args['single'][$aterm->slug])) {
+          if (isset($wistiti_args[$template][$post_type][$aterm->slug]) && !empty($wistiti_args[$template][$post_type][$aterm->slug])) {
             $key = $aterm->slug;
             break;
           }
         }
       }
+
+      //Parent
+      if (isset($wistiti_args[$template][$post_type][$term->slug]) && !empty($wistiti_args[$template][$post_type][$term->slug])) {
+        $key = $term->slug;
+        break;
+      }
+
     }
   }
 
   return $key;
-}
+}*/
 
 /*
 * Get template option in wistiti customizer
 */
-function wistiti_get_template_options($template, $post_type, $key = '') {
+function wistiti_get_template_options($template, $post_type, $taxonomy='', $term='') {
 
   global $wistiti_args;
 
   $options = array();
-	if (!empty($key)) {
-    $options = $wistiti_args[$template][$post_type][$key]['options'];
-  } else {
-    $options = $wistiti_args[$template][$post_type]['options'];
+  if (isset($wistiti_args[$template][$post_type])) {
+
+  	if (!empty($taxonomy) && isset($wistiti_args[$template][$post_type][$taxonomy])) {
+        if (!empty($term) && isset($wistiti_args[$template][$post_type][$taxonomy][$term]))
+          $options = $wistiti_args[$template][$post_type][$taxonomy][$term]['options'];
+        else
+          $options = $wistiti_args[$template][$post_type][$taxonomy]['options'];
+    }
+    else {
+      $options = $wistiti_args[$template][$post_type]['options'];
+    }
   }
-  //default values
+
+  //default values ?
   if (!isset($options['layout']) || empty($options['layout']))
     $options['layout']='block';
 
@@ -316,7 +330,6 @@ function wistiti_get_template_options($template, $post_type, $key = '') {
       $options['display']='default';
 
   return $options;
-
 }
 
 /*
