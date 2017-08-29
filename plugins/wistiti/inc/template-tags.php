@@ -53,7 +53,7 @@ endif;
  /**
   *
   */
-function wistiti_previous_posts_link($label, $args){
+function wistiti_previous_posts_link($label, $args, $query){
 	$markup = get_previous_posts_link($label);
 	//Replace and customize native classes
 	$markup = str_replace('php-posts-navigation-previous', $args['post_navigation']['previous_link'], $markup);
@@ -65,8 +65,8 @@ if ( ! function_exists( 'wistiti_next_posts_link' ) ) :
 /**
  *
  */
-function wistiti_next_posts_link($label, $args){
-	$markup = get_next_posts_link($label);
+function wistiti_next_posts_link($label, $args, $query){
+	$markup = get_next_posts_link($label, $query->max_num_pages);
 	//Replace and customize native classes
 	$markup = str_replace('php-posts-navigation-next', $args['post_navigation']['next_link'], $markup);
  	return $markup;

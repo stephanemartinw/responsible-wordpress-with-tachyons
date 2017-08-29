@@ -73,21 +73,24 @@ function wistiti_locate_template( $template_name, $template_path = '', $default_
 		$default_path = plugin_dir_path( __FILE__ ) . 'templates/';
 	endif;
 
-	// Search template file in theme folder.
-	$template = locate_template( array(
-		$template_path . $template_name,
-		$template_name
-	) );
-
 	// Get plugins template file.
-	if ( ! $template ) :
+	//if ( ! $template ) :
     //Check child plugin named 'mywistiti' (mandatory)
-    if (!file_exists($default_child_path . $template_name)) $template = $default_path . $template_name;
-    else $template =  $default_child_path . $template_name;
+    if (!file_exists($default_child_path . $template_name))
+      $templates[] = $default_path . $template_name;
+    else
+      $templates[] =  $default_child_path . $template_name;
+	//endif;
 
-	endif;
+  // Search template file in theme folder.
+  $template_in_theme = locate_template( array(
+    $template_path . $template_name,
+    $template_name
+  ) );
 
-	return apply_filters( 'wistiti_locate_template', $template, $template_name, $template_path, $default_path );
+  if ($template_in_theme) $templates[] = $template_path . $template_name;
+
+	return $templates;
 }
 
 /**
@@ -105,20 +108,25 @@ function wistiti_locate_template( $template_name, $template_path = '', $default_
  * @param string	$default_path			Default path to template files.
  */
 function wistiti_get_template( $template_name, $atts = array(), $template_path = '', $default_path = '',  $default_child_path = '' ) {
-	if ( is_array( $atts ) && isset( $atts ) ) :
+  $foundit = false;
+
+  if ( is_array( $atts ) && isset( $atts ) ) :
 		extract( $atts );
 	endif;
 
-	$template_file = wistiti_locate_template( $template_name, $template_path, $default_path,$default_child_path );
-	if ( ! file_exists( $template_file ) ) :
-		_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template_file ), '1.0.0' );
-		return false;
-	endif;
+	$template_files = wistiti_locate_template( $template_name, $template_path, $default_path,$default_child_path );
+  foreach ($template_files as $template_file) {
+    if ( ! file_exists( $template_file ) ) :
+  		_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template_file ), '1.0.0' );
+    else :
+      include $template_file;
+      $foundit=true;
+  	endif;
+  }
 
-	include $template_file;
-
-	return true;
+	return $foundit;
 }
+
 
 /*
 * Get Partial template

@@ -91,10 +91,13 @@ endif; ?>
 
   </div>
 
-  <?php if ($atts['pagination']) : ?>
+
+  <?php
+  //from http://callmenick.com/post/custom-wordpress-loop-with-pagination
+  if ($atts['pagination']) : ?>
     <nav class="<?php echo $template_args['post_navigation']['wrapper'];?>">
-      <?php echo wistiti_previous_posts_link(__('Previous'), $template_args); ?>
-      <?php echo wistiti_next_posts_link(__('Next'), $template_args); ?>
+      <?php echo wistiti_previous_posts_link(__($template_args['post_navigation']['previous_label']), $template_args, $grid_query); ?>
+      <?php echo wistiti_next_posts_link(__($template_args['post_navigation']['next_label']), $template_args, $grid_query); ?>
     </nav>
   <?php endif;?>
 
