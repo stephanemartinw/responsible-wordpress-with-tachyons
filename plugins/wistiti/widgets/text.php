@@ -17,7 +17,7 @@
   		parent::__construct(
   	 		'wistiti_wysiwyg_widget', // Base ID
   			'Wistiti Wysiwyg Widget', // Name
-  			array( 'description' => __('Displays one of your Wistiti Widget Blocks.', 'wistiti') ) // Args
+  			array( 'description' => __('Displays one of your Wistiti Widget Elements.', 'wistiti') ) // Args
   		);
   	}
 
@@ -56,9 +56,9 @@
   		} elseif( current_user_can( 'manage_options' ) ) { ?>
   				<p>
   					<?php if( empty( $id ) ) {
-  						_e( 'Please select a Widget Block to show in this area.', 'wistiti' );
+  						_e( 'Please select a Widget Element to show in this area.', 'wistiti' );
   					} else {
-  						printf( __( 'No widget block found with ID %d, please select an existing Widget Block in the widget settings.', 'wistiti' ), $id );
+  						printf( __( 'No widget element found with ID %d, please select an existing Widget Element in the widget settings.', 'wistiti' ), $id );
   					} ?>
   				</p>
   		<?php
@@ -95,25 +95,25 @@
   	public function form( $instance ) {
 
   		$posts = (array) get_posts(array(
-  			'post_type' => 'block',
+  			'post_type' => 'element',
   			'numberposts' => -1
   		));
 
   		$show_title = ( isset( $instance['show_title'] ) ) ? $instance['show_title'] : 1;
   		$selected_widget_id = ( isset( $instance['wysiwyg-widget-id'] ) ) ? $instance['wysiwyg-widget-id'] : 0;
-  		$title = ($selected_widget_id) ? get_the_title( $selected_widget_id ) : 'No widget block selected.';
+  		$title = ($selected_widget_id) ? get_the_title( $selected_widget_id ) : 'No widget element selected.';
   		?>
 
   		<input id="<?php echo $this->get_field_id( 'title' ); ?>" name="<?php echo $this->get_field_name( 'title' ); ?>" type="hidden" value="<?php echo esc_attr( $title ); ?>" />
 
   		<p>
-  			<label for="<?php echo $this->get_field_id( 'wysiwyg-widget-id' ); ?>"><?php _e( 'Widget Block to show:', 'wistiti' ); ?></label>
+  			<label for="<?php echo $this->get_field_id( 'wysiwyg-widget-id' ); ?>"><?php _e( 'Widget Element to show:', 'wistiti' ); ?></label>
   			<select class="widefat" id="<?php echo $this->get_field_id('wysiwyg-widget-id'); ?>" name="<?php echo $this->get_field_name( 'wysiwyg-widget-id' ); ?>" required>
   				<option value="0" disabled <?php selected( $selected_widget_id, 0 ); ?>>
   					<?php if( empty( $posts ) ) {
-  						_e( 'No widget blocks found', 'wistiti' );
+  						_e( 'No widget elements found', 'wistiti' );
   					} else {
-  						_e( 'Select a widget block', 'wistiti' );
+  						_e( 'Select a widget element', 'wistiti' );
   					} ?>
   				</option>
   				<?php foreach( $posts as $p ) { ?>
@@ -126,7 +126,7 @@
   			<label><input type="checkbox" id="<?php echo $this->get_field_id( 'show_title' ); ?>" name="<?php echo $this->get_field_name( 'show_title' ); ?>" value="1" <?php checked( $show_title, 1 ); ?> /> <?php _e( "Show title?", "wistiti" ); ?></label>
   		</p>
 
-  		<p class="help"><?php printf( __( 'Manage your widget blocks %shere%s', 'wistiti' ), '<a href="'. admin_url( 'edit.php?post_type=wysiwyg-widget' ) .'">', '</a>' ); ?></p>
+  		<p class="help"><?php printf( __( 'Manage your widget elements %shere%s', 'wistiti' ), '<a href="'. admin_url( 'edit.php?post_type=wysiwyg-widget' ) .'">', '</a>' ); ?></p>
   		<?php
   	}
   }
