@@ -19,7 +19,7 @@ Components is distributed under the terms of the GNU GPL v2 or later.
 Normalizing styles have been helped along thanks to the fine work of
 Nicolas Gallagher and Jonathan Neal http://necolas.github.com/normalize.css/
 */
-/*! normalize.css v6.0.0 | MIT License | github.com/necolas/normalize.css */
+/*! normalize.css v7.0.0 | MIT License | github.com/necolas/normalize.css */
 /* Document
    ========================================================================== */
 /**
@@ -37,6 +37,12 @@ html {
 
 /* Sections
    ========================================================================== */
+/**
+ * Remove the margin in all browsers (opinionated).
+ */
+body {
+  margin: 0; }
+
 /**
  * Add the correct display in IE 9-.
  */
@@ -213,14 +219,22 @@ svg:not(:root) {
 /* Forms
    ========================================================================== */
 /**
- * Remove the margin in Firefox and Safari.
+ * 1. Change the font styles in all browsers (opinionated).
+ * 2. Remove the margin in Firefox and Safari.
  */
 button,
 input,
 optgroup,
 select,
 textarea {
-  margin: 0; }
+  font-family: sans-serif;
+  /* 1 */
+  font-size: 100%;
+  /* 1 */
+  line-height: 1.15;
+  /* 1 */
+  margin: 0;
+  /* 2 */ }
 
 /**
  * Show the overflow in IE.
@@ -270,6 +284,12 @@ button:-moz-focusring,
 [type="reset"]:-moz-focusring,
 [type="submit"]:-moz-focusring {
   outline: 1px dotted ButtonText; }
+
+/**
+ * Correct the padding in Firefox.
+ */
+fieldset {
+  padding: 0.35em 0.75em 0.625em; }
 
 /**
  * 1. Correct the text wrapping in Edge and IE.
@@ -392,47 +412,9 @@ template {
 
 /*
 
-   Tachyons
-   COLOR VARIABLES
-
-   Grayscale
-   - Solids
-   - Transparencies
-   Colors
+    VARIABLES
 
 */
-/*
-
-  CUSTOM MEDIA QUERIES
-
-  Media query values can be changed to fit your own content.
-  There are no magic bullets when it comes to media query width values.
-  They should be declared in em units - and they should be set to meet
-  the needs of your content. You can also add additional media queries,
-  or remove some of the existing ones.
-
-  These media queries can be referenced like so:
-
-  @media (--breakpoint-not-small) {
-    .medium-and-larger-specific-style {
-      background-color: red;
-    }
-  }
-
-  @media (--breakpoint-medium) {
-    .medium-screen-specific-style {
-      background-color: red;
-    }
-  }
-
-  @media (--breakpoint-large) {
-    .large-and-larger-screen-specific-style {
-      background-color: red;
-    }
-  }
-
-*/
-/* Media Queries */
 /*
 
   DEBUG CHILDREN
@@ -474,7 +456,7 @@ template {
   background: white url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAIAAACQkWg2AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyhpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuNi1jMTExIDc5LjE1ODMyNSwgMjAxNS8wOS8xMC0wMToxMDoyMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENDIDIwMTUgKE1hY2ludG9zaCkiIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6NzY3MkJEN0U2N0M1MTFFNkIyQkNFMjQwODEwMDIxNzEiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6NzY3MkJEN0Y2N0M1MTFFNkIyQkNFMjQwODEwMDIxNzEiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo3NjcyQkQ3QzY3QzUxMUU2QjJCQ0UyNDA4MTAwMjE3MSIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo3NjcyQkQ3RDY3QzUxMUU2QjJCQ0UyNDA4MTAwMjE3MSIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/Pve6J3kAAAAzSURBVHjaYvz//z8D0UDsMwMjSRoYP5Gq4SPNbRjVMEQ1fCRDg+in/6+J1AJUxsgAEGAA31BAJMS0GYEAAAAASUVORK5CYII=) repeat top left; }
 
 /*
- 
+
   BOX SIZING
 
 */
@@ -1266,13 +1248,13 @@ img {
   border-radius: 0; }
 
 .br1 {
-  border-radius: .125rem; }
+  border-radius: 0.125rem; }
 
 .br2 {
-  border-radius: .25rem; }
+  border-radius: 0.25rem; }
 
 .br3 {
-  border-radius: .5rem; }
+  border-radius: 0.5rem; }
 
 .br4 {
   border-radius: 1rem; }
@@ -1304,13 +1286,13 @@ img {
     border-radius: 0; }
 
   .br1-ns {
-    border-radius: .125rem; }
+    border-radius: 0.125rem; }
 
   .br2-ns {
-    border-radius: .25rem; }
+    border-radius: 0.25rem; }
 
   .br3-ns {
-    border-radius: .5rem; }
+    border-radius: 0.5rem; }
 
   .br4-ns {
     border-radius: 1rem; }
@@ -1341,13 +1323,13 @@ img {
     border-radius: 0; }
 
   .br1-m {
-    border-radius: .125rem; }
+    border-radius: 0.125rem; }
 
   .br2-m {
-    border-radius: .25rem; }
+    border-radius: 0.25rem; }
 
   .br3-m {
-    border-radius: .5rem; }
+    border-radius: 0.5rem; }
 
   .br4-m {
     border-radius: 1rem; }
@@ -1378,13 +1360,13 @@ img {
     border-radius: 0; }
 
   .br1-l {
-    border-radius: .125rem; }
+    border-radius: 0.125rem; }
 
   .br2-l {
-    border-radius: .25rem; }
+    border-radius: 0.25rem; }
 
   .br3-l {
-    border-radius: .5rem; }
+    border-radius: 0.5rem; }
 
   .br4-l {
     border-radius: 1rem; }
@@ -1396,8 +1378,8 @@ img {
     border-radius: 9999px; }
 
   .br--bottom-l {
-    border-top-left-radius: 0;
-    border-top-right-radius: 0; }
+    border-radius-top-left: 0;
+    border-radius-top-right: 0; }
 
   .br--top-l {
     border-bottom-left-radius: 0;
@@ -1506,13 +1488,13 @@ img {
   border-width: 0; }
 
 .bw1 {
-  border-width: .125rem; }
+  border-width: 0.125rem; }
 
 .bw2 {
-  border-width: .25rem; }
+  border-width: 0.25rem; }
 
 .bw3 {
-  border-width: .5rem; }
+  border-width: 0.5rem; }
 
 .bw4 {
   border-width: 1rem; }
@@ -1538,13 +1520,13 @@ img {
     border-width: 0; }
 
   .bw1-ns {
-    border-width: .125rem; }
+    border-width: 0.125rem; }
 
   .bw2-ns {
-    border-width: .25rem; }
+    border-width: 0.25rem; }
 
   .bw3-ns {
-    border-width: .5rem; }
+    border-width: 0.5rem; }
 
   .bw4-ns {
     border-width: 1rem; }
@@ -1568,13 +1550,13 @@ img {
     border-width: 0; }
 
   .bw1-m {
-    border-width: .125rem; }
+    border-width: 0.125rem; }
 
   .bw2-m {
-    border-width: .25rem; }
+    border-width: 0.25rem; }
 
   .bw3-m {
-    border-width: .5rem; }
+    border-width: 0.5rem; }
 
   .bw4-m {
     border-width: 1rem; }
@@ -1598,13 +1580,13 @@ img {
     border-width: 0; }
 
   .bw1-l {
-    border-width: .125rem; }
+    border-width: 0.125rem; }
 
   .bw2-l {
-    border-width: .25rem; }
+    border-width: 0.25rem; }
 
   .bw3-l {
-    border-width: .5rem; }
+    border-width: 0.5rem; }
 
   .bw4-l {
     border-width: 1rem; }
@@ -2076,9 +2058,9 @@ img {
     it    = inline-table
     t     = table
     tc    = table-cell
-    t-row          = table-row
-    t-columm       = table-column
-    t-column-group = table-column-group
+    tr    = table-row
+    tcol  = table-column
+    tcolg = table-column-group
 
    Media Query Extensions:
      -ns = not-small
@@ -2275,14 +2257,17 @@ img {
 .flex-wrap {
   flex-wrap: wrap; }
 
+.flex-nowrap {
+  flex-wrap: nowrap; }
+
+.flex-wrap-reverse {
+  flex-wrap: wrap-reverse; }
+
 .flex-column-reverse {
   flex-direction: column-reverse; }
 
 .flex-row-reverse {
   flex-direction: row-reverse; }
-
-.flex-wrap-reverse {
-  flex-wrap: wrap-reverse; }
 
 .items-start {
   align-items: flex-start; }
@@ -2377,6 +2362,18 @@ img {
 .order-last {
   order: 99999; }
 
+.flex-grow-0 {
+  flex-grow: 0; }
+
+.flex-grow-1 {
+  flex-grow: 1; }
+
+.flex-shrink-0 {
+  flex-shrink: 0; }
+
+.flex-shrink-1 {
+  flex-shrink: 1; }
+
 @media screen and (min-width: 30em) {
   .flex-ns {
     display: flex; }
@@ -2403,14 +2400,17 @@ img {
   .flex-wrap-ns {
     flex-wrap: wrap; }
 
+  .flex-nowrap-ns {
+    flex-wrap: nowrap; }
+
+  .flex-wrap-reverse-ns {
+    flex-wrap: wrap-reverse; }
+
   .flex-column-reverse-ns {
     flex-direction: column-reverse; }
 
   .flex-row-reverse-ns {
     flex-direction: row-reverse; }
-
-  .flex-wrap-reverse-ns {
-    flex-wrap: wrap-reverse; }
 
   .items-start-ns {
     align-items: flex-start; }
@@ -2503,7 +2503,19 @@ img {
     order: 8; }
 
   .order-last-ns {
-    order: 99999; } }
+    order: 99999; }
+
+  .flex-grow-0-ns {
+    flex-grow: 0; }
+
+  .flex-grow-1-ns {
+    flex-grow: 1; }
+
+  .flex-shrink-0-ns {
+    flex-shrink: 0; }
+
+  .flex-shrink-1-ns {
+    flex-shrink: 1; } }
 @media screen and (min-width: 30em) and (max-width: 60em) {
   .flex-m {
     display: flex; }
@@ -2530,14 +2542,17 @@ img {
   .flex-wrap-m {
     flex-wrap: wrap; }
 
+  .flex-nowrap-m {
+    flex-wrap: nowrap; }
+
+  .flex-wrap-reverse-m {
+    flex-wrap: wrap-reverse; }
+
   .flex-column-reverse-m {
     flex-direction: column-reverse; }
 
   .flex-row-reverse-m {
     flex-direction: row-reverse; }
-
-  .flex-wrap-reverse-m {
-    flex-wrap: wrap-reverse; }
 
   .items-start-m {
     align-items: flex-start; }
@@ -2630,7 +2645,19 @@ img {
     order: 8; }
 
   .order-last-m {
-    order: 99999; } }
+    order: 99999; }
+
+  .flex-grow-0-m {
+    flex-grow: 0; }
+
+  .flex-grow-1-m {
+    flex-grow: 1; }
+
+  .flex-shrink-0-m {
+    flex-shrink: 0; }
+
+  .flex-shrink-1-m {
+    flex-shrink: 1; } }
 @media screen and (min-width: 60em) {
   .flex-l {
     display: flex; }
@@ -2657,14 +2684,17 @@ img {
   .flex-wrap-l {
     flex-wrap: wrap; }
 
+  .flex-nowrap-l {
+    flex-wrap: nowrap; }
+
+  .flex-wrap-reverse-l {
+    flex-wrap: wrap-reverse; }
+
   .flex-column-reverse-l {
     flex-direction: column-reverse; }
 
   .flex-row-reverse-l {
     flex-direction: row-reverse; }
-
-  .flex-wrap-reverse-l {
-    flex-wrap: wrap-reverse; }
 
   .items-start-l {
     align-items: flex-start; }
@@ -2757,7 +2787,19 @@ img {
     order: 8; }
 
   .order-last-l {
-    order: 99999; } }
+    order: 99999; }
+
+  .flex-grow-0-l {
+    flex-grow: 0; }
+
+  .flex-grow-1-l {
+    flex-grow: 1; }
+
+  .flex-shrink-0-l {
+    flex-shrink: 0; }
+
+  .flex-shrink-1-l {
+    flex-shrink: 1; } }
 /*
 
    FLOATS
@@ -2834,10 +2876,10 @@ img {
 
 */
 .sans-serif {
-  font-family: -apple-system, BlinkMacSystemFont, 'avenir next', avenir, 'helvetica neue', helvetica, ubuntu, roboto, noto, 'segoe ui', arial, sans-serif; }
+  font-family: -apple-system, BlinkMacSystemFont, "avenir next", avenir, helvetica, "helvetica neue", ubuntu, roboto, noto, "segoe ui", arial, sans-serif; }
 
 .serif {
-  font-family: georgia, times, serif; }
+  font-family: georgia, serif; }
 
 .system-sans-serif {
   font-family: sans-serif; }
@@ -3340,41 +3382,41 @@ code, .code {
 
 */
 .tracked {
-  letter-spacing: .1em; }
+  letter-spacing: 0.1em; }
 
 .tracked-tight {
-  letter-spacing: -.05em; }
+  letter-spacing: -0.05em; }
 
 .tracked-mega {
-  letter-spacing: .25em; }
+  letter-spacing: 0.25em; }
 
 @media screen and (min-width: 30em) {
   .tracked-ns {
-    letter-spacing: .1em; }
+    letter-spacing: 0.1em; }
 
   .tracked-tight-ns {
-    letter-spacing: -.05em; }
+    letter-spacing: -0.05em; }
 
   .tracked-mega-ns {
-    letter-spacing: .25em; } }
+    letter-spacing: 0.25em; } }
 @media screen and (min-width: 30em) and (max-width: 60em) {
   .tracked-m {
-    letter-spacing: .1em; }
+    letter-spacing: 0.1em; }
 
   .tracked-tight-m {
-    letter-spacing: -.05em; }
+    letter-spacing: -0.05em; }
 
   .tracked-mega-m {
-    letter-spacing: .25em; } }
+    letter-spacing: 0.25em; } }
 @media screen and (min-width: 60em) {
   .tracked-l {
-    letter-spacing: .1em; }
+    letter-spacing: 0.1em; }
 
   .tracked-tight-l {
-    letter-spacing: -.05em; }
+    letter-spacing: -0.05em; }
 
   .tracked-mega-l {
-    letter-spacing: .25em; } }
+    letter-spacing: 0.25em; } }
 /*
 
    LINE HEIGHT / LEADING
@@ -3628,39 +3670,39 @@ code, .code {
    Base:
      w = width
 
-   Modifiers
-     1 = 1st step in width scale
-     2 = 2nd step in width scale
-     3 = 3rd step in width scale
-     4 = 4th step in width scale
-     5 = 5th step in width scale
+     Modifiers
+       1 = 1st step in width scale
+       2 = 2nd step in width scale
+       3 = 3rd step in width scale
+       4 = 4th step in width scale
+       5 = 5th step in width scale
 
-     -10  = literal value 10%
-     -20  = literal value 20%
-     -25  = literal value 25%
-     -30  = literal value 30%
-     -33  = literal value 33%
-     -34  = literal value 34%
-     -40  = literal value 40%
-     -50  = literal value 50%
-     -60  = literal value 60%
-     -70  = literal value 70%
-     -75  = literal value 75%
-     -80  = literal value 80%
-     -90  = literal value 90%
-     -100 = literal value 100%
+       -10  = literal value 10%
+       -20  = literal value 20%
+       -25  = literal value 25%
+       -30  = literal value 30%
+       -33  = literal value 33%
+       -34  = literal value 34%
+       -40  = literal value 40%
+       -50  = literal value 50%
+       -60  = literal value 60%
+       -70  = literal value 70%
+       -75  = literal value 75%
+       -80  = literal value 80%
+       -90  = literal value 90%
+       -100 = literal value 100%
 
-     -third      = 100% / 3 (Not supported in opera mini or IE8)
-     -two-thirds = 100% / 1.5 (Not supported in opera mini or IE8)
-     -auto       = string value auto
+       -third      = 100% / 3 (Not supported in opera mini or IE8)
+       -two-thirds = 100% / 1.5 (Not supported in opera mini or IE8)
+       -auto       = string value auto
 
 
-   Media Query Extensions:
-     -ns = not-small
-     -m  = medium
-     -l  = large
+     Media Query Extensions:
+       -ns = not-small
+       -m  = medium
+       -l  = large
 
-*/
+  */
 /* Width Scale */
 .w1 {
   width: 1rem; }
@@ -3720,10 +3762,10 @@ code, .code {
   width: 100%; }
 
 .w-third {
-  width: 33.33333%; }
+  width: 33.3333333333%; }
 
 .w-two-thirds {
-  width: 66.66667%; }
+  width: 66.6666666667%; }
 
 .w-auto {
   width: auto; }
@@ -3787,10 +3829,10 @@ code, .code {
     width: 100%; }
 
   .w-third-ns {
-    width: 33.33333%; }
+    width: 33.3333333333%; }
 
   .w-two-thirds-ns {
-    width: 66.66667%; }
+    width: 66.6666666667%; }
 
   .w-auto-ns {
     width: auto; } }
@@ -3853,10 +3895,10 @@ code, .code {
     width: 100%; }
 
   .w-third-m {
-    width: 33.33333%; }
+    width: 33.3333333333%; }
 
   .w-two-thirds-m {
-    width: 66.66667%; }
+    width: 66.6666666667%; }
 
   .w-auto-m {
     width: auto; } }
@@ -3919,10 +3961,10 @@ code, .code {
     width: 100%; }
 
   .w-third-l {
-    width: 33.33333%; }
+    width: 33.3333333333%; }
 
   .w-two-thirds-l {
-    width: 66.66667%; }
+    width: 66.6666666667%; }
 
   .w-auto-l {
     width: auto; } }
@@ -4279,8 +4321,8 @@ code, .code {
    Docs: http://tachyons.io/docs/themes/skins/
 
    Classes for setting foreground and background colors on elements.
-   If you haven't declared a border color, but set border on an element, it will 
-   be set to the current text color. 
+   If you haven't declared a border color, but set border on an element, it will
+   be set to the current text color.
 
 */
 /* Text colors */
@@ -4624,13 +4666,13 @@ code, .code {
 .bg-inherit {
   background-color: inherit; }
 
-/* 
-  
+/*
+
    SKINS:PSEUDO
 
    Customize the color of an element when
    it is focused or hovered over.
- 
+
  */
 .hover-black:hover,
 .hover-black:focus {
@@ -4764,8 +4806,8 @@ code, .code {
 .hover-bg-dark-gray:focus {
   background-color: #333; }
 
-.hover-bg-dark-gray:focus,
-.hover-bg-mid-gray:hover {
+.hover-bg-mid-gray:hover,
+.hover-bg-mid-gray:focus {
   background-color: #555; }
 
 .hover-bg-gray:hover,
@@ -7244,7 +7286,6 @@ code, .code {
      4 = 4th step in size scale
      5 = 5th step in size scale
      6 = 6th step in size scale
-     7 = 7th step in size scale
 
    Media Query Extensions:
      -ns = not-small
@@ -7282,12 +7323,11 @@ code, .code {
   font-size: 1rem; }
 
 .f6 {
-  font-size: .875rem; }
+  font-size: 0.875rem; }
 
 .f7 {
-  font-size: .75rem; }
+  font-size: 0.75rem; }
 
-/* Small and hard to read for many people so use with extreme caution */
 @media screen and (min-width: 30em) {
   .f-6-ns,
   .f-headline-ns {
@@ -7313,10 +7353,10 @@ code, .code {
     font-size: 1rem; }
 
   .f6-ns {
-    font-size: .875rem; }
+    font-size: 0.875rem; }
 
   .f7-ns {
-    font-size: .75rem; } }
+    font-size: 0.75rem; } }
 @media screen and (min-width: 30em) and (max-width: 60em) {
   .f-6-m,
   .f-headline-m {
@@ -7342,10 +7382,10 @@ code, .code {
     font-size: 1rem; }
 
   .f6-m {
-    font-size: .875rem; }
+    font-size: 0.875rem; }
 
   .f7-m {
-    font-size: .75rem; } }
+    font-size: 0.75rem; } }
 @media screen and (min-width: 60em) {
   .f-6-l,
   .f-headline-l {
@@ -7371,10 +7411,10 @@ code, .code {
     font-size: 1rem; }
 
   .f6-l {
-    font-size: .875rem; }
+    font-size: 0.875rem; }
 
   .f7-l {
-    font-size: .75rem; } }
+    font-size: 0.75rem; } }
 /*
 
    TYPOGRAPHY
@@ -7497,17 +7537,41 @@ code, .code {
   margin-right: auto;
   margin-left: auto; }
 
+.mr-auto {
+  margin-right: auto; }
+
+.ml-auto {
+  margin-left: auto; }
+
 @media screen and (min-width: 30em) {
   .center-ns {
     margin-right: auto;
+    margin-left: auto; }
+
+  .mr-auto-ns {
+    margin-right: auto; }
+
+  .ml-auto-ns {
     margin-left: auto; } }
 @media screen and (min-width: 30em) and (max-width: 60em) {
   .center-m {
     margin-right: auto;
+    margin-left: auto; }
+
+  .mr-auto-m {
+    margin-right: auto; }
+
+  .ml-auto-m {
     margin-left: auto; } }
 @media screen and (min-width: 60em) {
   .center-l {
     margin-right: auto;
+    margin-left: auto; }
+
+  .mr-auto-l {
+    margin-right: auto; }
+
+  .ml-auto-l {
     margin-left: auto; } }
 /*
 
@@ -7760,11 +7824,11 @@ code, .code {
 .pointer:hover {
   cursor: pointer; }
 
-/* 
+/*
    Add shadow on hover.
 
-   Performant box-shadow animation pattern from 
-   http://tobiasahlin.com/blog/how-to-animate-box-shadow/ 
+   Performant box-shadow animation pattern from
+   http://tobiasahlin.com/blog/how-to-animate-box-shadow/
 */
 .shadow-hover {
   cursor: pointer;
@@ -7774,6 +7838,7 @@ code, .code {
 .shadow-hover::after {
   content: '';
   box-shadow: 0px 0px 16px 2px rgba(0, 0, 0, 0.2);
+  border-radius: inherit;
   opacity: 0;
   position: absolute;
   top: 0;
@@ -7787,7 +7852,7 @@ code, .code {
 .shadow-hover:focus::after {
   opacity: 1; }
 
-/* Combine with classes in skins and skins-pseudo for 
+/* Combine with classes in skins and skins-pseudo for
  * many different transition possibilities. */
 .bg-animate,
 .bg-animate:hover,
@@ -7882,7 +7947,7 @@ code, .code {
 .nested-headline-line-height h4,
 .nested-headline-line-height h5,
 .nested-headline-line-height h6 {
-  line-height: 1.25; }
+  line-height: 1.25rem; }
 
 .nested-list-reset ul,
 .nested-list-reset ol {
@@ -7891,7 +7956,7 @@ code, .code {
   list-style-type: none; }
 
 .nested-copy-indent p + p {
-  text-indent: 1em;
+  text-indent: 0.1em;
   margin-top: 0;
   margin-bottom: 0; }
 
