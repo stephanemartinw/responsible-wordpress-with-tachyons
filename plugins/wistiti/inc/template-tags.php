@@ -141,7 +141,7 @@ if ( ! function_exists( 'wistiti_post_title' ) ) :
 /**
  * Prints HTML with meta information for the taxonomies for Wistiti elements
  */
-function wistiti_post_title($args, $headinghierarchy='1', $has_link = true) {
+function wistiti_post_title($args, $headinghierarchy='2', $has_link = true) {
 	  echo '<h'.$headinghierarchy.' class="'.$args['classes']['title'].'">';
     if ($has_link) echo '<a class="'.$args['classes']['title_link'].'" href="'.get_the_permalink().'" rel="bookmark">';
     the_title();
@@ -154,14 +154,14 @@ if ( ! function_exists( 'wistiti_post_excerpt' ) ) :
 /**
  * Prints HTML with meta information for the taxonomies for Wistiti elements
  */
-function wistiti_post_excerpt($args, $headinghierarchy='2') {
+function wistiti_post_excerpt($args, $headinghierarchy='3') {
 
 	$theexcerpt = '';
-  if(has_excerpt()) $theexcerpt = get_the_excerpt();
+  if (has_excerpt()) $theexcerpt = get_the_excerpt();
 	if (!empty($theexcerpt)) {
 		echo '<h'.$headinghierarchy.' class="'.$args['classes']['excerpt'].'">';
-		echo $theexcerpt;
-		echo '</h'.$secondheadinghierarchy.'>';
+		  echo $theexcerpt;
+		echo '</h'.$headinghierarchy.'>';
 	}
 
 }
@@ -180,9 +180,9 @@ function wistiti_post_content($args) {
 
 	if (!empty($thecontent)) {
 		echo '<div class="'.$args['classes']['content'].'">';
-		echo '<p>';
-		echo $thecontent;
-		echo '</p>';
+  		echo '<p>';
+    		echo $thecontent;
+  		echo '</p>';
 		echo '</div>';
 
 		/*if (isset($args['classes']['content_link']) && !empty($args['classes']['content_link'])) {

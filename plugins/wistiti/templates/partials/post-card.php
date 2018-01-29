@@ -9,7 +9,7 @@
 
  //Attributes
  $firstheadinghierarchy = $atts['firstheadinghierarchy'];
- $secondheadinghierachy = $firstheadinghierarchy+1;
+ $secondheadinghierarchy = $firstheadinghierarchy+1;
 
 	//Customize
 	//Do not use tachyons classes heren, use the appropriate customizer !

@@ -11,7 +11,7 @@
 
   //Attributes
   $firstheadinghierarchy = $atts['firstheadinghierarchy'];
-  $secondheadinghierachy = $firstheadinghierarchy+1;
+  $secondheadinghierarchy = $firstheadinghierarchy+1;
 
   //Default skin
   global $partial_args;

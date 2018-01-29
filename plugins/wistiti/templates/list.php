@@ -50,13 +50,16 @@
 
   <?php $index=0; if ( $list_query->have_posts() ) : while ( $list_query->have_posts() ) : $list_query->the_post();
 
-      $tabindex=($index==0)?'0':'-1';
       //to do ???
+      $tabindex=null;
       $role='';
       ?>
 
       <?php if (!empty($list_item_tag)):?>
-      <<?php echo $list_item_tag; ?> class="overflow-hidden <?php echo $template_args['classes']['item'];?>"  role="<?php echo $role;?>" tabindex="<?php echo $tabindex;?>">
+        <<?php echo $list_item_tag; ?> class="db-list-item overflow-hidden <?php echo $template_args['classes']['item'];?>";
+        <?php if (!empty($role)) echo ' role="'. $role . '"';  ?>
+        <?php if (!empty($tabindex)) echo ' tabindex="'. $tabindex . '"'; ?>
+        <?php echo ">";?>
       <?php endif;
 
         //Set atts for template

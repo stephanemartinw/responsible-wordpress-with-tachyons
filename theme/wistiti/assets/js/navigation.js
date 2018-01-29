@@ -586,8 +586,9 @@ MenubarItem.prototype.init = function () {
   this.domNode.tabIndex = -1;
 
   this.domNode.setAttribute('role', 'menuitem');
-  this.domNode.setAttribute('aria-haspopup', 'true');
-  this.domNode.setAttribute('aria-expanded', 'false');
+  //SMW: let the menubar manage this dynamically
+  //this.domNode.setAttribute('aria-haspopup', 'true');
+  //this.domNode.setAttribute('aria-expanded', 'false');
 
   if (this.domNode.parentNode.tagName === 'LI') {
     this.domNode.parentNode.setAttribute('role', 'none');

@@ -16,12 +16,12 @@
   //  wistiti_get_template('partials/customizers/'.$atts['type'].'-'.$atts['display'].'-customizer.php', $atts);
 ?>
 
-<?php if ( $element_query->have_posts() ) : while ( $element_query->have_posts() ) : $element_query->the_post();
-
-    //Partial template search
-    wistiti_get_partial($atts);
-
-endwhile; ?>
+<?php if ( $element_query->have_posts() ) : while ( $element_query->have_posts() ) : $element_query->the_post();?>
+  <div class="db-block">
+    <?php //Partial template search
+    wistiti_get_partial($atts);?>
+  <div>
+<?php endwhile; ?>
 
 <?php if ($atts['pagination']) : wistiti_post_navigation($template_args);endif; ?>
 

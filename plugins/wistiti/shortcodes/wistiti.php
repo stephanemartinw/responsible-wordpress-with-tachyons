@@ -34,7 +34,7 @@ function wistiti_shortcode($atts = [], $content = null, $tag = '') {
     $default_layout = 'block';
     $default_layout_variant = '';
     $default_display = 'default';
-    $default_firstheadinghierarchy = 3;
+    $default_firstheadinghierarchy = 2;
     $default_background_image = '';
     $default_background_fallback_color = 'white';
     $default_pagination = false;

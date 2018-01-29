@@ -14,7 +14,7 @@ if ($inline) {
 ?>
 
 <?php if ($header_args['options']['activate']) :?>
-  <a class="clip skip-link screen-reader-text" href="#content"><?php esc_html_e( 'Skip to content', 'wistiti' ); ?></a>
+  <a class="skip-link" href="#content"><?php esc_html_e( 'Skip to content', 'wistiti' ); ?></a>
 
   <header id="masthead" class="cf cmzr-site-header" role="banner">
 
